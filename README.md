@@ -1,2 +1,1 @@
-# Taller_Reparacion
-hahahahaha
+Taller de repacion de electrodomesticos
