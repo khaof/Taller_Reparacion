@@ -1462,3 +1462,11 @@ function validaBajaRecambio(oEvento){
 	return bValido;	
 }
 //FIN VALIDAR
+
+//cerrar ventana emergente
+var closeWindow = document.getElementById("cerrarVentana");
+closeWindow.addEventListener("click", ocultaVentana, false);
+function ocultaVentana(){
+	document.getElementById("capaFondo").style.visibility="hidden";
+	document.getElementById("capaVentana").style.visibility="hidden";
+}
