@@ -1,4 +1,4 @@
-//Clase factura que hereda de compañia de seguros, presupuesto y cliente
+//Clase factura 
 function Factura(id_factura, dni_cliente, fecha_factura, id_presupuesto){
 	Presupuesto.call(this, id_presupuesto);
 	Cliente.call(this, dni_cliente);
@@ -10,26 +10,24 @@ Factura.prototype = Object.create(Presupuesto.prototype);
 Factura.prototype = Object.create(Cliente.prototype);
 Factura.prototype.constructor = Factura;
 Factura.prototype.toHTMLRow = function(){
-	return "<td>"+this.id_factura+"</td>"+"<td>"+this.fecha_factura+"</td>"+"<td>"+this.pagada_factura+"</td>"+"<td>"+this.id_CompaniaSeguros+"</td>"+"<td>"this.id_presupuesto+"<td>"+this.dni_cliente+"</td>";
+	return "<td>"+this.id_factura+"</td>"+"<td>"+this.fecha_factura+"</td>"+"<td>"+(this.pagada_factura?"SI":"NO")+"</td>"+"<td>"+this.id_CompaniaSeguros+"</td>"+"<td>"+this.id_presupuesto+"<td>"+this.dni_cliente+"</td>";
 }
 //--------------------------------------
-//Clase cliente que herada de factura y electrodomestico
-function Cliente(dni_cliente, nombre_cliente, apellidos_cliente, direccion_cliente, id_factura, id_electrodomestico){
-	Factura.call(this, id_factura);
-	Electrodomestico.call(this, id_electrodomestico);
+//Clase cliente 
+function Cliente(dni_cliente, nombre_cliente, apellidos_cliente, telefono_cliente, direccion_cliente, email_cliente){
 	this.dni_cliente = dni_cliente;
 	this.nombre_cliente = nombre_cliente;
 	this.apellidos_cliente = apellidos_cliente;
+	this.telefono_cliente = telefono_cliente;
 	this.direccion_cliente = direccion_cliente;
+	this.email_cliente = email_cliente;
 }
-Cliente.prototype = Object.create(Factura.prototype);
-Cliente.prototype = Object.create(Electrodomestico.prototype);
-Cliente.prototype.constructor = Cliente;
+
 Cliente.prototype.toHTMLRow = function(){
-	return "<td>"+this.dni_cliente+"</td><td>"+this.nombre_cliente+"</td><td>"+this.apellidos_cliente+"</td><td>"+this.direccion_cliente+"</td><td>"+this.id_factura+"</td><td>"+this.id_electrodomestico+"</td>";
+	return "<td>"+this.dni_cliente+"</td><td>"+this.nombre_cliente+"</td><td>"+this.apellidos_cliente+"</td><td>"+this.telefono_cliente+"</td><td>"+this.direccion_cliente+"</td><td>"+this.email_cliente+"</td>";
 }
 //---------------------------------------------
-//Clase prespuesto que no tiene herencias
+//Clase prespuesto 
 function Presupuesto(id_presupuesto,total_presupuesto){
 	this.id_presupuesto = id_presupuesto;
 	this.total_presupuesto = total_presupuesto;
@@ -38,7 +36,7 @@ Presupuesto.prototype.toHTMLRow = function(){
 	return "<td>"+this.id_presupuesto+"</td><td>"+this.total_presupuesto+"</td>";	
 }
 //-------------------------------------------
-//Clase Electrodomestico que hereda de cliente y parte_averia
+//Clase Electrodomestico 
 function Electrodomestico(nombre_electrodomestico, marca_electrodomestico, id_electrodomestico, dni_cliente, id_ParteAveria){
 	Cliente.call(this, dni_cliente);
 	Parte_Averia.call(this, id_ParteAveria);
@@ -54,7 +52,7 @@ Electrodomestico.prototype.toHTMLRow = function(){
 	return "<td>"+this.id_electrodomestico+"</td><td>"+this.nombre_electrodomestico+"</td><td>"+this.marca_electrodomestico+"</td><td>"+this.dni_cliente+"</td><td>"+this.id_ParteAveria+"</td>";
 }
 //-------------------------------------------------------------------
-//Claese Parte_averia que hereda de electrodomesticos, presupuesto y empleados
+//Claese Parte_averia 
 function Parte_Averia(id_ParteAveria, descripcion_ParteAveria, fecha_ParteAveria, dni_empleado,id_electrodomestico, id_presupuesto){
 	Electrodomestico.call(this, id_electrodomestico);
 	Empleado.call(this, dni_empleado);
@@ -71,7 +69,7 @@ Parte_Averia.prototype.toHTMLRow = function(){
 	return "<td>"+this.id_ParteAveria+"</td><td>"+this.descripcion_ParteAveria+"</td><td>"+this.fecha_ParteAveria+"</td><td>"+this.id_electrodomestico+"</td><td>"+this.dni_empleado+"</td><td>"+this.id_presupuesto+"</td>";
 }
 //---------------------------------------------------------------------------------
-//Clase empleado hereda de ParteAveria
+//Clase empleado 
 function Empleado(dni_empleado, nombre_empleado, apellidos_empleado, id_ParteAveria){
 	Parte_Averia.call(this, id_ParteAveria);
 	this.dni_empleado = dni_empleado;
@@ -85,7 +83,7 @@ Empleado.prototype.toHTMLRow = function(){
 	return "<td>"+this.dni_empleado+"</td><td>"+this.nombre_empleado+"</td><td>"+this.apellidos_empleado+"</td><td>"+this.id_ParteAveria+"</td>";
 }
 //---------------------------------------------------------------------------------------
-//Clase LineaComponente herada presupuesto y componente
+//Clase LineaComponente 
 function LineaComponente(id_LineaComponente, id_presupuesto, id_componente, cantidad_LineaComponente){
 	Presupuesto.call(this, id_presupuesto);
 	Componente.call(this, id_componente);
@@ -93,13 +91,13 @@ function LineaComponente(id_LineaComponente, id_presupuesto, id_componente, cant
 	this.cantidad_LineaComponente = cantidad_LineaComponente;
 }
 LineaComponente.prototype = Object.create(Presupuesto.prototype);
-LineaComponente.prototype = Object.create(Componente.prototype);
+LineaComponente.prototype = Object.create(Componentes.prototype);
 LineaComponente.prototype.constructor = LineaComponente;
 LineaComponente.prototype.toHTMLRow = function(){
 	return "<td>"+this.id_LineaComponente+"</td><td>"+this.cantidad_LineaComponente+"</td><td>"+this.id_presupuesto+"</td><td>"+this.id_componente+"</td>";
 }
 //--------------------------------------------------------------------------------------
-//Clase componente hereda lineaComponente y proveedor
+//Clase componente 
 function Componentes(id_componente, nombre_componente, precio_componente, id_LineaComponente, nif_proveedor){
 	LineaComponente.call(this, id_LineaComponente);
 	Proveedor.call(this, nif_proveedor);
@@ -114,7 +112,7 @@ Componentes.prototype.toHTMLRow = function(){
 	return "<td>"+this.id_componente+"</td><td>"+this.nombre_componente+"</td><td>"+this.precio_componente+"</td><td>"+this.id_LineaComponente+"</td><td>"+this.nif_proveedor+"</td>";
 }
 //------------------------------------------------------------------------
-//Clase proveedor no hereda de ninguno
+//Clase proveedor 
 function Proveedor(nif_proveedor, nombre_proveedor, direccion_proveedor, telefono_proveedor){
 	this.nif_proveedor = nif_proveedor;
 	this.nombre_proveedor = nombre_proveedor;
@@ -134,6 +132,71 @@ function taller_electromecanica(){
 	this.AlineaComponente = [ ];
 	this.Aempleados = [ ];
 	this.AparteAveria = [ ];
-	this.componente = [ ];
+	this.Acomponentes = [ ];
 	this.Aproveedor = [ ];
 }
+//Metodo altaCliente
+taller_electromecanica.prototype.altaCliente = function(oClientes){
+	var i=0;
+	var bEnc = false;
+	var sMensaje = "";
+	
+	while (i < this.Aclientes.length && bEnc == false){
+		if(this.Aclientes[i].dni_cliente == oClientes.dni_cliente)
+			bEnc = true;
+		else
+		i++;
+	}
+
+	if(bEnc==true){
+		sMensaje = "Este cliente ya está registrado";
+	}else{
+		this.Aclientes.push(oClientes);
+		sMensaje = "Cliente Alta: OK!";
+	}
+		
+	return sMensaje;
+}
+//----------------------------------
+//Metodo baja Cliente
+taller_electromecanica.prototype.bajaCliente = function(dniCliente){
+	var i=0;
+	var bEnc = false;
+	var sMensaje = "";
+	
+	while (i < this.Aclientes.length && bEnc == false){
+		if(this.Aclientes[i].dni_cliente == dniCliente)
+			bEnc = true;
+		else
+		i++;
+	}
+
+	if(bEnc==true){
+		this.Aclientes.splice(i, 1);
+		sMensaje = "Cliente Baja: OK!";
+	}
+		
+	return sMensaje;
+}
+//----------------------------------
+//Metodo modificarCliente
+taller_electromecanica.prototype.modificarCliente = function(oCliente){
+	var i=0;
+	var bEnc = false;
+	var sMensaje = "";
+	
+	while (i < this.Aclientes.length && bEnc == false){
+		if(this.Aclientes[i].dni_cliente == oClientes.dni_cliente)
+			bEnc = true;
+		else
+		i++;
+	}
+
+	if(bEnc==true){
+		this.Aclientes.splice(i, 1, oClientes);
+		sMensaje = "Cliente Modificar: OK!";
+	}
+		
+	return sMensaje;
+}
+//--------------------------------------
