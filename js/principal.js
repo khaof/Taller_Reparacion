@@ -827,3 +827,11 @@ function validarConsultaElectro(oEvento){
 }
 
 //FIN VALIDAR
+
+//Cerrar ventana emergente
+var closeWindow = document.getElementById("cerrarVentana");
+closeWindow.addEventListener("click", ocultaVentana, false);
+function ocultaVentana(){
+	document.getElementById("capaFondo").style.visibility="hidden";
+	document.getElementById("capaVentana").style.visibility="hidden";
+}
