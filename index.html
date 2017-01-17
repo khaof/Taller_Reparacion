@@ -1,0 +1,882 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Taller de reparación</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+
+<body>
+
+<div class="jumbotron" align="center">
+      <h1>Taller de Reparación</h1>
+      <p>Gestion de averías</p>
+</div>
+
+<!--MENÚ--> 
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">        
+        <li class="dropdown">
+        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Gestión cliente
+        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#" id="btnAltaCliente">Alta cliente</a></li>
+	          <li><a href="#" id="btnModificaCliente">Ver/Modificar cliente</a></li>	       
+	          <li class="dropdown dropdown-submenu" id="submenu">
+		        <a href="#">Factura reparación <span class="caret"></span></a>
+		        <ul class="dropdown-menu" id="submenu2">
+		          <li><a href="#" id="btnVerFactura">Ver factura</a></li>		          
+		          <li><a href="#" id="BtnBajaFactura">Baja de la factura</a></li>
+		        </ul>
+      		  </li>
+	        </ul>
+      	</li>
+      	
+      	 <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gestión Electrodoméstico
+	        	<span class="caret"></span>
+	        </a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#" id="btnAltaElectrodomestico">Alta</a></li>
+	          
+	          <li><a href="#" id="btnBajaElectrodomestico">Baja</a></li>
+	          <li class="dropdown dropdown-submenu" id="submenu">
+		        <a href="#">Recambios electrodoméstico <span class="caret"></span></a>
+		        <ul class="dropdown-menu" id="submenu2">
+		          <li><a href="#" id="btnAltaRecambio">Alta recambio</a></li>
+		          <li><a href="#" id="btnConsultaRecambio">Consultar recambio</a></li>          
+		          <li><a href="#" id="btnBajaRecambio">Baja del recambio</a></li>		
+		        </ul>
+      		  </li>
+      		  <li class="dropdown dropdown-submenu" id="submenu">
+		        <a href="#">Proveedor electrodoméstico <span class="caret"></span></a>
+		        <ul class="dropdown-menu" id="submenu2">
+		          <li><a href="#" id="btnAltaProveedor">Alta Proveedor</a></li>
+		          <li><a href="#" id="btnConsultaProveedor">Consultar Proveedor</a></li>		          
+		          <li><a href="#" id="btnBajaProveedor">Baja del proveedor</a></li>
+		        </ul>
+      		  </li>
+      		  <li><a href="#" id="btnConsultaElctrodomesticos">Consultar electrodomésticos</a></li>	
+	        </ul>
+      	</li>
+
+        <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gestión Avería
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#" id="btnAltaAvería">Alta avería</a></li>
+	          <li><a href="#" id="btnModificarAvería">Ver/Modificar avería</a></li>
+	          <li><a href="#" id="btnConsultaAvería">Consultar averías por usuario</a></li>
+	          <li class="dropdown dropdown-submenu" id="submenu">
+		        <a href="#">Presupuesto <span class="caret"></span></a>
+		        <ul class="dropdown-menu" id="submenu2">
+		          <li><a href="#" id="btnAltaPresupuesto">Alta presupuesto</a></li>
+		          <li><a href="#" id="btnModificaPresupuesto">Ver/Modificar presupuesto</a></li>		  		 
+		        </ul>
+      		  </li>      		  
+	          <li><a href="#">Baja avería</a></li>
+	        </ul>
+      	</li>
+            
+        <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gestión Empleado
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#" id="btnAltaEmpleado">Alta empleado</a></li>
+	          <li><a href="#" id="btnModificaEmpleado">Ver/Modificar empleado</a></li>
+	          <li><a href="#" id="btnBajaEmpleado">Baja empleado</a></li>
+	        </ul>
+      	</li>      	
+      </ul>	    
+    </div>
+  </div>
+</nav>
+
+<!--FORMULARIOS-->
+	<!--FORMULARIOS GESTION CLIENTE-->
+    <div class="col-sm-8 text-left formulario" id="altaCliente"> 
+      	<h1>Alta Cliente</h1>
+      	<hr>
+      <form name="formAltaCliente" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
+	            <div class="col-md-7">
+	              <input name="txtDNI" type="text" placeholder="DNI" class="form-control input-md">
+	            </div>
+		</div>
+
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	            <div class="col-md-7">
+	              <input name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+	            </div>
+		</div>
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Apellidos:</label>
+	            <div class="col-md-7">
+	              <input name="txtApellidos" type="text" placeholder="apellidos" class="form-control input-md">
+	            </div>
+		</div>		
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
+	            <div class="col-md-7">
+	              <input name="txtTelefono" type="text" placeholder="telefono" class="form-control input-md">
+	            </div>
+		</div>
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">Dirección:</label>
+	            <div class="col-md-7">
+	              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	    </div>
+
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">E-mail:</label>
+	            <div class="col-md-7">
+	              <input name="txtMail" type="text" placeholder="Correo" class="form-control input-md"/>
+	            </div>
+	    </div>
+        <!-- Button -->
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="btnAltaCli" class="btn btn-primary" value="Enviar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	            </div>
+	    </div>        
+      </form>
+    </div>
+ 
+    <div class="col-sm-8 text-left formulario" id="modificaCliente"> 
+      	<h1>Ver/Modificar cliente</h1>
+      	<hr>
+      <form name="formModificaCli" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtDNI" type="text" placeholder="DNI" class="form-control input-md">
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Apellido:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
+	            </div>
+			</div>		
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
+	            <div class="col-md-7">
+	              <input name="txtTelefono" type="text" placeholder="telefono" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">Dirección:</label>
+	            <div class="col-md-7">
+	              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	        </div>
+
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">E-mail:</label>
+	            <div class="col-md-7">
+	              <input name="txtMail" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	        </div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="btnModiCli" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>   
+
+    <div class="col-sm-8 text-left formulario" id="modificaFacturaReparacion"> 
+      	<h1>Ver factura Reparacion</h1>
+      	<hr>
+      <form name="FormModificaFacturaReparacion" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Id Factura:</label>
+	            <div class="col-md-3">
+	              <input name="txtIdFactura" disabled="disabled" type="text" placeholder="Id factura" class="form-control input-md">
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI cliente:</label>
+	            <div class="col-md-3">
+	              <input name="txtDNIClie" disabled="disabled" type="text" placeholder="DNI cliente" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Precio:</label>
+	            <div class="col-md-2">
+	              <input name="txtPrecio" disabled="disabled" type="text" placeholder="€" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
+	            <div class="col-md-2">
+	              <input name="txtFacPaga" type="text" placeholder="Si/No" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">			
+	        <label class="col-md-3 control-label" for="textinput">Fecha factura:</label>	        
+	            <div class="col-md-3">         
+	             	<input type="date" name="fecha"/>
+	            </div>
+			<p><b>*Puede modificar la fecha de la factura</b></p>
+			</div>					
+			
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="btnModiFacRepa" class="btn btn-primary" value="Modificar"/>	              
+	            </div>
+	        </div>        
+      </form>
+    </div>
+
+    <div class="col-sm-8 text-left formulario" id="bajaFacturaReparación"> 
+      	<h1>Dar de baja</h1>
+      	<hr>
+      <form name="formBajaFacturaReparación" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Id Factura:</label>
+	            <div class="col-md-7">
+	              <input name="txtIdFactura" type="text" placeholder="Id factura" class="form-control input-md">
+	            </div>
+		</div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7" align="center">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Dar de Baja"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>   
+
+	<!--FORMULARIOS GESTION ELECTRODOMÉSTICOS-->
+	<div class="col-sm-8 text-left formulario" id="altaElectrodomestico"> 
+      	<h1>Alta Electrodoméstico</h1>
+      	<hr>
+      <form name="altaElectrodomestico" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	            <div class="col-md-7">
+	              <input name="txtNombreElec" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
+	            </div>
+		</div>
+
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Marca:</label>
+	            <div class="col-md-7">
+	              <input name="txtMarca" type="text" placeholder="Marca" class="form-control input-md">
+	            </div>
+		</div>
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nº Referencia:</label>
+	            <div class="col-md-7">
+	              <input name="txtNumRef" type="text" placeholder="Nº de Referencia" class="form-control input-md">
+	            </div>
+		</div>		
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI Cliente:</label>
+	            <div class="col-md-7">
+	              <input name="txtDniCli" type="text" placeholder="DNI del cliente" class="form-control input-md">
+	            </div>
+		</div>
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">Nº Avería:</label>
+	            <div class="col-md-7">
+	              <input name="txtNumAver" type="text" placeholder="Número Avería" class="form-control input-md"/>
+	            </div>
+	    </div>
+        <!-- Button -->
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Enviar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	            </div>
+	    </div>        
+      </form>
+    </div>  
+
+	<div class="col-sm-8 text-left formulario" id="bajaElectrodomestico"> 
+      	<h1>Dar de baja electrodoméstico </h1>
+      	<hr>
+      <form name="altaReparacion" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nº de Referencia:</label>
+	            <div class="col-md-7">
+	              <input name="txtNumElec" type="text" placeholder="numReferencia" class="form-control input-md">
+	            </div>
+		</div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7" align="center">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Dar de Baja"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>
+
+	<div class="col-sm-8 text-left formulario" id="altaRecambio"> 
+      	<h1>Alta Recambio Electrodomestico</h1>
+      	<hr>
+      <form name="altaElectrodomestico" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Id Recambio:</label>
+	            <div class="col-md-7">
+	              <input name="txtIdRecambio" type="text" placeholder="Id recambio" class="form-control input-md">
+	            </div>
+		</div>
+
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Marca:</label>
+	            <div class="col-md-7">
+	              <input name="txtMarca" type="text" placeholder="Marca" class="form-control input-md">
+	            </div>
+		</div>
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nº Referencia:</label>
+	            <div class="col-md-7">
+	              <input name="txtNumRef" type="text" placeholder="Nº de Referencia" class="form-control input-md">
+	            </div>
+		</div>		
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI Cliente:</label>
+	            <div class="col-md-7">
+	              <input name="txtDniCli" type="text" placeholder="DNI del cliente" class="form-control input-md">
+	            </div>
+		</div>
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">Nº Avería:</label>
+	            <div class="col-md-7">
+	              <input name="txtNumAver" type="text" placeholder="Número Avería" class="form-control input-md"/>
+	            </div>
+	    </div>
+        <!-- Button -->
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Enviar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	            </div>
+	    </div>        
+      </form>
+    </div>
+
+    <div class="col-sm-8 text-left formulario" id="consultarRecambio"> 
+      	<h1>Consulta de Recambios</h1>
+      	<hr>
+      <form name="consultarRecambio" class="form-horizontal">
+      	<div class="form-group">
+	      
+		</div>  
+      </form>
+    </div>
+
+	<div class="col-sm-8 text-left formulario" id="bajaRecambio"> 
+      	<h1>Dar de baja Recambio de electrodoméstico </h1>
+      	<hr>
+      <form name="bajaRecambio" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Id Recambio:</label>
+	            <div class="col-md-7">
+	              <input name="txtIdRecam" type="text" placeholder="Id Recambio" class="form-control input-md">
+	            </div>
+		</div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7" align="center">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Dar de Baja"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>
+
+   	<div class="col-sm-8 text-left formulario" id="altaProveedor"> 
+      	<h1>Alta Proveedor Electrodomestico</h1>
+      	<hr>
+      <form name="altaProveedor" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nif:</label>
+	            <div class="col-md-7">
+	              <input name="txtNifProveedor" type="text" placeholder="Nif proveedor" class="form-control input-md">
+	            </div>
+		</div>
+
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	            <div class="col-md-7">
+	              <input name="txtNombreProveedor" type="text" placeholder="Nombre Proveedor" class="form-control input-md">
+	            </div>
+		</div>
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Dirección:</label>
+	            <div class="col-md-7">
+	              <input name="txtDireccionProveedor" type="text" placeholder="Dirección Proveedor" class="form-control input-md">
+	            </div>
+		</div>		
+
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
+	            <div class="col-md-7">
+	              <input name="txtTlfn" type="text" placeholder="Teléfono" class="form-control input-md">
+	            </div>
+		</div>
+
+        <!-- Button -->
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Alta Proveedor"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	            </div>
+	    </div>        
+      </form>
+    </div>
+
+    <div class="col-sm-8 text-left formulario" id="consultarProveedor"> 
+      	<h1>Consulta proveedor</h1>
+      	<hr>
+      <form name="consultarProveedor" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nif Proveedor:</label>
+	            <div class="col-md-7">
+	              <input name="txtConsultaProve" type="text" placeholder="Nif proveedor" class="form-control input-md">
+	            </div>
+		</div>
+		 <!-- Button -->
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Mostrar Proveedor"/>	              
+	            </div>
+	    </div>       
+      </form>
+    </div>
+
+	<div class="col-sm-8 text-left formulario" id="bajaProveedor"> 
+      	<h1>Dar de baja a un proveedor </h1>
+      	<hr>
+      <form name="bajaProveedor" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nif proveedor:</label>
+	            <div class="col-md-7">
+	              <input name="txtBajaProveedor" type="text" placeholder="Nif Proveedor" class="form-control input-md">
+	            </div>
+		</div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7" align="center">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Dar de Baja"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>
+	
+	<div class="col-sm-8 text-left formulario" id="consultarElectrodomesticos"> 
+      	<h1>Listado de electrodomésticos registrados</h1>
+      	<hr>
+       <form name="consultarProveedor" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Id Electrodoméstico:</label>
+	            <div class="col-md-7">
+	              <input name="txtConsultaElec" type="text" placeholder="Id Electrodoméstico" class="form-control input-md">
+	            </div>
+		</div>
+		 <!-- Button -->
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Mostrar Electrodomesticos"/>	              
+	            </div>
+	    </div>       
+      </form>
+    </div>
+
+	<!--FORMULARIOS GESTION AVERÍA-->
+	<div class="col-sm-8 text-left formulario" id="altaAveria"> 
+      	<h1>Alta Avería</h1>
+      	<hr>
+      <form name="altaAveria" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre Electrodomestico:</label>
+	            <div class="col-md-7">
+	              <input name="txtDNI" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Descripción averia:</label>
+	            <div class="col-md-7">
+	              <input name="txtReparacion" type="text" placeholder="Aquí la descripcion de la averia" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Fecha inicio:</label>
+	            <div class="col-md-7">         
+	             	<input type="date" name="fecha"/>
+	            </div>
+			</div>		
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI empleado:</label>
+	            <div class="col-md-7">
+	              <input name="txtDNIEmple" type="text" placeholder="DNI empleado" class="form-control input-md">
+	            </div>
+			</div>
+			
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	            </div>
+	        </div>        
+      </form>
+    </div> 
+
+	<div class="col-sm-8 text-left formulario" id="modificaAveria"> 
+      	<h1>Ver/Modificar Avería</h1>
+      	<hr>
+      <form name="modificaAveria" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtDNI" type="text" placeholder="apellidos" class="form-control input-md">
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Apellido:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
+	            </div>
+			</div>		
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
+	            <div class="col-md-7">
+	              <input name="txtTelefono" type="text" placeholder="telefono" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">Dirección:</label>
+	            <div class="col-md-7">
+	              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	        </div>
+
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">E-mail:</label>
+	            <div class="col-md-7">
+	              <input name="txtMail" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	        </div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	            </div>
+	        </div>        
+      </form>
+    </div> 
+
+	<div class="col-sm-8 text-left formulario" id="consultarAveria"> 
+      	<h1>Listado de averías registradas</h1>
+      	<hr>
+      <form name="consultarAveria" class="form-horizontal">
+      	<div class="form-group">
+	        <!--Aquí debe introducirse una tabla con todos los electrodomesticos registrados-->
+		</div>  
+      </form>
+    </div>
+
+    <div class="col-sm-8 text-left formulario" id="altaPresupuesto"> 
+      	<h1>Alta Presupuesto</h1>
+      	<hr>
+      <form name="altaPresupuesto" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre Electrodomestico:</label>
+	            <div class="col-md-7">
+	              <input name="txtDNI" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Descripción averia:</label>
+	            <div class="col-md-7">
+	              <input name="txtReparacion" type="text" placeholder="Aquí la descripcion de la averia" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Fecha inicio:</label>
+	            <div class="col-md-7">         
+	             	<input type="date" name="fecha"/>
+	            </div>
+			</div>		
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI empleado:</label>
+	            <div class="col-md-7">
+	              <input name="txtDNIEmple" type="text" placeholder="DNI empleado" class="form-control input-md">
+	            </div>
+			</div>
+			
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>
+
+	<div class="col-sm-8 text-left formulario" id="modificaPresupuesto"> 
+      	<h1>Ver/Modificar presupuesto</h1>
+      	<hr>
+      <form name="modificaAveria" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtDNI" type="text" placeholder="apellidos" class="form-control input-md">
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Apellido:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
+	            </div>
+			</div>		
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
+	            <div class="col-md-7">
+	              <input name="txtTelefono" type="text" placeholder="telefono" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">Dirección:</label>
+	            <div class="col-md-7">
+	              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	        </div>
+
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">E-mail:</label>
+	            <div class="col-md-7">
+	              <input name="txtMail" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	        </div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>
+
+	<!--FORMULARIOS GESTION EMPLEADO-->
+	<div class="col-sm-8 text-left formulario" id="altaEmpleado"> 
+      	<h1>Alta Empleado</h1>
+      	<hr>
+      <form name="altaEmpleado" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre Electrodomestico:</label>
+	            <div class="col-md-7">
+	              <input name="txtDNI" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Descripción averia:</label>
+	            <div class="col-md-7">
+	              <input name="txtReparacion" type="text" placeholder="Aquí la descripcion de la averia" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Fecha inicio:</label>
+	            <div class="col-md-7">         
+	             	<input type="date" name="fecha"/>
+	            </div>
+			</div>		
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI empleado:</label>
+	            <div class="col-md-7">
+	              <input name="txtDNIEmple" type="text" placeholder="DNI empleado" class="form-control input-md">
+	            </div>
+			</div>
+			
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	            </div>
+	        </div>        
+      </form>
+    </div> 
+
+	<div class="col-sm-8 text-left formulario" id="bajaEmpleado"> 
+      	<h1>Dar de baja a un empleado </h1>
+      	<hr>
+      <form name="bajaProveedor" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nº de Referencia:</label>
+	            <div class="col-md-7">
+	              <input name="txtNumElec" type="text" placeholder="Id factura" class="form-control input-md">
+	            </div>
+		</div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7" align="center">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Dar de Baja"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>
+	
+	<div class="col-sm-8 text-left formulario" id="modificaEmpleado"> 
+      	<h1>Ver/Modificar Empleado</h1>
+      	<hr>
+      <form name="modificaAveria" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtDNI" type="text" placeholder="apellidos" class="form-control input-md">
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Apellido:</label>
+	            <div class="col-md-7">
+	              <input disabled="disabled" name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
+	            </div>
+			</div>		
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
+	            <div class="col-md-7">
+	              <input name="txtTelefono" type="text" placeholder="telefono" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">Dirección:</label>
+	            <div class="col-md-7">
+	              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	        </div>
+
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="textarea">E-mail:</label>
+	            <div class="col-md-7">
+	              <input name="txtMail" type="text" placeholder="Dirección" class="form-control input-md"/>
+	            </div>
+	        </div>
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	            </div>
+	        </div>        
+      </form>
+    </div> 
+    <div id="capaVentana">
+    	<span id="nombreVentana">Ventana Emergente</span>
+    	<span id="cerrarVentana">X</span>
+    </div>
+    <div id="capaFondo"></div>
+
+<footer class="container-fluid text-right col-md-12">
+  <p>Trabajo Desarrollo Web Entorno Cliente. Hecho por Juan josé y Mario</p>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/objetos.js"></script>
+<script type="text/javascript" src="js/principal.js"></script>
+</body>
+</html>
