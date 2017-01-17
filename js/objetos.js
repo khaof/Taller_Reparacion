@@ -124,7 +124,7 @@ Proveedor.prototype.toHTMLRow = function(){
 }
 //--------------------------------------------------------------------------
 //Arrays de clases
-function taller_electromecanica(){
+function tallerElectromecanica(){
 	this.Afacturas = [ ];
 	this.Aclientes = [ ];
 	this.Aelectrodomesticos = [ ];
@@ -136,7 +136,7 @@ function taller_electromecanica(){
 	this.Aproveedor = [ ];
 }
 //Metodo altaCliente
-taller_electromecanica.prototype.altaCliente = function(oClientes){
+tallerElectromecanica.prototype.altaCliente = function(oClientes){
 	var i=0;
 	var bEnc = false;
 	var sMensaje = "";
@@ -159,7 +159,7 @@ taller_electromecanica.prototype.altaCliente = function(oClientes){
 }
 //----------------------------------
 //Metodo baja Cliente
-taller_electromecanica.prototype.bajaCliente = function(dniCliente){
+tallerElectromecanica.prototype.bajaCliente = function(dniCliente){
 	var i=0;
 	var bEnc = false;
 	var sMensaje = "";
@@ -180,7 +180,7 @@ taller_electromecanica.prototype.bajaCliente = function(dniCliente){
 }
 //----------------------------------
 //Metodo modificarCliente
-taller_electromecanica.prototype.modificarCliente = function(oCliente){
+tallerElectromecanica.prototype.modificarCliente = function(oCliente){
 	var i=0;
 	var bEnc = false;
 	var sMensaje = "";

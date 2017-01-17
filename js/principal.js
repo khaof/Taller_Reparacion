@@ -1,4 +1,6 @@
-﻿function ocultar(){
+﻿var oTaller = new tallerElectromecanica;
+
+function ocultar(){
 	var estolado = document.querySelectorAll('.formulario');
 	for(var i=0;i<estolado.length;i++){
     	estolado[i].style.display = "none";
@@ -299,6 +301,7 @@ function validarAltaCli(oEvento){
 		oE.preventDefault();
 		//Mostrar errores
 		alert(sErrores);
+
 	}
 	return bValido;
 }
@@ -1469,4 +1472,29 @@ closeWindow.addEventListener("click", ocultaVentana, false);
 function ocultaVentana(){
 	document.getElementById("capaFondo").style.visibility="hidden";
 	document.getElementById("capaVentana").style.visibility="hidden";
+	var info = document.getElementById("txtMensaje").innerHTML="";
+	/*var limpiar = document.createTextNode("");
+	info.appendChild(limpiar);	*/
+}
+
+//Acepta alta Cliente
+var eCliente = document.getElementById("btnAltaCli");
+eCliente.addEventListener("click", aceptarAltaCliente);
+
+function aceptarAltaCliente(){
+	var dni = document.formAltaCliente.txtDNI.value;
+	var nombre = document.formAltaCliente.txtNombre.value;
+	var apellidos = document.formAltaCliente.txtApellidos.value;
+	var tlfn = document.formAltaCliente.txtTelefono.value;
+	var direccion = document.formAltaCliente.txtDireccion.value;
+	var email = document.formAltaCliente.txtMail.value;
+
+	var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
+	var info = document.getElementById("txtMensaje");
+	var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
+	info.appendChild(sMensaje);
+
+	document.getElementById("capaFondo").style.visibility="visible";
+	document.getElementById("capaVentana").style.visibility="visible";
+
 }

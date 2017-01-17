@@ -40,7 +40,7 @@ footer {
 }
 
 #capaFondo{
-  visibility:visible;
+  visibility:hidden;
   position:absolute;
   padding:0px;
   left:0px;
@@ -55,10 +55,9 @@ footer {
 }
 
 #capaVentana {
-  visibility:visible;
-  position:relative;
+  visibility:hidden;
+  position:absolute;
   width: 300px;
-  height: 10%;
   padding: 1.5%;
   text-align: center;
   left:42%;
