@@ -120,6 +120,15 @@ document.formAltaProveedor.btnAltaProv.addEventListener("click", validarAltaProv
 document.formConsultarProveedor.btnConsultaPro.addEventListener("click", validarconsultProv);
 document.formBajaProveedor.btnBajaProv.addEventListener("click", validarbajaProv);
 document.formConsultarElectro.btnConsultarElec.addEventListener("click", validarConsultaElectro);
+document.formAltaEmpleado.btnAltaEmple.addEventListener("click", validarAltaEmple);
+document.formBajaEmpleado.btnBajaEmple.addEventListener("click", validarBajaEmple);
+document.formModificaEmpleado.btnModifiEmple.addEventListener("click", validarModiEmple);
+document.formAltaAveria.btnAltaAver.addEventListener("click", validaAltaAveria);
+document.formModAveria.btnModAver.addEventListener("click", validaModifAveria);
+document.formAltaRecElectrodomestico.btnAltaRecam.addEventListener("click", validaAltaRecambio);
+document.formBajaRecambio.btnBajaRecam.addEventListener("click", validaBajaRecambio);
+
+
 function validarAltaCli(oEvento){
 	var oE = oEvento || window.event;
 	var bValido = true;
@@ -262,9 +271,9 @@ function validarAltaCli(oEvento){
 	// Trim
 	document.formAltaCliente.txtMail.value = document.formAltaCliente.txtMail.value.trim();
 
-	var oExpReg =  /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
+	var oExpReg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	
-	if (oExpReg.test(sDireccion) == false){
+	if (oExpReg.test(sEmail) == false){
 	
 		if(bValido == true){
 			bValido = false;		
@@ -825,13 +834,631 @@ function validarConsultaElectro(oEvento){
 	}
 	return bValido;	
 }
+function validarAltaEmple(oEvento){
+	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
+	// Validaciones
+	//Campo dni
+	var sDNIEmple = document.formAltaEmpleado.txtDNIEmple.value.trim();
+	// Trim
+	document.formAltaEmpleado.txtDNIEmple.value = document.formAltaEmpleado.txtDNIEmple.value.trim();
 
-//FIN VALIDAR
+	var oExpReg = /^\d{8}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sDNIEmple) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaEmpleado.txtDNIEmple.focus();		
+		}
+	
+		sErrores += "\nDNI incorrecto";
+		
+		//Marcar error
+		document.formAltaEmpleado.txtDNIEmple.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaEmpleado.txtDNIEmple.className = "form-control control";	
+	}
 
-//Cerrar ventana emergente
-var closeWindow = document.getElementById("cerrarVentana");
-closeWindow.addEventListener("click", ocultaVentana, false);
-function ocultaVentana(){
-	document.getElementById("capaFondo").style.visibility="hidden";
-	document.getElementById("capaVentana").style.visibility="hidden";
+	//Campo nombre
+	var sNombreEmple = document.formAltaEmpleado.txtNombreEmple.value.trim();
+	// Trim
+	document.formAltaEmpleado.txtNombreEmple.value = document.formAltaEmpleado.txtNombreEmple.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sNombreEmple) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaEmpleado.txtNombreEmple.focus();		
+		}
+	
+		sErrores += "\nNombre incorrecto";
+		
+		//Marcar error
+		document.formAltaEmpleado.txtNombreEmple.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaEmpleado.txtNombreEmple.className = "form-control control";	
+	}
+	
+	//Campo apellido
+	var sApellidoEmple = document.formAltaEmpleado.txtApellidosEmple.value.trim();
+	// Trim
+	document.formAltaEmpleado.txtApellidosEmple.value = document.formAltaEmpleado.txtApellidosEmple.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sApellidoEmple) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaEmpleado.txtApellidosEmple.focus();		
+		}
+	
+		sErrores += "\nApellido incorrecto";
+		
+		//Marcar error
+		document.formAltaEmpleado.txtApellidosEmple.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaEmpleado.txtApellidosEmple.className = "form-control control";	
+	}
+	//Resultado
+	if (bValido == false){
+		//Cancelar envio del formulario
+		oE.preventDefault();
+		//Mostrar errores
+		alert(sErrores);
+	}
+	return bValido;
 }
+function validarBajaEmple(oEvento){
+	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
+	
+	// Validaciones
+	//Campo nif Proveedor
+	var sDNIEmple = document.formBajaEmpleado.txtDNIEmple.value.trim();
+	// Trim
+	document.formBajaEmpleado.txtDNIEmple.value = document.formBajaEmpleado.txtDNIEmple.value.trim();
+
+	var oExpReg = /^\d{8}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sDNIEmple) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formBajaEmpleado.txtDNIEmple.focus();		
+		}
+	
+		sErrores += "\nDNI incorrecto";
+		
+		//Marcar error
+		document.formBajaEmpleado.txtDNIEmple.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formBajaEmpleado.txtDNIEmple.className = "form-control control";	
+	}
+	//Resultado
+	if (bValido == false){
+		//Cancelar envio del formulario
+		oE.preventDefault();
+		//Mostrar errores
+		alert(sErrores);
+	}
+	return bValido;	
+}
+function validarModiEmple(oEvento){
+	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
+	
+	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
+	// Validaciones
+	//Campo dni
+	var sDNIEmplea = document.formModificaEmpleado.txtDNIEmplea.value.trim();
+	// Trim
+	document.formModificaEmpleado.txtDNIEmplea.value = document.formModificaEmpleado.txtDNIEmplea.value.trim();
+
+	var oExpReg = /^\d{8}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sDNIEmplea) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaEmpleado.txtDNIEmplea.focus();		
+		}
+	
+		sErrores += "\nDNI incorrecto";
+		
+		//Marcar error
+		document.formModificaEmpleado.txtDNIEmplea.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaEmpleado.txtDNIEmplea.className = "form-control control";	
+	}
+
+	//Campo nombre
+	var sNombreEmplea = document.formModificaEmpleado.txtNombreEmplea.value.trim();
+	// Trim
+	document.formModificaEmpleado.txtNombreEmplea.value = document.formModificaEmpleado.txtNombreEmplea.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sNombreEmplea) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaEmpleado.txtNombreEmplea.focus();		
+		}
+	
+		sErrores += "\nNombre incorrecto";
+		
+		//Marcar error
+		document.formModificaEmpleado.txtNombreEmplea.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaEmpleado.txtNombreEmplea.className = "form-control control";	
+	}
+	
+	//Campo apellido
+	var sApellidoEmplea = document.formModificaEmpleado.txtApellidoEmplea.value.trim();
+	// Trim
+	document.formModificaEmpleado.txtApellidoEmplea.value = document.formModificaEmpleado.txtApellidoEmplea.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sApellidoEmplea) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaEmpleado.txtApellidoEmplea.focus();		
+		}
+	
+		sErrores += "\nApellido incorrecto";
+		
+		//Marcar error
+		document.formModificaEmpleado.txtApellidoEmplea.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaEmpleado.txtApellidoEmplea.className = "form-control control";	
+	}
+
+	//Resultado
+	if (bValido == false){
+		//Cancelar envio del formulario
+		oE.preventDefault();
+		//Mostrar errores
+		alert(sErrores);
+	}
+	return bValido;
+}
+function validaAltaAveria(oEvento){
+ 	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
+	
+	// Validaciones
+
+	//Campo idAveria
+	var sIdAveria = document.formAltaAveria.txtidAveria.value.trim();
+	// Trim
+	document.formAltaAveria.txtidAveria.value = document.formAltaAveria.txtidAveria.value.trim();
+
+	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sIdAveria) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaAveria.txtidAveria.focus();		
+		}
+	
+		sErrores += "\nId incorrecto";
+		
+		//Marcar error
+		document.formAltaAveria.txtidAveria.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaAveria.txtidAveria.className = "form-control control";	
+	}
+
+	//Campo descripcion
+	var sDescripcionAver = document.formAltaAveria.txtDescripAveria.value.trim();
+	// Trim
+	document.formAltaAveria.txtDescripAveria.value = document.formAltaAveria.txtDescripAveria.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sDescripcionAver) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaAveria.txtDescripAveria.focus();		
+		}
+	
+		sErrores += "\nDescripcion incorrecta";
+		
+		//Marcar error
+		document.formAltaAveria.txtDescripAveria.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaAveria.txtDescripAveria.className = "form-control control";	
+	}
+
+	//DNI EMPLEADO
+	var sdniEmple = document.formAltaAveria.txtDNIEmplead.value.trim();
+	// Trim
+	document.formAltaAveria.txtDNIEmplead.value = document.formAltaAveria.txtDNIEmplead.value.trim();
+
+	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sdniEmple) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaAveria.txtDNIEmplead.focus();		
+		}
+	
+		sErrores += "\nDNI incorrecto";
+		
+		//Marcar error
+		document.formAltaAveria.txtDNIEmplead.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaAveria.txtDNIEmplead.className = "form-control control";	
+	}
+
+	//ID ELECTRODOMESTICO
+	var sIDElec = document.formAltaAveria.txtIdElectro.value.trim();
+	// Trim
+	document.formAltaAveria.txtIdElectro.value = document.formAltaAveria.txtIdElectro.value.trim();
+
+	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sIDElec) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaAveria.txtIdElectro.focus();		
+		}
+	
+		sErrores += "\nDNI incorrecto";
+		
+		//Marcar error
+		document.formAltaAveria.txtIdElectro.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaAveria.txtIdElectro.className = "form-control control";	
+	}
+
+	//Resultado
+	if (bValido == false){
+		//Cancelar envio del formulario
+		oE.preventDefault();
+		//Mostrar errores
+		alert(sErrores);
+	}
+	return bValido;
+}
+function validaModifAveria(oEvento){
+	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
+	
+	// Validaciones
+
+	//Campo idAveria
+	var sIdAveria = document.formModAveria.txtidAveria.value.trim();
+	// Trim
+	document.formModAveria.txtidAveria.value = document.formModAveria.txtidAveria.value.trim();
+
+	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sIdAveria) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModAveria.txtidAveria.focus();		
+		}
+	
+		sErrores += "\nId incorrecto";
+		
+		//Marcar error
+		document.formModAveria.txtidAveria.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModAveria.txtidAveria.className = "form-control control";	
+	}
+
+	//Campo descripcion
+	var sDescripcionAver = document.formModAveria.txtDescripAveria.value.trim();
+	// Trim
+	document.formModAveria.txtDescripAveria.value = document.formModAveria.txtDescripAveria.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sDescripcionAver) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModAveria.txtDescripAveria.focus();		
+		}
+	
+		sErrores += "\nDescripcion incorrecta";
+		
+		//Marcar error
+		document.formModAveria.txtDescripAveria.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModAveria.txtDescripAveria.className = "form-control control";	
+	}
+
+	//DNI EMPLEADO
+	var sdniEmple = document.formModAveria.txtDNIEmplead.value.trim();
+	// Trim
+	document.formModAveria.txtDNIEmplead.value = document.formModAveria.txtDNIEmplead.value.trim();
+
+	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sdniEmple) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModAveria.txtDNIEmplead.focus();		
+		}
+	
+		sErrores += "\nDNI incorrecto";
+		
+		//Marcar error
+		document.formModAveria.txtDNIEmplead.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModAveria.txtDNIEmplead.className = "form-control control";	
+	}
+
+	//ID ELECTRODOMESTICO
+	var sIDElec = document.formModAveria.txtIdElectro.value.trim();
+	// Trim
+	document.formModAveria.txtIdElectro.value = document.formModAveria.txtIdElectro.value.trim();
+
+	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sIDElec) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModAveria.txtIdElectro.focus();		
+		}
+	
+		sErrores += "\nID incorrecto";
+		
+		//Marcar error
+		document.formModAveria.txtIdElectro.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModAveria.txtIdElectro.className = "form-control control";	
+	}
+
+	//Resultado
+	if (bValido == false){
+		//Cancelar envio del formulario
+		oE.preventDefault();
+		//Mostrar errores
+		alert(sErrores);
+	}
+	return bValido;
+}
+function validaAltaRecambio(oEvento){
+	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
+	
+	// Validaciones
+
+	//Campo id Recaambio
+	var sIdRecambio = document.formAltaRecElectrodomestico.txtIdRecambio.value.trim();
+	// Trim
+	document.formAltaRecElectrodomestico.txtIdRecambio.value = document.formAltaRecElectrodomestico.txtIdRecambio.value.trim();
+
+	var oExpReg =  /^\d{3}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sIdRecambio) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaRecElectrodomestico.txtIdRecambio.focus();		
+		}
+	
+		sErrores += "\nId incorrecto";
+		
+		//Marcar error
+		document.formAltaRecElectrodomestico.txtIdRecambio.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaRecElectrodomestico.txtIdRecambio.className = "form-control control";	
+	}
+
+	//Campo nombre
+	var sNombreRec = document.formAltaRecElectrodomestico.txtNombreRecambio.value.trim();
+	// Trim
+	document.formAltaRecElectrodomestico.txtNombreRecambio.value = document.formAltaRecElectrodomestico.txtNombreRecambio.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sNombreRec) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaRecElectrodomestico.txtNombreRecambio.focus();		
+		}
+	
+		sErrores += "\nDescripcion incorrecta";
+		
+		//Marcar error
+		document.formAltaRecElectrodomestico.txtNombreRecambio.className = "form-control  error";
+	
+	}
+	else {
+	//Desmarcar error
+	document.formAltaRecElectrodomestico.txtNombreRecambio.className = "form-control control";	
+	}
+
+	//campo precio
+	var sPrecio = document.formAltaRecElectrodomestico.txtPrecio.value.trim();
+	// Trim
+	document.formAltaRecElectrodomestico.txtPrecio.value = document.formAltaRecElectrodomestico.txtPrecio.value.trim();
+
+	var oExpReg =  /^\d{4}$/;
+	
+	if (oExpReg.test(sPrecio) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaRecElectrodomestico.txtPrecio.focus();		
+		}
+	
+		sErrores += "\nPrecio incorrecto";
+		
+		//Marcar error
+		document.formAltaRecElectrodomestico.txtPrecio.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaRecElectrodomestico.txtPrecio.className = "form-control control";	
+	}
+
+	//Nif proveedor
+	var sNifProve = document.formAltaRecElectrodomestico.txtNifProv.value.trim();
+	// Trim
+	document.formAltaRecElectrodomestico.txtNifProv.value = document.formAltaRecElectrodomestico.txtNifProv.value.trim();
+
+	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sNifProve) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaRecElectrodomestico.txtNifProv.focus();		
+		}
+	
+		sErrores += "\nNif incorrecto";
+		
+		//Marcar error
+		document.formAltaRecElectrodomestico.txtNifProv.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaRecElectrodomestico.txtNifProv.className = "form-control control";	
+	}
+
+	//Resultado
+	if (bValido == false){
+		//Cancelar envio del formulario
+		oE.preventDefault();
+		//Mostrar errores
+		alert(sErrores);
+	}
+	return bValido;
+}
+function validaBajaRecambio(oEvento){
+	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
+	
+	// Validaciones
+	//Campo id recambio
+	var sIdRecam = document.formBajaRecambio.txtIdRecam.value.trim();
+	// Trim
+	document.formBajaRecambio.txtIdRecam.value = document.formBajaRecambio.txtIdRecam.value.trim();
+
+	var oExpReg = /^\d{8}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sIdRecam) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formBajaRecambio.txtIdRecam.focus();		
+		}
+	
+		sErrores += "\nID incorrecto";
+		
+		//Marcar error
+		document.formBajaRecambio.txtIdRecam.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formBajaRecambio.txtIdRecam.className = "form-control control";	
+	}
+	//Resultado
+	if (bValido == false){
+		//Cancelar envio del formulario
+		oE.preventDefault();
+		//Mostrar errores
+		alert(sErrores);
+	}
+	return bValido;	
+}
+//FIN VALIDAR

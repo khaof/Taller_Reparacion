@@ -242,7 +242,10 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
 	            <div class="col-md-2">
-	              <input name="txtFacPaga" type="text" placeholder="Si/No" class="form-control input-md">
+	              <select name="txtFacPaga">
+	              	<option value="si">Si</option>
+	              	<option value="no">No</option>
+	              </select>
 	            </div>
 			</div>
 
@@ -351,7 +354,7 @@
 	<div class="col-sm-8 text-left formulario" id="altaRecambio"> 
       	<h1>Alta Recambio Electrodomestico</h1>
       	<hr>
-      <form name="altaElectrodomestico" class="form-horizontal">
+      <form name="formAltaRecElectrodomestico" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Id Recambio:</label>
 	            <div class="col-md-7">
@@ -360,37 +363,30 @@
 		</div>
 
 	    <div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Marca:</label>
+	        <label class="col-md-3 control-label" for="textinput">Nombre recambio:</label>
 	            <div class="col-md-7">
-	              <input name="txtMarca" type="text" placeholder="Marca" class="form-control input-md">
+	              <input name="txtNombreRecambio" type="text" placeholder="Nombre" class="form-control input-md">
 	            </div>
 		</div>
 
 		<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nº Referencia:</label>
+	        <label class="col-md-3 control-label" for="textinput">Precio:</label>
 	            <div class="col-md-7">
-	              <input name="txtNumRef" type="text" placeholder="Nº de Referencia" class="form-control input-md">
+	              <input name="txtPrecio" type="text" placeholder="Precio €" class="form-control input-md">
 	            </div>
 		</div>		
 
 		<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">DNI Cliente:</label>
+	        <label class="col-md-3 control-label" for="textinput">Nif Proveedor:</label>
 	            <div class="col-md-7">
-	              <input name="txtDniCli" type="text" placeholder="DNI del cliente" class="form-control input-md">
+	              <input name="txtNifProv" type="text" placeholder="Nif Proeedor" class="form-control input-md">
 	            </div>
 		</div>
-
-		<div class="form-group">
-	        <label class="col-md-3 control-label" for="textarea">Nº Avería:</label>
-	            <div class="col-md-7">
-	              <input name="txtNumAver" type="text" placeholder="Número Avería" class="form-control input-md"/>
-	            </div>
-	    </div>
         <!-- Button -->
 	    <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Enviar"/>
+	              <input type="button" id="singlebutton" name="btnAltaRecam" class="btn btn-primary" value="Enviar"/>
 	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	    </div>        
@@ -410,7 +406,7 @@
 	<div class="col-sm-8 text-left formulario" id="bajaRecambio"> 
       	<h1>Dar de baja Recambio de electrodoméstico </h1>
       	<hr>
-      <form name="bajaRecambio" class="form-horizontal">
+      <form name="formBajaRecambio" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Id Recambio:</label>
 	            <div class="col-md-7">
@@ -421,7 +417,7 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7" align="center">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Dar de Baja"/>
+	              <input type="button" id="singlebutton" name="btnBajaRecam" class="btn btn-danger" value="Dar de Baja"/>
 	            </div>
 	        </div>        
       </form>
@@ -534,23 +530,37 @@
 	<div class="col-sm-8 text-left formulario" id="altaAveria"> 
       	<h1>Alta Avería</h1>
       	<hr>
-      <form name="altaAveria" class="form-horizontal">
+      <form name="formAltaAveria" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nombre Electrodomestico:</label>
+	        <label class="col-md-3 control-label" for="textinput">Id Avería:</label>
 	            <div class="col-md-7">
-	              <input name="txtDNI" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
+	              <input name="txtidAveria" type="text" placeholder="id Averia" class="form-control input-md">
 	            </div>
 			</div>
 
 	      	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Descripción averia:</label>
+	        <label class="col-md-3 control-label" for="textinput">Descripción avería:</label>
 	            <div class="col-md-7">
-	              <input name="txtReparacion" type="text" placeholder="Aquí la descripcion de la averia" class="form-control input-md">
+	              <textarea name="txtDescripAveria" type="text" placeholder="Aquí la descripcion de la averia" class="form-control input-md"></textarea> 
 	            </div>
 			</div>
 
 			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Fecha inicio:</label>
+	        <label class="col-md-3 control-label" for="textinput">Recambios:</label>
+	            <div class="col-md-2">
+	              <select name="comboRecambio">
+	              	<option>Fusibles</option>
+	              	<option>Cables</option>
+	              </select> 
+	            </div>
+	        <label class="col-md-3 control-label" for="textinput">Unidades:</label>
+	            <div class="col-md-3">
+	             <input type="text" size="2" name="txtUnidades" />
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Fecha parte avería:</label>
 	            <div class="col-md-7">         
 	             	<input type="date" name="fecha"/>
 	            </div>
@@ -559,7 +569,14 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">DNI empleado:</label>
 	            <div class="col-md-7">
-	              <input name="txtDNIEmple" type="text" placeholder="DNI empleado" class="form-control input-md">
+	              <input name="txtDNIEmplead" type="text" placeholder="DNI empleado" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Id Electrodomestico:</label>
+	            <div class="col-md-7">
+	              <input name="txtIdElectro" type="text" placeholder="Id electrodomestico" class="form-control input-md">
 	            </div>
 			</div>
 			
@@ -567,7 +584,7 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="button" id="singlebutton" name="btnAltaAver" class="btn btn-primary" value="Modificar"/>
 	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
 	            </div>
 	        </div>        
@@ -577,53 +594,61 @@
 	<div class="col-sm-8 text-left formulario" id="modificaAveria"> 
       	<h1>Ver/Modificar Avería</h1>
       	<hr>
-      <form name="modificaAveria" class="form-horizontal">
+      <form name="formModAveria" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
+	        <label class="col-md-3 control-label" for="textinput">Id Avería:</label>
 	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtDNI" type="text" placeholder="apellidos" class="form-control input-md">
+	              <input name="txtidAveria" type="text" placeholder="id Averia" class="form-control input-md">
 	            </div>
 			</div>
 
 	      	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	        <label class="col-md-3 control-label" for="textinput">Descripción avería:</label>
 	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+	              <textarea name="txtDescripAveria" type="text" placeholder="Aquí la descripcion de la averia" class="form-control input-md"></textarea> 
 	            </div>
 			</div>
 
 			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Apellido:</label>
-	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
+	        <label class="col-md-3 control-label" for="textinput">Recambios:</label>
+	            <div class="col-md-2">
+	              <select name="comboRecambio">
+	              	<option>Fusibles</option>
+	              	<option>Cables</option>
+	              </select> 
+	            </div>
+	        <label class="col-md-3 control-label" for="textinput">Unidades:</label>
+	            <div class="col-md-3">
+	             <input type="text" size="2" name="txtUnidades" />
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Fecha parte avería:</label>
+	            <div class="col-md-7">         
+	             	<input type="date" name="fecha"/>
 	            </div>
 			</div>		
 
 			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
+	        <label class="col-md-3 control-label" for="textinput">DNI empleado:</label>
 	            <div class="col-md-7">
-	              <input name="txtTelefono" type="text" placeholder="telefono" class="form-control input-md">
+	              <input name="txtDNIEmplead" type="text" placeholder="DNI empleado" class="form-control input-md">
 	            </div>
 			</div>
 
 			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textarea">Dirección:</label>
+	        <label class="col-md-3 control-label" for="textinput">Id Electrodomestico:</label>
 	            <div class="col-md-7">
-	              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
+	              <input name="txtIdElectro" type="text" placeholder="Id electrodomestico" class="form-control input-md">
 	            </div>
-	        </div>
-
-	        <div class="form-group">
-	        <label class="col-md-3 control-label" for="textarea">E-mail:</label>
-	            <div class="col-md-7">
-	              <input name="txtMail" type="text" placeholder="Dirección" class="form-control input-md"/>
-	            </div>
-	        </div>
+			</div>
+			
 	        <!-- Button -->
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="button" id="singlebutton" name="btnModAver" class="btn btn-primary" value="Modificar"/>
 	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
 	            </div>
 	        </div>        
@@ -635,7 +660,7 @@
       	<hr>
       <form name="consultarAveria" class="form-horizontal">
       	<div class="form-group">
-	        <!--Aquí debe introducirse una tabla con todos los electrodomesticos registrados-->
+	        
 		</div>  
       </form>
     </div>
@@ -643,41 +668,32 @@
     <div class="col-sm-8 text-left formulario" id="altaPresupuesto"> 
       	<h1>Alta Presupuesto</h1>
       	<hr>
-      <form name="altaPresupuesto" class="form-horizontal">
+      <form name="FormAltaPresupuesto" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nombre Electrodomestico:</label>
+	        <label class="col-md-3 control-label" for="textinput">ID Presupuesto:</label>
 	            <div class="col-md-7">
-	              <input name="txtDNI" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
+	              <Select name="txtIdPresupuesto">
+	              	<option>pres01</option>
+	              	<option>pres02</option>
+	              </Select>
 	            </div>
 			</div>
 
 	      	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Descripción averia:</label>
-	            <div class="col-md-7">
-	              <input name="txtReparacion" type="text" placeholder="Aquí la descripcion de la averia" class="form-control input-md">
+	        <label class="col-md-3 control-label" for="textinput">Total presupuesto:</label>
+	            <div class="col-md-2">
+	              <input name="txtTotalPresu" type="text" placeholder="€" class="form-control input-md"> 
 	            </div>
-			</div>
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Fecha inicio:</label>
-	            <div class="col-md-7">         
-	             	<input type="date" name="fecha"/>
+	            <div class="col-md-2">
+	              Euros 
 	            </div>
-			</div>		
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">DNI empleado:</label>
-	            <div class="col-md-7">
-	              <input name="txtDNIEmple" type="text" placeholder="DNI empleado" class="form-control input-md">
-	            </div>
-			</div>
-			
+			</div>			
 	        <!-- Button -->
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	              <input type="button" id="singlebutton" name="btnGeneraFactura" class="btn btn-primary" value="Generar Factura"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	        </div>        
       </form>
@@ -743,41 +759,34 @@
 	<div class="col-sm-8 text-left formulario" id="altaEmpleado"> 
       	<h1>Alta Empleado</h1>
       	<hr>
-      <form name="altaEmpleado" class="form-horizontal">
+      <form name="formAltaEmpleado" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nombre Electrodomestico:</label>
-	            <div class="col-md-7">
-	              <input name="txtDNI" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
-	            </div>
-			</div>
-
-	      	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Descripción averia:</label>
-	            <div class="col-md-7">
-	              <input name="txtReparacion" type="text" placeholder="Aquí la descripcion de la averia" class="form-control input-md">
-	            </div>
-			</div>
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Fecha inicio:</label>
-	            <div class="col-md-7">         
-	             	<input type="date" name="fecha"/>
-	            </div>
-			</div>		
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">DNI empleado:</label>
+	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
 	            <div class="col-md-7">
 	              <input name="txtDNIEmple" type="text" placeholder="DNI empleado" class="form-control input-md">
 	            </div>
 			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+	            <div class="col-md-7">
+	              <input name="txtNombreEmple" type="text" placeholder="Nombre empleado" class="form-control input-md">
+	            </div>
+			</div>
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Apellidos:</label>
+	            <div class="col-md-7">         
+	             	<input name="txtApellidosEmple" type="text" placeholder="Apellidos empleado" class="form-control input-md">
+	            </div>
+			</div>	
 			
 	        <!-- Button -->
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	              <input type="button" id="singlebutton" name="btnAltaEmple" class="btn btn-primary" value="Alta"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	        </div>        
       </form>
@@ -786,18 +795,18 @@
 	<div class="col-sm-8 text-left formulario" id="bajaEmpleado"> 
       	<h1>Dar de baja a un empleado </h1>
       	<hr>
-      <form name="bajaProveedor" class="form-horizontal">
+      <form name="formBajaEmpleado" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nº de Referencia:</label>
+	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
 	            <div class="col-md-7">
-	              <input name="txtNumElec" type="text" placeholder="Id factura" class="form-control input-md">
+	              <input name="txtDNIEmple" type="text" placeholder="Id factura" class="form-control input-md">
 	            </div>
 		</div>
 	        <!-- Button -->
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7" align="center">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Dar de Baja"/>
+	              <input type="button" id="singlebutton" name="btnBajaEmple" class="btn btn-danger" value="Dar de Baja"/>
 	            </div>
 	        </div>        
       </form>
@@ -806,63 +815,37 @@
 	<div class="col-sm-8 text-left formulario" id="modificaEmpleado"> 
       	<h1>Ver/Modificar Empleado</h1>
       	<hr>
-      <form name="modificaAveria" class="form-horizontal">
+      <form name="formModificaEmpleado" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
 	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtDNI" type="text" placeholder="apellidos" class="form-control input-md">
+	              <input name="txtDNIEmplea" type="text" placeholder="Dni Empleado" class="form-control input-md">
 	            </div>
 			</div>
 
 	      	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
 	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+	              <input name="txtNombreEmplea" type="text" placeholder="nombre" class="form-control input-md">
 	            </div>
 			</div>
 
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Apellido:</label>
 	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
+	              <input name="txtApellidoEmplea" type="text" placeholder="apellidos" class="form-control input-md">
 	            </div>
-			</div>		
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
-	            <div class="col-md-7">
-	              <input name="txtTelefono" type="text" placeholder="telefono" class="form-control input-md">
-	            </div>
-			</div>
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textarea">Dirección:</label>
-	            <div class="col-md-7">
-	              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
-	            </div>
-	        </div>
-
-	        <div class="form-group">
-	        <label class="col-md-3 control-label" for="textarea">E-mail:</label>
-	            <div class="col-md-7">
-	              <input name="txtMail" type="text" placeholder="Dirección" class="form-control input-md"/>
-	            </div>
-	        </div>
+			</div>					
 	        <!-- Button -->
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
+	              <input type="button" id="singlebutton" name="btnModifiEmple" class="btn btn-primary" value="Modificar"/>
 	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
 	            </div>
 	        </div>        
       </form>
     </div> 
-    <div id="capaVentana">
-    	<span id="nombreVentana">Ventana Emergente</span>
-    	<span id="cerrarVentana">X</span>
-    </div>
-    <div id="capaFondo"></div>
 
 <footer class="container-fluid text-right col-md-12">
   <p>Trabajo Desarrollo Web Entorno Cliente. Hecho por Juan josé y Mario</p>
