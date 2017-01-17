@@ -1,3 +1,94 @@
-#asasa{
-	background-color: white;
+﻿.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
 }
+.jumbotron{
+  margin-bottom: 0; 
+}
+.row.content {
+  height: 450px
+}
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+footer {
+  background-color: #101010;
+  color: grey;
+  padding: 15px;
+  font-size: 20px;
+  margin-top: 150px;
+}
+#submenu:hover #submenu2{
+  display: block;
+  left: 100%;
+  top: 15%;
+}
+
+#altaCliente, #modificaCliente, #altaFacturaReparacion, #bajaFacturaReparación, #modificaFacturaReparacion, 
+#altaAveria, #altaElectrodomestico, #consultarElectrodomesticos, 
+#bajaElectrodomestico, #altaRecambio, #consultarRecambio, #bajaRecambio, 
+#altaProveedor, #consultarProveedor, #bajaProveedor, #altaAveria, #modificaAveria, #consultarAveria,
+#altaPresupuesto, #modificaPresupuesto, #altaEmpleado, #bajaEmpleado, #modificaEmpleado{
+	display: none;
+}
+
+.error{
+  background-color: yellow;
+}
+
+#capaFondo{
+  visibility:visible;
+  position:absolute;
+  padding:0px;
+  left:0px;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  background-color: rgba(210,210,210, 0.7);
+  background-repeat:repeat;
+  width:100%;
+  height:100%;
+  z-index:2;
+}
+
+#capaVentana {
+  visibility:visible;
+  position:relative;
+  width: 300px;
+  height: 10%;
+  padding: 1.5%;
+  text-align: center;
+  left:42%;
+  top:35%;
+  z-index:3;
+  background:#fff;
+  border:1px solid #000;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+#cerrarVentana{
+  position: absolute;
+  top: 0;
+  left: 258px;
+  width: 40px;
+  color: #000;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+
+}
+#cerrarVentana:hover{
+  background-color: #E23737;
+  color: #fff;
+  border-color: #000;
+}
+#nombreVentana{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 87%;
+  border-bottom: 1px solid;
+}
+prueba
