@@ -1488,13 +1488,14 @@ function aceptarAltaCliente(){
 	var tlfn = document.formAltaCliente.txtTelefono.value;
 	var direccion = document.formAltaCliente.txtDireccion.value;
 	var email = document.formAltaCliente.txtMail.value;
+		var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
+		var info = document.getElementById("txtMensaje");
+		var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
+		info.appendChild(sMensaje);
 
-	var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
-	var info = document.getElementById("txtMensaje");
-	var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
-	info.appendChild(sMensaje);
-
-	document.getElementById("capaFondo").style.visibility="visible";
-	document.getElementById("capaVentana").style.visibility="visible";
+		document.getElementById("capaFondo").style.visibility="visible";
+		document.getElementById("capaVentana").style.visibility="visible";
+	}
+	
 
 }
