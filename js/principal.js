@@ -27,7 +27,6 @@ var eCliente = document.getElementById("btnAltaCli");
 eCliente.addEventListener("click", aceptarAltaCliente);
 function aceptarAltaCliente(){
 	var bValido = true;
-	var sErrores = "";
 	var arrayErrores = [];
 	
 	// Validaciones
@@ -47,7 +46,6 @@ function aceptarAltaCliente(){
 			document.formAltaCliente.txtDNI.focus();		
 		}
 	
-		sErrores += "\nDNI incorrecto";
 		arrayErrores.push("DNI incorrecto");
 		
 		//Marcar error
@@ -74,7 +72,6 @@ function aceptarAltaCliente(){
 			document.formAltaCliente.txtNombre.focus();		
 		}
 	
-		sErrores += "\nNombre incorrecto. Debe tener entre 3 y 40 caracteres";
 		arrayErrores.push("Nombre incorrecto. Debe tener entre 3 y 40 caracteres");
 		
 		//Marcar error
@@ -101,7 +98,6 @@ function aceptarAltaCliente(){
 			document.formAltaCliente.txtApellidos.focus();		
 		}
 	
-		sErrores += "\nApellido incorrecto. Debe tener un tamaño entre 5 y 60";
 		arrayErrores.push("Apellido incorrecto. Debe tener un tamaño entre 5 y 60");
 		//Marcar error
 		document.formAltaCliente.txtApellidos.className = "form-control  error";
@@ -127,7 +123,6 @@ function aceptarAltaCliente(){
 			document.formAltaCliente.txtTelefono.focus();		
 		}
 	
-		sErrores += "\nTeléfono incorrecto";
 		arrayErrores.push("Apellido incorrecto. Debe tener un tamaño entre 5 y 60");
 		
 		//Marcar error
@@ -153,7 +148,6 @@ function aceptarAltaCliente(){
 			document.formAltaCliente.txtDireccion.focus();		
 		}
 	
-		sErrores += "\nDirección incorrecta. Debe tener un tamaño entre 10 y 60 caracteres";
 		arrayErrores.push("Dirección incorrecta. Debe tener un tamaño entre 10 y 60 caracteres");
 		
 		//Marcar error
@@ -180,7 +174,6 @@ function aceptarAltaCliente(){
 			document.formAltaCliente.txtMail.focus();		
 		}
 	
-		sErrores += "\nE-Mail incorrecto. Debe ser example@example.com";
 		arrayErrores.push("E-Mail incorrecto. Debe ser example@example.com");
 		
 		//Marcar error
@@ -196,8 +189,6 @@ function aceptarAltaCliente(){
 	//Resultado
 	if (bValido == false){	
 		//Mostrar errores
-		//alert(sErrores);
-		//var sMensaje = document.createTextNode(sErrores);
 		var div = document.createElement("div");
 		for(var i =0; i<arrayErrores.length;i++){
 			div.appendChild(document.createTextNode(arrayErrores[i]));
@@ -223,7 +214,7 @@ function aceptarAltaCliente(){
 document.formAltaEmpleado.btnAltaEmple.addEventListener("click", aceptarAltaEmpleado);
 function aceptarAltaEmpleado(){
 	var bValido = true;
-	var sErrores = "";
+	var arrayErrores = [];
 	// Validaciones
 	//Campo dni
 	var sDNIEmple = document.formAltaEmpleado.txtDNIEmple.value.trim();
@@ -240,7 +231,7 @@ function aceptarAltaEmpleado(){
 			document.formAltaEmpleado.txtDNIEmple.focus();		
 		}
 	
-		sErrores += "\nDNI incorrecto";
+		arrayErrores.push("DNI incorrecto");
 		
 		//Marcar error
 		document.formAltaEmpleado.txtDNIEmple.className = "form-control  error";
@@ -266,7 +257,7 @@ function aceptarAltaEmpleado(){
 			document.formAltaEmpleado.txtNombreEmple.focus();		
 		}
 	
-		sErrores += "\nNombre incorrecto";
+		arrayErrores.push("Nombre incorrecto");
 		
 		//Marcar error
 		document.formAltaEmpleado.txtNombreEmple.className = "form-control  error";
@@ -292,7 +283,7 @@ function aceptarAltaEmpleado(){
 			document.formAltaEmpleado.txtApellidosEmple.focus();		
 		}
 	
-		sErrores += "\nApellido incorrecto";
+		arrayErrores.push("Apellido incorrecto");
 		
 		//Marcar error
 		document.formAltaEmpleado.txtApellidosEmple.className = "form-control  error";
@@ -305,7 +296,13 @@ function aceptarAltaEmpleado(){
 	//Resultado
 	if (bValido == false){;
 		//Mostrar errores
-		alert(sErrores);
+		var div = document.createElement("div");
+		for(var i =0; i<arrayErrores.length;i++){
+			div.appendChild(document.createTextNode(arrayErrores[i]));
+			div.appendChild(document.createElement("br"));
+		}
+		openWindow(div);
+
 	}else{
 		var dniEmple = document.formAltaEmpleado.txtDNIEmple.value;
 		var nomEmple = document.formAltaEmpleado.txtNombreEmple.value;
@@ -314,17 +311,14 @@ function aceptarAltaEmpleado(){
 		var oEmpleado = new Empleado(dniEmple, nomEmple, apellEmple);
 		var info = document.getElementById("txtMensaje");
 		var sMensaje = document.createTextNode(oTaller.altaEmpleado(oEmpleado));
-		info.appendChild(sMensaje);
-
-		document.getElementById("capaFondo").style.visibility="visible";
-		document.getElementById("capaVentana").style.visibility="visible";	
+		openWindow(sMensaje);
 	}
 }
 //********************ACEPTA ALTA PROVEEDOR***********************************
 document.formAltaProveedor.btnAltaProv.addEventListener("click", aceptarAltaProveedor);
 function aceptarAltaProveedor(){
 	var bValido = true;
-	var sErrores = "";
+	var arrayErrores = [];
 	// Validaciones
 	//Campo dni
 	var sNif = document.formAltaProveedor.txtNifProveedor.value.trim();
@@ -341,7 +335,7 @@ function aceptarAltaProveedor(){
 			document.formAltaProveedor.txtNifProveedor.focus();		
 		}
 	
-		sErrores += "\nDNI incorrecto";
+		 arrayErrores.push("DNI incorrecto");
 		
 		//Marcar error
 		document.formAltaProveedor.txtNifProveedor.className = "form-control  error";
@@ -367,7 +361,8 @@ function aceptarAltaProveedor(){
 			document.formAltaProveedor.txtNombreProveedor.focus();		
 		}
 	
-		sErrores += "\nNombre incorrecto";
+		arrayErrores.push("Nombre incorrecto");
+		//por aqui
 		
 		//Marcar error
 		document.formAltaProveedor.txtNombreProveedor.className = "form-control  error";
