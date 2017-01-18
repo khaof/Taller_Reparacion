@@ -27,7 +27,7 @@ footer {
   top: 15%;
 }
 
-#altaCliente, #modificaCliente, #altaFacturaReparacion, #ListarFacturaReparacion, #bajaFacturaReparación, #modificaFacturaReparacion, 
+#altaCliente, #modificaCliente, #bajaCliente, #altaFacturaReparacion, #ListarFacturaReparacion, #bajaFacturaReparación, #modificaFacturaReparacion, 
 #altaAveria, #altaElectrodomestico, #consultarElectrodomesticos, 
 #bajaElectrodomestico, #altaRecambio, #consultarRecambio, #bajaRecambio, #altaLineaComponente, 
 #altaProveedor, #consultarProveedor, #bajaProveedor, #altaAveria, #modificaAveria, #consultarAveria,
@@ -57,10 +57,10 @@ footer {
 #capaVentana {
   visibility:hidden;
   position:absolute;
-  width: 26%;
+  width: 300px;
   padding: 1.5%;
-  text-align: left;
-  left:39%;
+  text-align: center;
+  left:42%;
   top:35%;
   z-index:3;
   background:#fff;
@@ -71,10 +71,9 @@ footer {
 #cerrarVentana{
   position: absolute;
   top: 0;
-  left: 32.63em;
+  left: 258px;
   width: 40px;
   color: #000;
-  text-align: center;
   border-left: 1px solid;
   border-bottom: 1px solid;
 
@@ -88,7 +87,6 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
-  width: 92%;
+  width: 87%;
   border-bottom: 1px solid;
-  text-align: center;
 }
