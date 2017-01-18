@@ -1,34 +1,22 @@
 ﻿var oTaller = new tallerElectromecanica;
-
 //cerrar ventana emergente
 var closeWindow = document.getElementById("cerrarVentana");
 closeWindow.addEventListener("click", ocultaVentana, false);
 function ocultaVentana(){
 	document.getElementById("capaFondo").style.visibility="hidden";
 	document.getElementById("capaVentana").style.visibility="hidden";
-	var info = document.getElementById("txtMensaje");
-	info.parentNode.removeChild(info);
-}
-//funcion abrir ventana
-function openWindow(sTexto){
-	var info = document.getElementById("capaVentana");
-	var parrafo = document.createElement("p");
-	info.appendChild(parrafo);
-	parrafo.setAttribute("id", "txtMensaje");
-	parrafo.appendChild(sTexto);
-	
-	document.getElementById("capaFondo").style.visibility="visible";
-	document.getElementById("capaVentana").style.visibility="visible";
-
+	var info = document.getElementById("txtMensaje").innerHTML="";
+	/*var limpiar = document.createTextNode("");
+	info.appendChild(limpiar);	*/
 }
 
-//********************ACEPTA ALTA CLIENTE*************************************
+//********************CLIENTE*************************************
+//***ACEPTA ALTA***
 var eCliente = document.getElementById("btnAltaCli");
 eCliente.addEventListener("click", aceptarAltaCliente);
 function aceptarAltaCliente(){
 	var bValido = true;
 	var sErrores = "";
-	var arrayErrores = [];
 	
 	// Validaciones
 
@@ -48,7 +36,6 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nDNI incorrecto";
-		arrayErrores.push("DNI incorrecto");
 		
 		//Marcar error
 		document.formAltaCliente.txtDNI.className = "form-control  error";
@@ -75,7 +62,6 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nNombre incorrecto. Debe tener entre 3 y 40 caracteres";
-		arrayErrores.push("Nombre incorrecto. Debe tener entre 3 y 40 caracteres");
 		
 		//Marcar error
 		document.formAltaCliente.txtNombre.className = "form-control  error";
@@ -102,7 +88,7 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nApellido incorrecto. Debe tener un tamaño entre 5 y 60";
-		arrayErrores.push("Apellido incorrecto. Debe tener un tamaño entre 5 y 60");
+		
 		//Marcar error
 		document.formAltaCliente.txtApellidos.className = "form-control  error";
 	
@@ -128,7 +114,6 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nTeléfono incorrecto";
-		arrayErrores.push("Apellido incorrecto. Debe tener un tamaño entre 5 y 60");
 		
 		//Marcar error
 		document.formAltaCliente.txtTelefono.className = "form-control  error";
@@ -154,7 +139,6 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nDirección incorrecta. Debe tener un tamaño entre 10 y 60 caracteres";
-		arrayErrores.push("Dirección incorrecta. Debe tener un tamaño entre 10 y 60 caracteres");
 		
 		//Marcar error
 		document.formAltaCliente.txtDireccion.className = "form-control  error";
@@ -181,7 +165,6 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nE-Mail incorrecto. Debe ser example@example.com";
-		arrayErrores.push("E-Mail incorrecto. Debe ser example@example.com");
 		
 		//Marcar error
 		document.formAltaCliente.txtMail.className = "form-control  error";
@@ -196,14 +179,7 @@ function aceptarAltaCliente(){
 	//Resultado
 	if (bValido == false){	
 		//Mostrar errores
-		//alert(sErrores);
-		//var sMensaje = document.createTextNode(sErrores);
-		var div = document.createElement("div");
-		for(var i =0; i<arrayErrores.length;i++){
-			div.appendChild(document.createTextNode(arrayErrores[i]));
-			div.appendChild(document.createElement("br"));
-		}
-		openWindow(div);
+		alert(sErrores);
 
 	}else{
 		var dni = document.formAltaCliente.txtDNI.value;
@@ -213,13 +189,136 @@ function aceptarAltaCliente(){
 		var direccion = document.formAltaCliente.txtDireccion.value;
 		var email = document.formAltaCliente.txtMail.value;
 			
-		var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
-		var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
-		openWindow(sMensaje);
-			
+				var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
+				var info = document.getElementById("txtMensaje");
+				var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
+				info.appendChild(sMensaje);
+
+				document.getElementById("capaFondo").style.visibility="visible";
+				document.getElementById("capaVentana").style.visibility="visible";	
 	}
 }
-//********************ACEPTA ALTA EMPLEADO************************************
+//***ACEPTA MODIFICAR***
+document.formModificaCli.btnModiCli.addEventListener("click", aceptarModificaCliente);
+function aceptarModificaCliente(){
+	var bValido = true;
+	var sErrores = "";
+	
+	// Validaciones
+	//Campo telefono
+	var sTelefono = document.formModificaCli.txtTelefono.value.trim();
+	// Trim
+	document.formModificaCli.txtTelefono.value = document.formModificaCli.txtTelefono.value.trim();
+
+	var oExpReg = /^[679]*\d{8}$/;
+	
+	if (oExpReg.test(sTelefono) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaCli.txtTelefono.focus();		
+		}
+	
+		sErrores += "\nTeléfono incorrecto";
+		
+		//Marcar error
+		document.formModificaCli.txtTelefono.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaCli.txtTelefono.className = "form-control control";	
+	}
+
+	//Campo direccion
+	var sDireccion = document.formModificaCli.txtDireccion.value.trim();
+	// Trim
+	document.formModificaCli.txtDireccion.value = document.formModificaCli.txtDireccion.value.trim();
+	
+	if (sDireccion.length<10 || sDireccion>60){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaCli.txtDireccion.focus();		
+		}
+	
+		sErrores += "\nDirección incorrecta";
+		
+		//Marcar error
+		document.formModificaCli.txtDireccion.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaCli.txtDireccion.className = "form-control control";	
+	}
+
+	//Campo e-mail
+	var sEmail = document.formModificaCli.txtMail.value.trim();
+	// Trim
+	document.formModificaCli.txtMail.value = document.formModificaCli.txtMail.value.trim();
+
+	var oExpReg =  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
+	if (oExpReg.test(sEmail) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaCli.txtMail.focus();		
+		}
+	
+		sErrores += "\nE-Mail incorrecto. Debe tener el formato example@example.com";
+		
+		//Marcar error
+		document.formModificaCli.txtMail.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaCli.txtMail.className = "form-control control";	
+	}
+
+
+	//Resultado
+	if (bValido == false){
+		//Mostrar errores
+		alert(sErrores);
+	}else{
+		var combo=document.formModificaCli.txtDNI.selectedIndex;
+		var dni= document.formModificaCli.txtDNI.options[combo].value;
+		var nombre = document.formModificaCli.txtNombre.value;
+		var apellidos = document.formModificaCli.txtApellido.value;
+		var tlfn = document.formModificaCli.txtTelefono.value;
+		var direccion = document.formModificaCli.txtDireccion.value;
+		var email = document.formModificaCli.txtMail.value;
+			
+		var oClienteMod = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
+		var info = document.getElementById("txtMensaje");
+		var sMensaje = document.createTextNode(oTaller.modificarCliente(oClienteMod));
+		info.appendChild(sMensaje);
+
+		document.getElementById("capaFondo").style.visibility="visible";
+		document.getElementById("capaVentana").style.visibility="visible";
+	}
+}
+//***ACEPTA BAJA***
+document.formBajaCliente.btnBajaCliente.addEventListener("click", aceptarBajaCliente);
+function aceptarBajaCliente(){
+	var combo=document.formModificaCli.txtDNI.selectedIndex;
+	var dniCliente= document.formModificaCli.txtDNI.options[combo].value;
+	
+	var info = document.getElementById("txtMensaje");
+	var sMensaje = document.createTextNode(oTaller.bajaCliente(dniCliente));
+	info.appendChild(sMensaje);
+
+	document.getElementById("capaFondo").style.visibility="visible";
+	document.getElementById("capaVentana").style.visibility="visible";
+}
+//********************EMPLEADO************************************
+//***ACEPTA ALTA***
 document.formAltaEmpleado.btnAltaEmple.addEventListener("click", aceptarAltaEmpleado);
 function aceptarAltaEmpleado(){
 	var bValido = true;
@@ -451,6 +550,9 @@ function aceptarAltaProveedor(){
 }
 
 
+
+
+
 function ocultar(){
 	var estolado = document.querySelectorAll('.formulario');
 	for(var i=0;i<estolado.length;i++){
@@ -467,6 +569,11 @@ document.getElementById("btnModificaCliente").addEventListener("click", function
 	//Muestra
     document.getElementById("modificaCliente").style.display = "block";
 });
+document.getElementById("btnBajaCliente").addEventListener("click", function(){
+	ocultar();
+	//Muestra
+    document.getElementById("bajaCliente").style.display = "block";
+});
 document.getElementById("btnVerFactura").addEventListener("click", function(){
 	ocultar();
 	//Muestra
@@ -481,7 +588,6 @@ document.getElementById("btnListarFacturas").addEventListener("click", function(
 	//Muestra
     document.getElementById("ListarFacturaReparacion").style.display = "block";
 });
-
 document.getElementById("BtnBajaFactura").addEventListener("click", function(){
 	ocultar();
 	//Muestra
@@ -606,94 +712,6 @@ document.formBajaRecambio.btnBajaRecam.addEventListener("click", validaBajaRecam
 document.FormListarFacturaReparacion.btnListarFacRepa.addEventListener("click",validaFecha);
 
 function validarModClien(oEvento){
-	var bValido = true;
-	var sErrores = "";
-	
-	// Validaciones
-	//Campo telefono
-	var sTelefono = document.formModificaCli.txtTelefono.value.trim();
-	// Trim
-	document.formModificaCli.txtTelefono.value = document.formModificaCli.txtTelefono.value.trim();
-
-	var oExpReg = /^[679]*\d{8}$/;
-	
-	if (oExpReg.test(sTelefono) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formModificaCli.txtTelefono.focus();		
-		}
-	
-		sErrores += "\nTeléfono incorrecto";
-		
-		//Marcar error
-		document.formModificaCli.txtTelefono.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formModificaCli.txtTelefono.className = "form-control control";	
-	}
-
-	//Campo direccion
-	var sDireccion = document.formModificaCli.txtDireccion.value.trim();
-	// Trim
-	document.formModificaCli.txtDireccion.value = document.formModificaCli.txtDireccion.value.trim();
-
-	var oExpReg =  /^[a-zA-Z\s]{3,60}$/;
-	
-	if (oExpReg.test(sDireccion) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formModificaCli.txtDireccion.focus();		
-		}
-	
-		sErrores += "\nDirección incorrecta";
-		
-		//Marcar error
-		document.formModificaCli.txtDireccion.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formModificaCli.txtDireccion.className = "form-control control";	
-	}
-
-	//Campo e-mail
-	var sEmail = document.formModificaCli.txtMail.value.trim();
-	// Trim
-	document.formModificaCli.txtMail.value = document.formModificaCli.txtMail.value.trim();
-
-	var oExpReg =  /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
-	
-	if (oExpReg.test(sDireccion) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formModificaCli.txtMail.focus();		
-		}
-	
-		sErrores += "\nE-Mail incorrecto";
-		
-		//Marcar error
-		document.formModificaCli.txtMail.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formModificaCli.txtMail.className = "form-control control";	
-	}
-
-
-	//Resultado
-	if (bValido == false){
-		//Mostrar errores
-		alert(sErrores);
-	}
 }
 function validarBajaFact(oEvento){
 	var oE = oEvento || window.event;
