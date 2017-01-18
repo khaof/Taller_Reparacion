@@ -6,9 +6,20 @@ closeWindow.addEventListener("click", ocultaVentana, false);
 function ocultaVentana(){
 	document.getElementById("capaFondo").style.visibility="hidden";
 	document.getElementById("capaVentana").style.visibility="hidden";
-	var info = document.getElementById("txtMensaje").innerHTML="";
-	/*var limpiar = document.createTextNode("");
-	info.appendChild(limpiar);	*/
+	var info = document.getElementById("txtMensaje");
+	info.parentNode.removeChild(info);
+}
+//funcion abrir ventana
+function openWindow(sTexto){
+	var info = document.getElementById("capaVentana");
+	var parrafo = document.createElement("p");
+	info.appendChild(parrafo);
+	parrafo.setAttribute("id", "txtMensaje");
+	parrafo.appendChild(sTexto);
+	
+	document.getElementById("capaFondo").style.visibility="visible";
+	document.getElementById("capaVentana").style.visibility="visible";
+
 }
 
 //********************ACEPTA ALTA CLIENTE*************************************
@@ -17,6 +28,7 @@ eCliente.addEventListener("click", aceptarAltaCliente);
 function aceptarAltaCliente(){
 	var bValido = true;
 	var sErrores = "";
+	var arrayErrores = [];
 	
 	// Validaciones
 
@@ -36,6 +48,7 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nDNI incorrecto";
+		arrayErrores.push("DNI incorrecto");
 		
 		//Marcar error
 		document.formAltaCliente.txtDNI.className = "form-control  error";
@@ -62,6 +75,7 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nNombre incorrecto. Debe tener entre 3 y 40 caracteres";
+		arrayErrores.push("Nombre incorrecto. Debe tener entre 3 y 40 caracteres");
 		
 		//Marcar error
 		document.formAltaCliente.txtNombre.className = "form-control  error";
@@ -88,7 +102,7 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nApellido incorrecto. Debe tener un tamaño entre 5 y 60";
-		
+		arrayErrores.push("Apellido incorrecto. Debe tener un tamaño entre 5 y 60");
 		//Marcar error
 		document.formAltaCliente.txtApellidos.className = "form-control  error";
 	
@@ -114,6 +128,7 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nTeléfono incorrecto";
+		arrayErrores.push("Apellido incorrecto. Debe tener un tamaño entre 5 y 60");
 		
 		//Marcar error
 		document.formAltaCliente.txtTelefono.className = "form-control  error";
@@ -139,6 +154,7 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nDirección incorrecta. Debe tener un tamaño entre 10 y 60 caracteres";
+		arrayErrores.push("Dirección incorrecta. Debe tener un tamaño entre 10 y 60 caracteres");
 		
 		//Marcar error
 		document.formAltaCliente.txtDireccion.className = "form-control  error";
@@ -165,6 +181,7 @@ function aceptarAltaCliente(){
 		}
 	
 		sErrores += "\nE-Mail incorrecto. Debe ser example@example.com";
+		arrayErrores.push("E-Mail incorrecto. Debe ser example@example.com");
 		
 		//Marcar error
 		document.formAltaCliente.txtMail.className = "form-control  error";
@@ -179,7 +196,14 @@ function aceptarAltaCliente(){
 	//Resultado
 	if (bValido == false){	
 		//Mostrar errores
-		alert(sErrores);
+		//alert(sErrores);
+		//var sMensaje = document.createTextNode(sErrores);
+		var div = document.createElement("div");
+		for(var i =0; i<arrayErrores.length;i++){
+			div.appendChild(document.createTextNode(arrayErrores[i]));
+			div.appendChild(document.createElement("br"));
+		}
+		openWindow(div);
 
 	}else{
 		var dni = document.formAltaCliente.txtDNI.value;
@@ -189,13 +213,10 @@ function aceptarAltaCliente(){
 		var direccion = document.formAltaCliente.txtDireccion.value;
 		var email = document.formAltaCliente.txtMail.value;
 			
-				var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
-				var info = document.getElementById("txtMensaje");
-				var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
-				info.appendChild(sMensaje);
-
-				document.getElementById("capaFondo").style.visibility="visible";
-				document.getElementById("capaVentana").style.visibility="visible";	
+		var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
+		var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
+		openWindow(sMensaje);
+			
 	}
 }
 //********************ACEPTA ALTA EMPLEADO************************************
