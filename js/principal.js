@@ -195,6 +195,7 @@ function aceptarAltaCliente(){
 		}
 		openWindow(div);
 
+
 	}else{
 		var dni = document.formAltaCliente.txtDNI.value;
 		var nombre = document.formAltaCliente.txtNombre.value;
