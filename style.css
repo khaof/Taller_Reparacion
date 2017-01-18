@@ -57,10 +57,10 @@ footer {
 #capaVentana {
   visibility:hidden;
   position:absolute;
-  width: 300px;
+  width: 26%;
   padding: 1.5%;
-  text-align: center;
-  left:42%;
+  text-align: left;
+  left:39%;
   top:35%;
   z-index:3;
   background:#fff;
@@ -71,9 +71,10 @@ footer {
 #cerrarVentana{
   position: absolute;
   top: 0;
-  left: 258px;
+  left: 32.63em;
   width: 40px;
   color: #000;
+  text-align: center;
   border-left: 1px solid;
   border-bottom: 1px solid;
 
@@ -87,6 +88,7 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
-  width: 87%;
+  width: 92%;
   border-bottom: 1px solid;
+  text-align: center;
 }
