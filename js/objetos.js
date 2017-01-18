@@ -70,17 +70,14 @@ Parte_Averia.prototype.toHTMLRow = function(){
 }
 //---------------------------------------------------------------------------------
 //Clase empleado 
-function Empleado(dni_empleado, nombre_empleado, apellidos_empleado, id_ParteAveria){
-	Parte_Averia.call(this, id_ParteAveria);
+function Empleado(dni_empleado, nombre_empleado, apellidos_empleado){
 	this.dni_empleado = dni_empleado;
 	this.nombre_empleado = nombre_empleado;
 	this.apellidos_empleado = apellidos_empleado;
 }
 
-Empleado.prototype = Object.create(Parte_Averia.prototype);
-Empleado.prototype.constructor = Empleado;
 Empleado.prototype.toHTMLRow = function(){
-	return "<td>"+this.dni_empleado+"</td><td>"+this.nombre_empleado+"</td><td>"+this.apellidos_empleado+"</td><td>"+this.id_ParteAveria+"</td>";
+	return "<td>"+this.dni_empleado+"</td><td>"+this.nombre_empleado+"</td><td>"+this.apellidos_empleado+"</td><td>";
 }
 //---------------------------------------------------------------------------------------
 //Clase LineaComponente 
@@ -193,10 +190,55 @@ tallerElectromecanica.prototype.modificarCliente = function(oCliente){
 	}
 
 	if(bEnc==true){
-		this.Aclientes.splice(i, 1, oClientes);
+		this.Aclientes.splice(i, 1, oEmpleado);
 		sMensaje = "Cliente Modificar: OK!";
 	}
 		
 	return sMensaje;
 }
 //--------------------------------------
+//Metodo altaEmpleado
+tallerElectromecanica.prototype.altaEmpleado = function(oEmpleado){
+	var i=0;
+	var bEnc = false;
+	var sMensaje = "";
+	
+	while (i < this.Aempleados.length && bEnc == false){
+		if(this.Aempleados[i].dni_empleado == oEmpleado.dni_empleado)
+			bEnc = true;
+		else
+		i++;
+	}
+
+	if(bEnc==true){
+		sMensaje = "Este Empleado ya está registrado";
+	}else{
+		this.Aempleados.push(oEmpleado);
+		sMensaje = "Empleado Alta: OK!";
+	}
+		
+	return sMensaje;
+}
+//--------------------------------------
+//Metodo altaProveedor
+tallerElectromecanica.prototype.altaProveedor = function(oProveedor){
+	var i=0;
+	var bEnc = false;
+	var sMensaje = "";
+	
+	while (i < this.Aproveedor.length && bEnc == false){
+		if(this.Aproveedor[i].nif_proveedor == oProveedor.nif_proveedor)
+			bEnc = true;
+		else
+		i++;
+	}
+
+	if(bEnc==true){
+		sMensaje = "Este proveedor ya está registrado";
+	}else{
+		this.Aproveedor.push(oProveedor);
+		sMensaje = "Proveedor Alta: OK!";
+	}
+		
+	return sMensaje;
+}
