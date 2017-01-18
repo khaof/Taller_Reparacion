@@ -1,5 +1,216 @@
 ﻿var oTaller = new tallerElectromecanica;
 
+//cerrar ventana emergente
+var closeWindow = document.getElementById("cerrarVentana");
+closeWindow.addEventListener("click", ocultaVentana, false);
+function ocultaVentana(){
+	document.getElementById("capaFondo").style.visibility="hidden";
+	document.getElementById("capaVentana").style.visibility="hidden";
+	var info = document.getElementById("txtMensaje").innerHTML="";
+	/*var limpiar = document.createTextNode("");
+	info.appendChild(limpiar);	*/
+}
+
+//Acepta alta Cliente
+var eCliente = document.getElementById("btnAltaCli");
+eCliente.addEventListener("click", aceptarAltaCliente);
+
+function aceptarAltaCliente(){
+	var bValido = true;
+	var sErrores = "";
+	
+	// Validaciones
+
+	//Campo dni
+	var sDNI = document.formAltaCliente.txtDNI.value.trim();
+	// Trim
+	document.formAltaCliente.txtDNI.value = document.formAltaCliente.txtDNI.value.trim();
+
+	var oExpReg = /^\d{8}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sDNI) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaCliente.txtDNI.focus();		
+		}
+	
+		sErrores += "\nDNI incorrecto";
+		
+		//Marcar error
+		document.formAltaCliente.txtDNI.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaCliente.txtDNI.className = "form-control control";	
+	}
+
+	//Campo nombre
+	var sNombre = document.formAltaCliente.txtNombre.value.trim();
+	// Trim
+	document.formAltaCliente.txtNombre.value = document.formAltaCliente.txtNombre.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sNombre) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaCliente.txtNombre.focus();		
+		}
+	
+		sErrores += "\nNombre incorrecto. Debe tener entre 3 y 40 caracteres";
+		
+		//Marcar error
+		document.formAltaCliente.txtNombre.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaCliente.txtNombre.className = "form-control control";	
+	}
+	
+	//Campo apellido
+	var sApellido = document.formAltaCliente.txtApellidos.value.trim();
+	// Trim
+	document.formAltaCliente.txtApellidos.value = document.formAltaCliente.txtApellidos.value.trim();
+
+	var oExpReg = /^[a-zA-ZñÑ\s\W]{5,60}$/;
+	
+	if (oExpReg.test(sApellido) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaCliente.txtApellidos.focus();		
+		}
+	
+		sErrores += "\nApellido incorrecto. Debe tener un tamaño entre 5 y 60";
+		
+		//Marcar error
+		document.formAltaCliente.txtApellidos.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaCliente.txtApellidos.className = "form-control control";	
+	}
+
+	//Campo telefono
+	var sTelefono = document.formAltaCliente.txtTelefono.value.trim();
+	// Trim
+	document.formAltaCliente.txtTelefono.value = document.formAltaCliente.txtTelefono.value.trim();
+
+	var oExpReg = /^[679]*\d{8}$/;
+	
+	if (oExpReg.test(sTelefono) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaCliente.txtTelefono.focus();		
+		}
+	
+		sErrores += "\nTeléfono incorrecto";
+		
+		//Marcar error
+		document.formAltaCliente.txtTelefono.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaCliente.txtTelefono.className = "form-control control";	
+	}
+
+	//Campo direccion
+	var sDireccion = document.formAltaCliente.txtDireccion.value.trim();
+	// Trim
+	document.formAltaCliente.txtDireccion.value = document.formAltaCliente.txtDireccion.value.trim();
+
+	
+	if (sDireccion.length<10 || sDireccion>60){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaCliente.txtDireccion.focus();		
+		}
+	
+		sErrores += "\nDirección incorrecta. Debe tener un tamaño entre 10 y 60 caracteres";
+		
+		//Marcar error
+		document.formAltaCliente.txtDireccion.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaCliente.txtDireccion.className = "form-control control";	
+	}
+
+	//Campo e-mail
+	var sEmail = document.formAltaCliente.txtMail.value.trim();
+	// Trim
+	document.formAltaCliente.txtMail.value = document.formAltaCliente.txtMail.value.trim();
+
+	var oExpReg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
+	if (oExpReg.test(sEmail) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaCliente.txtMail.focus();		
+		}
+	
+		sErrores += "\nE-Mail incorrecto. Debe ser example@example.com";
+		
+		//Marcar error
+		document.formAltaCliente.txtMail.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaCliente.txtMail.className = "form-control control";	
+	}
+
+
+	//Resultado
+	if (bValido == false){	
+		//Mostrar errores
+		alert(sErrores);
+
+	}else{
+		var dni = document.formAltaCliente.txtDNI.value;
+		var nombre = document.formAltaCliente.txtNombre.value;
+		var apellidos = document.formAltaCliente.txtApellidos.value;
+		var tlfn = document.formAltaCliente.txtTelefono.value;
+		var direccion = document.formAltaCliente.txtDireccion.value;
+		var email = document.formAltaCliente.txtMail.value;
+			
+				var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
+				var info = document.getElementById("txtMensaje");
+				var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
+				info.appendChild(sMensaje);
+
+				document.getElementById("capaFondo").style.visibility="visible";
+				document.getElementById("capaVentana").style.visibility="visible";	
+	}
+		return bValido;
+}
+
+
+/*function aceptarAltaEmpleado(){
+	var dniEmple = document.formAltaEmpleado.txtDNIEmple.value;
+	var nomEmple = document.formAltaEmpleado.txtNombreEmple.value;
+	var apellEmple = document.formAltaEmpleado.txtApellidosEmple.value;
+	var 
+}*/
+
+
+
 function ocultar(){
 	var estolado = document.querySelectorAll('.formulario');
 	for(var i=0;i<estolado.length;i++){
@@ -113,7 +324,7 @@ document.getElementById("btnModificaEmpleado").addEventListener("click", functio
 });
 //FIN OCULTAR FORMULARIOS
 //VALIDAR FORMULARIO
-document.formAltaCliente.btnAltaCli.addEventListener("click", validarAltaCli);
+
 document.formModificaCli.btnModiCli.addEventListener("click", validarModiCli);
 document.formBajaFacturaReparacion.btnBajaFactura.addEventListener("click", validarBajaFact);
 document.formAltaElectrodomestico.btnAltaElect.addEventListener("click", validarAltaElect);
@@ -131,180 +342,6 @@ document.formAltaRecElectrodomestico.btnAltaRecam.addEventListener("click", vali
 document.formBajaRecambio.btnBajaRecam.addEventListener("click", validaBajaRecambio);
 
 
-function validarAltaCli(oEvento){
-	var oE = oEvento || window.event;
-	var bValido = true;
-	var sErrores = "";
-	
-	// Validaciones
-
-	//Campo dni
-	var sDNI = document.formAltaCliente.txtDNI.value.trim();
-	// Trim
-	document.formAltaCliente.txtDNI.value = document.formAltaCliente.txtDNI.value.trim();
-
-	var oExpReg = /^\d{8}[a-zA-Z]$/;
-	
-	if (oExpReg.test(sDNI) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaCliente.txtDNI.focus();		
-		}
-	
-		sErrores += "\nDNI incorrecto";
-		
-		//Marcar error
-		document.formAltaCliente.txtDNI.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaCliente.txtDNI.className = "form-control control";	
-	}
-
-	//Campo nombre
-	var sNombre = document.formAltaCliente.txtNombre.value.trim();
-	// Trim
-	document.formAltaCliente.txtNombre.value = document.formAltaCliente.txtNombre.value.trim();
-
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
-	
-	if (oExpReg.test(sNombre) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaCliente.txtNombre.focus();		
-		}
-	
-		sErrores += "\nNombre incorrecto";
-		
-		//Marcar error
-		document.formAltaCliente.txtNombre.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaCliente.txtNombre.className = "form-control control";	
-	}
-	
-	//Campo apellido
-	var sApellido = document.formAltaCliente.txtApellidos.value.trim();
-	// Trim
-	document.formAltaCliente.txtApellidos.value = document.formAltaCliente.txtApellidos.value.trim();
-
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
-	
-	if (oExpReg.test(sApellido) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaCliente.txtApellidos.focus();		
-		}
-	
-		sErrores += "\nApellido incorrecto";
-		
-		//Marcar error
-		document.formAltaCliente.txtApellidos.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaCliente.txtApellidos.className = "form-control control";	
-	}
-
-	//Campo telefono
-	var sTelefono = document.formAltaCliente.txtTelefono.value.trim();
-	// Trim
-	document.formAltaCliente.txtTelefono.value = document.formAltaCliente.txtTelefono.value.trim();
-
-	var oExpReg = /^[679]*\d{8}$/;
-	
-	if (oExpReg.test(sTelefono) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaCliente.txtTelefono.focus();		
-		}
-	
-		sErrores += "\nTeléfono incorrecto";
-		
-		//Marcar error
-		document.formAltaCliente.txtTelefono.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaCliente.txtTelefono.className = "form-control control";	
-	}
-
-	//Campo direccion
-	var sDireccion = document.formAltaCliente.txtDireccion.value.trim();
-	// Trim
-	document.formAltaCliente.txtDireccion.value = document.formAltaCliente.txtDireccion.value.trim();
-
-	var oExpReg =  /^[a-zA-Z\s]{3,60}$/;
-	
-	if (oExpReg.test(sDireccion) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaCliente.txtDireccion.focus();		
-		}
-	
-		sErrores += "\nDirección incorrecta";
-		
-		//Marcar error
-		document.formAltaCliente.txtDireccion.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaCliente.txtDireccion.className = "form-control control";	
-	}
-
-	//Campo e-mail
-	var sEmail = document.formAltaCliente.txtMail.value.trim();
-	// Trim
-	document.formAltaCliente.txtMail.value = document.formAltaCliente.txtMail.value.trim();
-
-	var oExpReg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	
-	if (oExpReg.test(sEmail) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaCliente.txtMail.focus();		
-		}
-	
-		sErrores += "\nE-Mail incorrecto";
-		
-		//Marcar error
-		document.formAltaCliente.txtMail.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaCliente.txtMail.className = "form-control control";	
-	}
-
-
-	//Resultado
-	if (bValido == false){
-		//Cancelar envio del formulario
-		oE.preventDefault();
-		//Mostrar errores
-		alert(sErrores);
-
-	}
-	return bValido;
-}
 function validarModiCli(oEvento){
 	var oE = oEvento || window.event;
 	var bValido = true;
@@ -1465,38 +1502,3 @@ function validaBajaRecambio(oEvento){
 	return bValido;	
 }
 //FIN VALIDAR
-
-//cerrar ventana emergente
-var closeWindow = document.getElementById("cerrarVentana");
-closeWindow.addEventListener("click", ocultaVentana, false);
-function ocultaVentana(){
-	document.getElementById("capaFondo").style.visibility="hidden";
-	document.getElementById("capaVentana").style.visibility="hidden";
-	var info = document.getElementById("txtMensaje").innerHTML="";
-	/*var limpiar = document.createTextNode("");
-	info.appendChild(limpiar);	*/
-}
-
-//Acepta alta Cliente
-var eCliente = document.getElementById("btnAltaCli");
-eCliente.addEventListener("click", aceptarAltaCliente);
-
-function aceptarAltaCliente(){
-	var dni = document.formAltaCliente.txtDNI.value;
-	var nombre = document.formAltaCliente.txtNombre.value;
-	var apellidos = document.formAltaCliente.txtApellidos.value;
-	var tlfn = document.formAltaCliente.txtTelefono.value;
-	var direccion = document.formAltaCliente.txtDireccion.value;
-	var email = document.formAltaCliente.txtMail.value;
-	if (dni!="" && nombre!="" && apellidos!="" && tlfn!="" & direccion!="" && email!="") {
-		var oCliente = new Cliente(dni, nombre, apellidos, tlfn, direccion, email);
-		var info = document.getElementById("txtMensaje");
-		var sMensaje = document.createTextNode(oTaller.altaCliente(oCliente));
-		info.appendChild(sMensaje);
-
-		document.getElementById("capaFondo").style.visibility="visible";
-		document.getElementById("capaVentana").style.visibility="visible";
-	}
-	
-
-}
