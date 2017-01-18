@@ -33,7 +33,8 @@
 	          <li class="dropdown dropdown-submenu" id="submenu">
 		        <a href="#">Factura reparación <span class="caret"></span></a>
 		        <ul class="dropdown-menu" id="submenu2">
-		          <li><a href="#" id="btnVerFactura">Ver factura</a></li>		          
+		          <li><a href="#" id="btnVerFactura">Modificar factura</a></li>		 
+		          <li><a href="#" id="btnListarFacturas">Listar facturas</a></li>         
 		          <li><a href="#" id="BtnBajaFactura">Baja de la factura</a></li>
 		        </ul>
       		  </li>
@@ -81,7 +82,8 @@
 		          <li><a href="#" id="btnAltaPresupuesto">Alta presupuesto</a></li>
 		          <li><a href="#" id="btnModificaPresupuesto">Ver/Modificar presupuesto</a></li>		  		 
 		        </ul>
-      		  </li>      		  
+      		  </li>    
+      		  <li><a href="#" id="btnLineaComponente">Linea de Componente</a></li>  		  
 	          <li><a href="#">Baja avería</a></li>
 	        </ul>
       	</li>
@@ -252,7 +254,7 @@
 			<div class="form-group">			
 	        <label class="col-md-3 control-label" for="textinput">Fecha factura:</label>	        
 	            <div class="col-md-3">         
-	             	<input type="date" name="fecha"/>
+	             	<input type="text=" name="fecha" placeholder="." />
 	            </div>
 			<p><b>*Puede modificar la fecha de la factura</b></p>
 			</div>					
@@ -264,6 +266,40 @@
 	              <input type="button" id="singlebutton" name="btnModiFacRepa" class="btn btn-primary" value="Modificar"/>	              
 	            </div>
 	        </div>        
+      </form>
+    </div>
+
+    <div class="col-sm-8 text-left formulario" id="ListarFacturaReparacion"> 
+      	<h1>Listado de facturas</h1>
+      	<hr>
+      <form name="FormListarFacturaReparacion" class="form-horizontal">
+      	<div class="form-group">
+
+			<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
+	            <div class="col-md-2">
+	              <select name="txtFacPaga">
+	              	<option value="si">Si</option>
+	              	<option value="no">No</option>
+	              </select>
+	            </div>
+			</div>
+
+			<div class="form-group">			
+	        <label class="col-md-3 control-label" for="textinput">Fecha factura:</label>	        
+	            <div class="col-md-3">         
+	             	<input type="text=" name="fecha"/>
+	            </div>
+			</div>					
+			
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="btnListarFacRepa" class="btn btn-primary" value="Listar Facturas"/>	              
+	            </div>
+	        </div>   
+	    </div>     
       </form>
     </div>
 
@@ -562,7 +598,7 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Fecha parte avería:</label>
 	            <div class="col-md-7">         
-	             	<input type="date" name="fecha"/>
+	             	<input type="text" name="fecha" placeholder="." disabled="disabled" />
 	            </div>
 			</div>		
 
@@ -626,7 +662,7 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Fecha parte avería:</label>
 	            <div class="col-md-7">         
-	             	<input type="date" name="fecha"/>
+	             	<input type="text" name="fecha" placeholder="." />
 	            </div>
 			</div>		
 
@@ -755,6 +791,41 @@
       </form>
     </div>
 
+    <div class="col-sm-8 text-left formulario" id="altaLineaComponente"> 
+      	<h1>Linea de componente</h1>
+      	<hr>
+      <form name="formaltaLineaComponente" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">ID Presupuesto:</label>
+	            <div class="col-md-7">
+	              <Select name="txtIdPresupuesto">
+	              	<option>pres01</option>
+	              	<option>pres02</option>
+	              </Select>
+	            </div>
+			</div>
+
+	      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">ID Recambio:</label>
+	            <div class="col-md-7">
+		            <Select name="txtIdRecambio">
+		              	<option>rec01</option>
+		              	<option>rec02</option>
+		             </Select>
+		        </div>
+			</div>		
+	
+	        <!-- Button -->
+	        <div class="form-group">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7">
+	              <input type="button" id="singlebutton" name="btnGeneraFactura" class="btn btn-primary" value="Generar Linea Componente"/>
+	              
+	            </div>
+	        </div>        
+      </form>
+    </div>
+
 	<!--FORMULARIOS GESTION EMPLEADO-->
 	<div class="col-sm-8 text-left formulario" id="altaEmpleado"> 
       	<h1>Alta Empleado</h1>
@@ -846,6 +917,8 @@
 	        </div>        
       </form>
     </div> 
+
+
     <div id="capaVentana">
     	<span id="nombreVentana">Ventana Emergente</span>
     	<span id="cerrarVentana">X</span>

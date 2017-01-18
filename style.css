@@ -27,9 +27,9 @@ footer {
   top: 15%;
 }
 
-#altaCliente, #modificaCliente, #altaFacturaReparacion, #bajaFacturaReparación, #modificaFacturaReparacion, 
+#altaCliente, #modificaCliente, #altaFacturaReparacion, #ListarFacturaReparacion, #bajaFacturaReparación, #modificaFacturaReparacion, 
 #altaAveria, #altaElectrodomestico, #consultarElectrodomesticos, 
-#bajaElectrodomestico, #altaRecambio, #consultarRecambio, #bajaRecambio, 
+#bajaElectrodomestico, #altaRecambio, #consultarRecambio, #bajaRecambio, #altaLineaComponente, 
 #altaProveedor, #consultarProveedor, #bajaProveedor, #altaAveria, #modificaAveria, #consultarAveria,
 #altaPresupuesto, #modificaPresupuesto, #altaEmpleado, #bajaEmpleado, #modificaEmpleado{
 	display: none;

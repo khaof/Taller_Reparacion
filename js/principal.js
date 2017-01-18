@@ -449,8 +449,18 @@ document.getElementById("btnModificaCliente").addEventListener("click", function
 document.getElementById("btnVerFactura").addEventListener("click", function(){
 	ocultar();
 	//Muestra
+	var f=new Date();
+	var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	f=f.getDate() +'/'+ meses[f.getMonth()] +'/'+ f.getFullYear();
+	document.FormModificaFacturaReparacion.fecha.setAttribute("placeholder",f);
     document.getElementById("modificaFacturaReparacion").style.display = "block";
 });
+document.getElementById("btnListarFacturas").addEventListener("click", function(){
+	ocultar();
+	//Muestra
+    document.getElementById("ListarFacturaReparacion").style.display = "block";
+});
+
 document.getElementById("BtnBajaFactura").addEventListener("click", function(){
 	ocultar();
 	//Muestra
@@ -504,17 +514,32 @@ document.getElementById("btnConsultaElctrodomesticos").addEventListener("click",
 document.getElementById("btnAltaAvería").addEventListener("click", function(){
 	ocultar();
 	//Muestra 
+	var f=new Date();
+	var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	f=f.getDate() +'/'+ meses[f.getMonth()] +'/'+ f.getFullYear();
+	document.formAltaAveria.fecha.setAttribute("placeholder",f);
+    
     document.getElementById("altaAveria").style.display = "block";
 });
 document.getElementById("btnModificarAvería").addEventListener("click", function(){
 	ocultar();
 	//Muestra 
+	var f=new Date();
+	var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	f=f.getDate() +'/'+ meses[f.getMonth()] +'/'+ f.getFullYear();
+	document.formModAveria.fecha.setAttribute("placeholder",f);
+
     document.getElementById("modificaAveria").style.display = "block";
 });
 document.getElementById("btnConsultaAvería").addEventListener("click", function(){
 	ocultar();
 	//Muestra  
     document.getElementById("consultarAveria").style.display = "block";
+});
+document.getElementById("btnLineaComponente").addEventListener("click", function(){
+	ocultar();
+	//Muestra  
+    document.getElementById("altaLineaComponente").style.display = "block";
 });
 document.getElementById("btnAltaPresupuesto").addEventListener("click", function(){
 	ocultar();
@@ -548,7 +573,6 @@ document.getElementById("btnModificaEmpleado").addEventListener("click", functio
 document.formBajaFacturaReparacion.btnBajaFactura.addEventListener("click", validarBajaFact);
 document.formAltaElectrodomestico.btnAltaElect.addEventListener("click", validarAltaElect);
 document.formBajaElectrodomestico.btnBajaElect.addEventListener("click", validarBajaElect);
-
 document.formConsultarProveedor.btnConsultaPro.addEventListener("click", validarconsultProv);
 document.formBajaProveedor.btnBajaProv.addEventListener("click", validarbajaProv);
 document.formConsultarElectro.btnConsultarElec.addEventListener("click", validarConsultaElectro);
@@ -558,7 +582,7 @@ document.formAltaAveria.btnAltaAver.addEventListener("click", validaAltaAveria);
 document.formModAveria.btnModAver.addEventListener("click", validaModifAveria);
 document.formAltaRecElectrodomestico.btnAltaRecam.addEventListener("click", validaAltaRecambio);
 document.formBajaRecambio.btnBajaRecam.addEventListener("click", validaBajaRecambio);
-
+document.FormListarFacturaReparacion.btnListarFacRepa.addEventListener("click",validaFecha);
 
 function validarModClien(oEvento){
 	var bValido = true;
@@ -968,7 +992,46 @@ function validarConsultaElectro(oEvento){
 	}
 	return bValido;	
 }
+function validaFecha(oEvento){
+	var oE = oEvento || window.event;
+	var bValido = true;
+	var sErrores = "";
 
+	// Validaciones
+	//Campo nif Proveedor
+	var sFecha = document.FormListarFacturaReparacion.fecha.value.trim();
+	// Trim
+	document.FormListarFacturaReparacion.fecha.value = document.FormListarFacturaReparacion.fecha.value.trim();
+
+	var oExpReg = /^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$/;
+	
+	if (oExpReg.test(sFecha) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.FormListarFacturaReparacion.fecha.focus();		
+		}
+	
+		sErrores += "\nFecha incorrecta. Formato DD/MM/YY";
+		
+		//Marcar error
+		document.FormListarFacturaReparacion.fecha.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.FormListarFacturaReparacion.fecha.className = "form-control control";	
+	}
+	//Resultado
+	if (bValido == false){
+		//Cancelar envio del formulario
+		oE.preventDefault();
+		//Mostrar errores
+		alert(sErrores);
+	}
+	return bValido;	
+}
 function validarBajaEmple(oEvento){
 	var oE = oEvento || window.event;
 	var bValido = true;
