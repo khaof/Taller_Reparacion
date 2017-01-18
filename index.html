@@ -30,7 +30,6 @@
 	        <ul class="dropdown-menu">
 	          <li><a href="#" id="btnAltaCliente">Alta cliente</a></li>
 	          <li><a href="#" id="btnModificaCliente">Ver/Modificar cliente</a></li>	       
-	           <li><a href="#" id="btnBajaCliente">Dar de baja al cliente</a></li>	       
 	          <li class="dropdown dropdown-submenu" id="submenu">
 		        <a href="#">Factura reparación <span class="caret"></span></a>
 		        <ul class="dropdown-menu" id="submenu2">
@@ -165,27 +164,24 @@
       	<h1>Ver/Modificar cliente</h1>
       	<hr>
       <form name="formModificaCli" class="form-horizontal">
-      		<div class="form-group">
+      	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
 	            <div class="col-md-7">
-	              <Select name="txtDNI">
-						<option value="49034017h">49034017h</option>
-						<option value="43333333h">43333333h</option>
-	              </Select>
+	              <input disabled="disabled" name="txtDNI" type="text" placeholder="DNI" class="form-control input-md">
 	            </div>
 			</div>
 
 	      	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
 	            <div class="col-md-7">
-	              <input name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+	              <input disabled="disabled" name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
 	            </div>
 			</div>
 
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Apellido:</label>
 	            <div class="col-md-7">
-	              <input name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
+	              <input disabled="disabled" name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
 	            </div>
 			</div>		
 
@@ -218,30 +214,7 @@
 	            </div>
 	        </div>        
       </form>
-    </div>  
-
-    <div class="col-sm-8 text-left formulario" id="bajaCliente"> 
-      	<h1>Dar de baja</h1>
-      	<hr>
-      <form name="formBajaCliente" class="form-horizontal">
-      		<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
-	            <div class="col-md-7">
-	              <Select name="txtDNI">
-						<option value="49034017h">49034017h</option>
-						<option value="43333333h">43333333h</option>
-	              </Select>
-	            </div>
-			</div>
-	        <!-- Button -->
-	        <div class="form-group">
-	        <label class="col-md-3 control-label" for="singlebutton"></label>
-	            <div class="col-md-7" align="left">
-	              <input type="button" id="singlebutton" name="btnBajaCliente" class="btn btn-danger" value="Dar de Baja"/>
-	            </div>
-	        </div>        
-      </form>
-    </div>    
+    </div>   
 
     <div class="col-sm-8 text-left formulario" id="modificaFacturaReparacion"> 
       	<h1>Ver factura Reparacion</h1>

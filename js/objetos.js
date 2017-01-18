@@ -132,7 +132,6 @@ function tallerElectromecanica(){
 	this.Acomponentes = [ ];
 	this.Aproveedor = [ ];
 }
-
 //Metodo altaCliente
 tallerElectromecanica.prototype.altaCliente = function(oClientes){
 	var i=0;
@@ -173,29 +172,28 @@ tallerElectromecanica.prototype.bajaCliente = function(dniCliente){
 		this.Aclientes.splice(i, 1);
 		sMensaje = "Cliente Baja: OK!";
 	}
-
+		
 	return sMensaje;
 }
 //----------------------------------
 //Metodo modificarCliente
-tallerElectromecanica.prototype.modificarCliente = function(oClienteMod){
+tallerElectromecanica.prototype.modificarCliente = function(oCliente){
 	var i=0;
 	var bEnc = false;
 	var sMensaje = "";
 	
 	while (i < this.Aclientes.length && bEnc == false){
-		if(this.Aclientes[i].dni_cliente == oClienteMod.dni_cliente)
+		if(this.Aclientes[i].dni_cliente == oClientes.dni_cliente)
 			bEnc = true;
 		else
 		i++;
 	}
 
 	if(bEnc==true){
-		this.Aclientes.splice(i, 1, oClienteMod);
+		this.Aclientes.splice(i, 1, oEmpleado);
 		sMensaje = "Cliente Modificar: OK!";
-	}else{
-		sMensaje = "Cliente Modificar: No se ha encontrado el DNI";
-	}	
+	}
+		
 	return sMensaje;
 }
 //--------------------------------------
