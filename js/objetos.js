@@ -170,6 +170,8 @@ tallerElectromecanica.prototype.bajaCliente = function(dniCliente) {
 		if (bEnc == true) {
 			this.Aclientes.splice(i, 1);
 			sMensaje = "Cliente Baja: OK!";
+		}else{
+			sMensaje = "Cliente no encontrado";
 		}
 
 		return sMensaje;

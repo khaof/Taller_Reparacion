@@ -335,6 +335,7 @@ function aceptarBajaCliente(){
 	var sMensaje = document.createTextNode(oTaller.bajaCliente(dniCliente));
 	openWindow(sMensaje);
 }
+
 //********************GESTION EMPLEADO************************************
 //***ACEPTA ALTA***
 document.formAltaEmpleado.btnAltaEmple.addEventListener("click", aceptarAltaEmpleado);
