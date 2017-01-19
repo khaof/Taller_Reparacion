@@ -37,19 +37,17 @@ Presupuesto.prototype.toHTMLRow = function(){
 }
 //-------------------------------------------
 //Clase Electrodomestico 
-function Electrodomestico(nombre_electrodomestico, marca_electrodomestico, id_electrodomestico, dni_cliente, id_ParteAveria){
-	Cliente.call(this, dni_cliente);
-	Parte_Averia.call(this, id_ParteAveria);
-	this.id_electrodomestico = id_electrodomestico;
-	this.nombre_electrodomestico = nombre_electrodomestico;
-	this.marca_electrodomestico = marca_electrodomestico;
+function Electrodomestico(sNumRef, sNombreElec, sMarca, sDniCli){
+	Cliente.call(this, sDniCli);
+	this.sNumRef = sNumRef;
+	this.sNombreElec = sNombreElec;
+	this.sMarca = sMarca;
 
 }
 Electrodomestico.prototype = Object.create(Cliente.prototype);
-Electrodomestico.prototype = Object.create(Parte_Averia.prototype);
 Electrodomestico.prototype.constructor = Electrodomestico;
 Electrodomestico.prototype.toHTMLRow = function(){
-	return "<td>"+this.id_electrodomestico+"</td><td>"+this.nombre_electrodomestico+"</td><td>"+this.marca_electrodomestico+"</td><td>"+this.dni_cliente+"</td><td>"+this.id_ParteAveria+"</td>";
+	return "<td>"+this.sNumRef+"</td><td>"+this.sNombreElec+"</td><td>"+this.sMarca+"</td><td>"+this.dni_cliente+"</td><td>"+this.sDniCli+"</td>";
 }
 //-------------------------------------------------------------------
 //Claese Parte_averia 
@@ -242,5 +240,29 @@ tallerElectromecanica.prototype.altaProveedor = function(oProveedor){
 		sMensaje = "Proveedor Alta: OK!";
 	}
 		
+	return sMensaje;
+}
+//--------------------------------------
+//Metodo Electrodomestico
+tallerElectromecanica.prototype.altaElectrodomestico = function(oElectrodomestico){
+
+//METODO MAL HECHO HAY QUE ARREGLARLO
+	var i=0;
+	var bEnc = false;
+	var sMensaje = "";
+	
+	//compruebo que el num_ref del electrodomestico no esta ya registrado
+	for (var i = 0; i < this.Aelectrodomesticos.length; i++) {
+		if (this.Aelectrodomesticos[i].sNumRef == oElectrodomestico.sNumRef) {
+			bEncontradoUser = true;
+		}
+	}
+	if (bEnc == false) {
+		this.Aelectrodomesticos.push(oElectrodomestico);
+		sMensaje = "Se ha registrado";
+	}else{
+		sMensaje = "El Electrodomestico ya esta registrado";
+	}
+	
 	return sMensaje;
 }

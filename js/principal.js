@@ -10,18 +10,23 @@ function ocultaVentana(){
 }
 //funcion abrir ventana
 function openWindow(sTexto){
-	var info = document.getElementById("capaVentana");
-	var parrafo = document.createElement("p");
-	info.appendChild(parrafo);
-	parrafo.setAttribute("id", "txtMensaje");
-	parrafo.appendChild(sTexto);
-	
-	document.getElementById("capaFondo").style.visibility="visible";
-	document.getElementById("capaVentana").style.visibility="visible";
-
+		var info = document.getElementById("txtMensaje");
+		if(info != null){
+			info.parentNode.removeChild(info);
+		}
+		
+		var info = document.getElementById("capaVentana");
+		var parrafo = document.createElement("p");
+		info.appendChild(parrafo);
+		parrafo.setAttribute("id", "txtMensaje");
+		parrafo.appendChild(sTexto);
+		
+		document.getElementById("capaFondo").style.visibility="visible";
+		document.getElementById("capaVentana").style.visibility="visible";	
 }
 
-//********************ACEPTA ALTA CLIENTE*************************************
+//********************GESTION CLIENTE*************************************
+//***ACEPTA ALTA***
 var eCliente = document.getElementById("btnAltaCli");
 eCliente.addEventListener("click", aceptarAltaCliente);
 function aceptarAltaCliente(){
@@ -189,6 +194,7 @@ function aceptarAltaCliente(){
 	if (bValido == false){	
 		//Mostrar errores
 		var div = document.createElement("div");
+		div.style.textAlign = "left";
 		for(var i =0; i<arrayErrores.length;i++){
 			div.appendChild(document.createTextNode(arrayErrores[i]));
 			div.appendChild(document.createElement("br"));
@@ -298,6 +304,7 @@ function aceptarModificaCliente(){
 	if (bValido == false){
 		//Mostrar errores
 		var div = document.createElement("div");
+		div.style.textAlign = "left";
 		for(var i =0; i<arrayErrores.length;i++){
 			div.appendChild(document.createTextNode(arrayErrores[i]));
 			div.appendChild(document.createElement("br"));
@@ -328,7 +335,7 @@ function aceptarBajaCliente(){
 	var sMensaje = document.createTextNode(oTaller.bajaCliente(dniCliente));
 	openWindow(sMensaje);
 }
-//********************EMPLEADO************************************
+//********************GESTION EMPLEADO************************************
 //***ACEPTA ALTA***
 document.formAltaEmpleado.btnAltaEmple.addEventListener("click", aceptarAltaEmpleado);
 function aceptarAltaEmpleado(){
@@ -416,6 +423,7 @@ function aceptarAltaEmpleado(){
 	if (bValido == false){;
 		//Mostrar errores
 		var div = document.createElement("div");
+		div.style.textAlign = "left";
 		for(var i =0; i<arrayErrores.length;i++){
 			div.appendChild(document.createTextNode(arrayErrores[i]));
 			div.appendChild(document.createElement("br"));
@@ -433,7 +441,8 @@ function aceptarAltaEmpleado(){
 		openWindow(sMensaje);
 	}
 }
-//********************ACEPTA ALTA PROVEEDOR***********************************
+//********************GESTION PROVEEDOR***********************************
+//***ACEPTA ALTA***
 document.formAltaProveedor.btnAltaProv.addEventListener("click", aceptarAltaProveedor);
 function aceptarAltaProveedor(){
 	var bValido = true;
@@ -546,6 +555,7 @@ function aceptarAltaProveedor(){
 	if (bValido == false){
 		//Mostrar errores
 		var div = document.createElement("div");
+		div.style.textAlign = "left";
 		for(var i =0; i<arrayErrores.length;i++){
 			div.appendChild(document.createTextNode(arrayErrores[i]));
 			div.appendChild(document.createElement("br"));
@@ -564,6 +574,141 @@ function aceptarAltaProveedor(){
 	}
 	return bValido;	
 }
+
+//********************ACEPTA ALTA ELECTRODOMÉSTICO***********************************
+//***ACEPTA ALTA***
+document.formAltaElectrodomestico.btnAltaElect.addEventListener("click", aceptarAltaElectrodomestico);
+function aceptarAltaElectrodomestico(){
+	var bValido = true;
+	var arrayErrores = [];
+	//Validaciones
+	//Campo numRefElectrodomestico
+	var sNumRefElec = document.formAltaElectrodomestico.txtNumRef.value.trim();
+	// Trim
+	document.formAltaElectrodomestico.txtNumRef.value = document.formAltaElectrodomestico.txtNumRef.value.trim();
+
+	var oExpReg = /^[0-9]$/;
+	
+	if (oExpReg.test(sNumRefElec) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaElectrodomestico.txtNumRef.focus();		
+		}
+	
+		arrayErrores.push("El numero de referencia debe ser un número");
+		
+		//Marcar error
+		document.formAltaElectrodomestico.txtNumRef.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaElectrodomestico.txtNumRef.className = "form-control control";	
+	}
+	//Campo nombre
+	var sNombreElectr = document.formAltaElectrodomestico.txtNombreElec.value.trim();
+	// Trim
+	document.formAltaElectrodomestico.txtNombreElec.value = document.formAltaElectrodomestico.txtNombreElec.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sNombreElectr) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaElectrodomestico.txtNombreElec.focus();		
+		}
+	
+		arrayErrores.push("Campo nombre incorrecto.");
+		
+		//Marcar error
+		document.formAltaElectrodomestico.txtNombreElec.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaElectrodomestico.txtNombreElec.className = "form-control control";	
+	}
+
+	//Campo marca 
+	var smarcaElectr = document.formAltaElectrodomestico.txtMarca.value.trim();
+	// Trim
+	document.formAltaElectrodomestico.txtMarca.value = document.formAltaElectrodomestico.txtMarca.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(smarcaElectr) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaElectrodomestico.txtMarca.focus();		
+		}
+	
+		arrayErrores.push("Campo marca incorrecto");
+		
+		//Marcar error
+		document.formAltaElectrodomestico.txtMarca.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaElectrodomestico.txtMarca.className = "form-control control";	
+	}
+
+	//Campo dni
+	var sDNICli = document.formAltaElectrodomestico.txtDniCli.value.trim();
+	// Trim
+	document.formAltaElectrodomestico.txtDniCli.value = document.formAltaElectrodomestico.txtDniCli.value.trim();
+
+	var oExpReg = /^\d{8}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sDNICli) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formAltaElectrodomestico.txtDniCli.focus();		
+		}
+	
+		arrayErrores.push("Campo DNI incorrecto");
+		
+		//Marcar error
+		document.formAltaElectrodomestico.txtDniCli.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formAltaElectrodomestico.txtDniCli.className = "form-control control";	
+	}
+
+	//Resultado
+	if (bValido == false){
+		//Mostrar errores
+		var div = document.createElement("div");
+		div.style.textAlign = "left";
+		for(var i =0; i<arrayErrores.length;i++){
+			div.appendChild(document.createTextNode(arrayErrores[i]));
+			div.appendChild(document.createElement("br"));
+		}
+		openWindow(div);
+	}else{
+		var sNumRef = document.formAltaElectrodomestico.txtNumRef.value;
+		var sNombreElec = document.formAltaElectrodomestico.txtNombreElec.value;
+		var sMarca = document.formAltaElectrodomestico.txtMarca.value;
+		var sDniCli = document.formAltaElectrodomestico.txtDniCli.value;
+
+		var oElectrodomestico = new Electrodomestico(sNumRef, sNombreElec, sMarca, sDniCli);
+		var info = document.getElementById("txtMensaje");
+		var sMensaje = document.createTextNode(oTaller.altaElectrodomestico(oElectrodomestico));
+		openWindow(sMensaje);
+	}
+	return bValido;
+}
+
 
 function ocultar(){
 	var estolado = document.querySelectorAll('.formulario');
@@ -770,126 +915,7 @@ function validarBajaFact(oEvento){
 }
 function validarAltaElect(oEvento){
 	var oE = oEvento || window.event;
-	var bValido = true;
-	var arrayErrores = [];
 	
-	//Validaciones
-	//Campo numRefElectrodomestico
-	var sNumRefElec = document.formAltaElectrodomestico.txtNumRef.value.trim();
-	// Trim
-	document.formAltaElectrodomestico.txtNumRef.value = document.formAltaElectrodomestico.txtNumRef.value.trim();
-
-	var oExpReg = /^[0-9]$/;
-	
-	if (oExpReg.test(sNumRefElec) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaElectrodomestico.txtNumRef.focus();		
-		}
-	
-		arrayErrores.push("El numero de referencia debe ser un número");
-		
-		//Marcar error
-		document.formAltaElectrodomestico.txtNumRef.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaElectrodomestico.txtNumRef.className = "form-control control";	
-	}
-	//Campo nombre
-	var sNombreElectr = document.formAltaElectrodomestico.txtNombreElec.value.trim();
-	// Trim
-	document.formAltaElectrodomestico.txtNombreElec.value = document.formAltaElectrodomestico.txtNombreElec.value.trim();
-
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
-	
-	if (oExpReg.test(sNombreElectr) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaElectrodomestico.txtNombreElec.focus();		
-		}
-	
-		arrayErrores.push("Campo nombre incorrecto");
-		
-		//Marcar error
-		document.formAltaElectrodomestico.txtNombreElec.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaElectrodomestico.txtNombreElec.className = "form-control control";	
-	}
-
-	//Campo marca 
-	var smarcaElectr = document.formAltaElectrodomestico.txtMarca.value.trim();
-	// Trim
-	document.formAltaElectrodomestico.txtMarca.value = document.formAltaElectrodomestico.txtMarca.value.trim();
-
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
-	
-	if (oExpReg.test(smarcaElectr) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaElectrodomestico.txtMarca.focus();		
-		}
-	
-		arrayErrores.push("Campo marca incorrecto");
-		
-		//Marcar error
-		document.formAltaElectrodomestico.txtMarca.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaElectrodomestico.txtMarca.className = "form-control control";	
-	}
-
-	//Campo dni
-	var sDNICli = document.formAltaElectrodomestico.txtDniCli.value.trim();
-	// Trim
-	document.formAltaElectrodomestico.txtDniCli.value = document.formAltaElectrodomestico.txtDniCli.value.trim();
-
-	var oExpReg = /^\d{8}[a-zA-Z]$/;
-	
-	if (oExpReg.test(sDNICli) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formAltaElectrodomestico.txtDniCli.focus();		
-		}
-	
-		arrayErrores.push("Campo DNI incorrecto");
-		
-		//Marcar error
-		document.formAltaElectrodomestico.txtDniCli.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formAltaElectrodomestico.txtDniCli.className = "form-control control";	
-	}
-
-	//Resultado
-	if (bValido == false){
-		//Cancelar envio del formulario
-		oE.preventDefault();
-		//Mostrar errores
-		var div = document.createElement("div");
-		for(var i =0; i<arrayErrores.length;i++){
-			div.appendChild(document.createTextNode(arrayErrores[i]));
-			div.appendChild(document.createElement("br"));
-		}
-		openWindow(div);
-	}
-	return bValido;
 }
 function validarBajaElect(oEvento){
 	var oE = oEvento || window.event;
