@@ -131,6 +131,25 @@ function tallerElectromecanica() {
 	this.Aproveedor = [];
 }
 
+tallerElectromecanica.prototype.getComboClientes = function(){
+	var select = document.createElement("select");
+	for (var i = 0; i<this.Aclientes.length; i++){
+		var option = document.createElement("option");
+		option.setAttribute("value", this.Aclientes[i].dni_cliente);
+		var texto = document.createTextNode(this.Aclientes[i].nombre_cliente+"-"+this.Aclientes[i].dni_cliente);
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+	if(this.Aclientes.length<=0){
+		var option = document.createElement("option");
+		var texto = document.createTextNode("No existen clientes");
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+	select.className = "form-control";
+	return select;
+}
+
 //Metodo altaCliente
 tallerElectromecanica.prototype.altaCliente = function(oClientes) {
 		var i = 0;

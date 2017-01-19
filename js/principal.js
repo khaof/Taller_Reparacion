@@ -731,6 +731,10 @@ document.getElementById("btnBajaCliente").addEventListener("click", function(){
 	ocultar();
 	//Muestra
     document.getElementById("bajaCliente").style.display = "block";
+    var divComboBajaClientes = document.getElementById("comboBajaClientes");
+    divComboBajaClientes.removeChild(divComboBajaClientes.firstChild);
+    divComboBajaClientes.appendChild(oTaller.getComboClientes());
+
 });
 document.getElementById("btnVerFactura").addEventListener("click", function(){
 	ocultar();
