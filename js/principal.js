@@ -441,6 +441,122 @@ function aceptarAltaEmpleado(){
 		openWindow(sMensaje);
 	}
 }
+//***ACEPTA BAJA***
+document.formBajaEmpleado.btnBajaEmple.addEventListener("click", aceptarBajaEmpleado);
+function aceptarBajaEmpleado(){
+	var combo=document.formBajaEmpleado.txtDNIEmple.selectedIndex;
+	var dniEmple= document.formBajaEmpleado.txtDNIEmple.options[combo].value;
+	
+	var info = document.getElementById("txtMensaje");
+	var sMensaje = document.createTextNode(oTaller.bajaEmpleado(dniEmple));
+	openWindow(sMensaje);
+}
+//***ACEPTA MODIFICAR***
+document.formModificaEmpleado.btnModifiEmple.addEventListener("click", aceptarModEmpleado);
+function aceptarModEmpleado(){
+	var bValido = true;
+	var arrayErrores = [];
+	// Validaciones
+	//Campo dni
+	var sDNIEmplea = document.formModificaEmpleado.txtDNIEmplea.value.trim();
+	// Trim
+	document.formModificaEmpleado.txtDNIEmplea.value = document.formModificaEmpleado.txtDNIEmplea.value.trim();
+
+	var oExpReg = /^\d{8}[a-zA-Z]$/;
+	
+	if (oExpReg.test(sDNIEmplea) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaEmpleado.txtDNIEmplea.focus();		
+		}
+	
+		arrayErrores.push("DNI incorrecto");
+		
+		//Marcar error
+		document.formModificaEmpleado.txtDNIEmplea.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaEmpleado.txtDNIEmplea.className = "form-control control";	
+	}
+
+	//Campo nombre
+	var sNombreEmplea = document.formModificaEmpleado.txtNombreEmplea.value.trim();
+	// Trim
+	document.formModificaEmpleado.txtNombreEmplea.value = document.formModificaEmpleado.txtNombreEmplea.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sNombreEmplea) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaEmpleado.txtNombreEmplea.focus();		
+		}
+	
+		arrayErrores.push("Nombre incorrecto");
+		
+		//Marcar error
+		document.formModificaEmpleado.txtNombreEmplea.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaEmpleado.txtNombreEmplea.className = "form-control control";	
+	}
+	
+	//Campo apellido
+	var sApellidoEmplea = document.formModificaEmpleado.txtApellidoEmplea.value.trim();
+	// Trim
+	document.formModificaEmpleado.txtApellidoEmplea.value = document.formModificaEmpleado.txtApellidoEmplea.value.trim();
+
+	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	
+	if (oExpReg.test(sApellidoEmplea) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.formModificaEmpleado.txtApellidoEmplea.focus();		
+		}
+	
+		arrayErrores.push("Apellido incorrecto");
+		
+		//Marcar error
+		document.formModificaEmpleado.txtApellidoEmplea.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.formModificaEmpleado.txtApellidoEmplea.className = "form-control control";	
+	}
+
+	//Resultado
+	if (bValido == false){
+		//Mostrar errores
+		var div = document.createElement("div");
+		for(var i =0; i<arrayErrores.length;i++){
+			div.appendChild(document.createTextNode(arrayErrores[i]));
+			div.appendChild(document.createElement("br"));
+		}
+		openWindow(div);
+	}else{
+		var dniEmplea = document.formModificaEmpleado.txtDNIEmplea.value;
+		var nomEmplea = document.formModificaEmpleado.txtNombreEmplea.value;
+		var apellEmplea = document.formModificaEmpleado.txtApellidoEmplea.value;
+
+		var oEmpleadoMod = new Empleado(dniEmplea, nomEmplea, apellEmplea);
+		var info = document.getElementById("txtMensaje");
+		var sMensaje = document.createTextNode(oTaller.altaEmpleado(oEmpleadoMod));
+		openWindow(sMensaje);
+	}
+	return bValido;
+}
+
 //********************GESTION PROVEEDOR***********************************
 //***ACEPTA ALTA***
 document.formAltaProveedor.btnAltaProv.addEventListener("click", aceptarAltaProveedor);
@@ -574,8 +690,19 @@ function aceptarAltaProveedor(){
 	}
 	return bValido;	
 }
+//***ACEPTA BAJA***
+document.formBajaProveedor.btnBajaProv.addEventListener("click", aceptarBajaProveedor);
+function aceptarBajaProveedor(){
+	var combo=document.formBajaProveedor.txtDNIProveedor.selectedIndex;
+	var DNIProveedor= document.formBajaProveedor.txtDNIProveedor.options[combo].value;
+	
+	var info = document.getElementById("txtMensaje");
+	var sMensaje = document.createTextNode(oTaller.bajaProveedor(DNIProveedor));
+	openWindow(sMensaje);
+}
 
-//********************ACEPTA ALTA ELECTRODOMÉSTICO***********************************
+
+//********************GESTION ELECTRODOMÉSTICO***********************************
 //***ACEPTA ALTA***
 document.formAltaElectrodomestico.btnAltaElect.addEventListener("click", aceptarAltaElectrodomestico);
 function aceptarAltaElectrodomestico(){
@@ -708,6 +835,23 @@ function aceptarAltaElectrodomestico(){
 	}
 	return bValido;
 }
+
+//***ACEPTA BAJA***
+document.formBajaElectrodomestico.btnBajaElect.addEventListener("click", aceptaBajaElectrodomestico);
+function aceptaBajaElectrodomestico(){
+	var combo=document.formBajaElectrodomestico.txtNumElec.selectedIndex;
+	var numRef= document.formBajaElectrodomestico.txtNumElec.options[combo].value;
+	
+	var info = document.getElementById("txtMensaje");
+	var sMensaje = document.createTextNode(oTaller.bajaElectrodomestico(numRef));
+	openWindow(sMensaje);
+}
+
+
+
+
+
+
 
 
 function ocultar(){
@@ -855,13 +999,8 @@ document.getElementById("btnModificaEmpleado").addEventListener("click", functio
 
 
 document.formBajaFacturaReparacion.btnBajaFactura.addEventListener("click", validarBajaFact);
-document.formAltaElectrodomestico.btnAltaElect.addEventListener("click", validarAltaElect);
-document.formBajaElectrodomestico.btnBajaElect.addEventListener("click", validarBajaElect);
 document.formConsultarProveedor.btnConsultaPro.addEventListener("click", validarconsultProv);
-document.formBajaProveedor.btnBajaProv.addEventListener("click", validarbajaProv);
 document.formConsultarElectro.btnConsultarElec.addEventListener("click", validarConsultaElectro);
-document.formBajaEmpleado.btnBajaEmple.addEventListener("click", validarBajaEmple);
-document.formModificaEmpleado.btnModifiEmple.addEventListener("click", validarModiEmple);
 document.formAltaAveria.btnAltaAver.addEventListener("click", validaAltaAveria);
 document.formModAveria.btnModAver.addEventListener("click", validaModifAveria);
 document.formAltaRecElectrodomestico.btnAltaRecam.addEventListener("click", validaAltaRecambio);
@@ -913,55 +1052,6 @@ function validarBajaFact(oEvento){
 	}
 	return bValido;
 }
-function validarAltaElect(oEvento){
-	var oE = oEvento || window.event;
-	
-}
-function validarBajaElect(oEvento){
-	var oE = oEvento || window.event;
-	var bValido = true;
-	var arrayErrores = [];
-	
-	// Validaciones
-	//Campo numRefElectrodomestico
-	var sNumElec = document.formBajaElectrodomestico.txtNumElec.value.trim();
-	// Trim
-	document.formBajaElectrodomestico.txtNumElec.value = document.formBajaElectrodomestico.txtNumElec.value.trim();
-
-	var oExpReg = /^[0-9]$/;
-	
-	if (oExpReg.test(sNumElec) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formBajaElectrodomestico.txtNumElec.focus();		
-		}
-	
-		arrayErrores.push("El ID Debe ser un número");
-		
-		//Marcar error
-		document.formBajaElectrodomestico.txtNumElec.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formBajaElectrodomestico.txtNumElec.className = "form-control control";	
-	}
-	//Resultado
-	if (bValido == false){
-		//Cancelar envio del formulario
-		oE.preventDefault();
-		//Mostrar errores
-		var div = document.createElement("div");
-		for(var i =0; i<arrayErrores.length;i++){
-			div.appendChild(document.createTextNode(arrayErrores[i]));
-			div.appendChild(document.createElement("br"));
-		}
-		openWindow(div);
-	}
-	return bValido;	
-}
 function validarconsultProv(oEvento){
 	var oE = oEvento || window.event;
 	var bValido = true;
@@ -992,51 +1082,6 @@ function validarconsultProv(oEvento){
 	else {
 		//Desmarcar error
 		document.formConsultarProveedor.txtConsultaProve.className = "form-control control";	
-	}
-	//Resultado
-	if (bValido == false){
-		//Cancelar envio del formulario
-		oE.preventDefault();
-		//Mostrar errores
-		var div = document.createElement("div");
-		for(var i =0; i<arrayErrores.length;i++){
-			div.appendChild(document.createTextNode(arrayErrores[i]));
-			div.appendChild(document.createElement("br"));
-		}
-		openWindow(div);
-	}
-	return bValido;	
-}
-function validarbajaProv(oEvento){
-	var oE = oEvento || window.event;
-	var bValido = true;
-	var arrayErrores = [];
-	
-	// Validaciones
-	//Campo nif Proveedor
-	var sNifProv = document.formBajaProveedor.txtBajaProveedor.value.trim();
-	// Trim
-	document.formBajaProveedor.txtBajaProveedor.value = document.formBajaProveedor.txtBajaProveedor.value.trim();
-
-	var oExpReg = /^[0-9]$/;
-	
-	if (oExpReg.test(sNifProv) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formBajaProveedor.txtBajaProveedor.focus();		
-		}
-	
-		arrayErrores.push("El nif debe ser un número");
-		
-		//Marcar error
-		document.formBajaProveedor.txtBajaProveedor.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formBajaProveedor.txtBajaProveedor.className = "form-control control";	
 	}
 	//Resultado
 	if (bValido == false){
@@ -1141,148 +1186,6 @@ function validaFecha(oEvento){
 		openWindow(div);
 	}
 	return bValido;	
-}
-function validarBajaEmple(oEvento){
-	var oE = oEvento || window.event;
-	var bValido = true;
-	var arrayErrores = [];
-	
-	// Validaciones
-	//Campo nif Proveedor
-	var sDNIEmple = document.formBajaEmpleado.txtDNIEmple.value.trim();
-	// Trim
-	document.formBajaEmpleado.txtDNIEmple.value = document.formBajaEmpleado.txtDNIEmple.value.trim();
-
-	var oExpReg = /^\d{8}[a-zA-Z]$/;
-	
-	if (oExpReg.test(sDNIEmple) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formBajaEmpleado.txtDNIEmple.focus();		
-		}
-	
-		arrayErrores.push("DNI incorrecto");
-		
-		//Marcar error
-		document.formBajaEmpleado.txtDNIEmple.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formBajaEmpleado.txtDNIEmple.className = "form-control control";	
-	}
-	//Resultado
-	if (bValido == false){
-		//Cancelar envio del formulario
-		oE.preventDefault();
-		//Mostrar errores
-		var div = document.createElement("div");
-		for(var i =0; i<arrayErrores.length;i++){
-			div.appendChild(document.createTextNode(arrayErrores[i]));
-			div.appendChild(document.createElement("br"));
-		}
-		openWindow(div);
-	}
-	return bValido;	
-}
-function validarModiEmple(oEvento){
-	var oE = oEvento || window.event;
-	var bValido = true;
-	var arrayErrores = [];
-	// Validaciones
-	//Campo dni
-	var sDNIEmplea = document.formModificaEmpleado.txtDNIEmplea.value.trim();
-	// Trim
-	document.formModificaEmpleado.txtDNIEmplea.value = document.formModificaEmpleado.txtDNIEmplea.value.trim();
-
-	var oExpReg = /^\d{8}[a-zA-Z]$/;
-	
-	if (oExpReg.test(sDNIEmplea) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formModificaEmpleado.txtDNIEmplea.focus();		
-		}
-	
-		arrayErrores.push("DNI incorrecto");
-		
-		//Marcar error
-		document.formModificaEmpleado.txtDNIEmplea.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formModificaEmpleado.txtDNIEmplea.className = "form-control control";	
-	}
-
-	//Campo nombre
-	var sNombreEmplea = document.formModificaEmpleado.txtNombreEmplea.value.trim();
-	// Trim
-	document.formModificaEmpleado.txtNombreEmplea.value = document.formModificaEmpleado.txtNombreEmplea.value.trim();
-
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
-	
-	if (oExpReg.test(sNombreEmplea) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formModificaEmpleado.txtNombreEmplea.focus();		
-		}
-	
-		arrayErrores.push("Nombre incorrecto");
-		
-		//Marcar error
-		document.formModificaEmpleado.txtNombreEmplea.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formModificaEmpleado.txtNombreEmplea.className = "form-control control";	
-	}
-	
-	//Campo apellido
-	var sApellidoEmplea = document.formModificaEmpleado.txtApellidoEmplea.value.trim();
-	// Trim
-	document.formModificaEmpleado.txtApellidoEmplea.value = document.formModificaEmpleado.txtApellidoEmplea.value.trim();
-
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
-	
-	if (oExpReg.test(sApellidoEmplea) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formModificaEmpleado.txtApellidoEmplea.focus();		
-		}
-	
-		arrayErrores.push("Apellido incorrecto");
-		
-		//Marcar error
-		document.formModificaEmpleado.txtApellidoEmplea.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formModificaEmpleado.txtApellidoEmplea.className = "form-control control";	
-	}
-
-	//Resultado
-	if (bValido == false){
-		//Cancelar envio del formulario
-		oE.preventDefault();
-		//Mostrar errores
-		var div = document.createElement("div");
-		for(var i =0; i<arrayErrores.length;i++){
-			div.appendChild(document.createTextNode(arrayErrores[i]));
-			div.appendChild(document.createElement("br"));
-		}
-		openWindow(div);
-	}
-	return bValido;
 }
 function validaAltaAveria(oEvento){
  	var oE = oEvento || window.event;

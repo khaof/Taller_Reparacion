@@ -227,7 +227,7 @@
       		<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
 	            <div class="col-md-7">
-	              <Select name="txtDNI">
+	              <Select name="txtDNI" class="form-control">
 						<option value="49034017h">49034017h</option>
 						<option value="43333333h">43333333h</option>
 	              </Select>
@@ -401,7 +401,9 @@
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Nº de Referencia:</label>
 	            <div class="col-md-7">
-	              <input name="txtNumElec" type="text" placeholder="numReferencia" class="form-control input-md">
+	              <Select name="txtNumElec" class="form-control">
+	              	<option value="1">1</option>
+	              </Select>
 	            </div>
 		</div>
 	        <!-- Button -->
@@ -554,9 +556,11 @@
       	<hr>
       <form name="formBajaProveedor" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nif proveedor:</label>
+	        <label class="col-md-3 control-label" for="textinput">DNI proveedor:</label>
 	            <div class="col-md-7">
-	              <input name="txtBajaProveedor" type="text" placeholder="Nif Proveedor" class="form-control input-md">
+	              <Select name="txtDNIProveedor" class="form-control">
+						<option value="12345678A">12345678A</option>
+	              </Select>
 	            </div>
 		</div>
 	        <!-- Button -->
@@ -897,7 +901,9 @@
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
 	            <div class="col-md-7">
-	              <input name="txtDNIEmple" type="text" placeholder="Id factura" class="form-control input-md">
+	              <select name="txtDNIEmple" class="form-control">
+						<option value="32165498A">32165498A</option>
+	              </select>
 	            </div>
 		</div>
 	        <!-- Button -->

@@ -42,7 +42,6 @@ function Electrodomestico(num_Refe, nombre_Electro, marca, dni_cliente, nombre_c
 	this.num_Refe = num_Refe;
 	this.nombre_Electro = nombre_Electro;
 	this.marca = marca;
-
 }
 Electrodomestico.prototype = Object.create(Cliente.prototype);
 Electrodomestico.prototype.constructor = Electrodomestico;
@@ -108,8 +107,8 @@ Componentes.prototype.toHTMLRow = function() {
 	}
 	//------------------------------------------------------------------------
 	//Clase proveedor 
-function Proveedor(nif_proveedor, nombre_proveedor, direccion_proveedor, telefono_proveedor) {
-	this.nif_proveedor = nif_proveedor;
+function Proveedor(DNI_proveedor, nombre_proveedor, direccion_proveedor, telefono_proveedor) {
+	this.DNI_proveedor = DNI_proveedor;
 	this.nombre_proveedor = nombre_proveedor;
 	this.direccion_proveedor = direccion_proveedor;
 	this.telefono_proveedor = telefono_proveedor;
@@ -130,8 +129,8 @@ function tallerElectromecanica() {
 	this.Acomponentes = [];
 	this.Aproveedor = [];
 }
-
-//Metodo altaCliente
+//--------------------------------------------------------------------------
+	//Metodo altaCliente
 tallerElectromecanica.prototype.altaCliente = function(oClientes) {
 		var i = 0;
 		var bEnc = false;
@@ -152,16 +151,15 @@ tallerElectromecanica.prototype.altaCliente = function(oClientes) {
 		}
 
 		return sMensaje;
-	}
-	//----------------------------------
+}
 	//Metodo baja Cliente
-tallerElectromecanica.prototype.bajaCliente = function(dniCliente) {
+tallerElectromecanica.prototype.bajaCliente = function(oDniCliente) {
 		var i = 0;
 		var bEnc = false;
 		var sMensaje = "";
 
 		while (i < this.Aclientes.length && bEnc == false) {
-			if (this.Aclientes[i].dni_cliente == dniCliente)
+			if (this.Aclientes[i].dni_cliente == oDniCliente)
 				bEnc = true;
 			else
 				i++;
@@ -173,8 +171,7 @@ tallerElectromecanica.prototype.bajaCliente = function(dniCliente) {
 		}
 
 		return sMensaje;
-	}
-	//----------------------------------
+}
 	//Metodo modificarCliente
 tallerElectromecanica.prototype.modificarCliente = function(oClienteMod) {
 		var i = 0;
@@ -195,8 +192,10 @@ tallerElectromecanica.prototype.modificarCliente = function(oClienteMod) {
 			sMensaje = "Cliente Modificar: No se ha encontrado el DNI";
 		}
 		return sMensaje;
-	}
-	//--------------------------------------
+}
+
+
+//------------------------------------------------------------------------
 	//Metodo altaEmpleado
 tallerElectromecanica.prototype.altaEmpleado = function(oEmpleado) {
 		var i = 0;
@@ -218,8 +217,50 @@ tallerElectromecanica.prototype.altaEmpleado = function(oEmpleado) {
 		}
 
 		return sMensaje;
+}
+	//Metodo bajaEmpleado
+tallerElectromecanica.prototype.bajaEmpleado = function(oDNIEmpleado){
+	var i = 0;
+	var bEnc = false;
+	var sMensaje = "";
+
+	while (i < this.Aempleados.length && bEnc == false) {
+		if (this.Aempleados[i].dni_empleado == oDNIEmpleado)
+			bEnc = true;
+		else
+			i++;
 	}
-	//--------------------------------------
+
+	if (bEnc == true) {
+		this.Aempleados.splice(i, 1);
+		sMensaje = "Empleado Baja: OK!";
+	}
+
+	return sMensaje;
+}
+	//Metodo modificarEmpleado
+tallerElectromecanica.prototype.aceptarModEmpleado = function(oEmpleadoMod) {
+		var i = 0;
+		var bEnc = false;
+		var sMensaje = "";
+
+		while (i < this.Aempleados.length && bEnc == false) {
+			if (this.Aempleados[i].dni_empleado == oEmpleadoMod.dni_empleado)
+				bEnc = true;
+			else
+				i++;
+		}
+
+		if (bEnc == true) {
+			this.Aempleados.splice(i, 1, oEmpleadoMod);
+			sMensaje = "Empleado Modificar: OK!";
+		} else {
+			sMensaje = "Empleado Modificar: No se ha encontrado el DNI";
+		}
+		return sMensaje;
+}
+
+//------------------------------------------------------------------------
 	//Metodo altaProveedor
 tallerElectromecanica.prototype.altaProveedor = function(oProveedor) {
 		var i = 0;
@@ -241,12 +282,34 @@ tallerElectromecanica.prototype.altaProveedor = function(oProveedor) {
 		}
 
 		return sMensaje;
-	}
-	//--------------------------------------
-	//Metodo Electrodomestico
-tallerElectromecanica.prototype.altaElectrodomestico = function(oElectrodomestico) {
+}
+	//Metodo BajaProveedor
+tallerElectromecanica.prototype.bajaProveedor = function(oDNIProveedor){
+	var i = 0;
+	var bEnc = false;
+	var sMensaje = "";
 
-	//MÉTODO MAL HECHO HAY QUE ARREGLARLO
+	while (i < this.Aproveedor.length && bEnc == false) {
+		if (this.Aproveedor[i].DNI_proveedor == oDNIProveedor)
+			bEnc = true;
+		else
+			i++;
+	}
+
+	if (bEnc == true) {
+		this.Aproveedor.splice(i, 1);
+		sMensaje = "Proveedor Baja: OK!";
+	}
+
+	return sMensaje;
+}
+
+
+
+
+	//--------------------------------------
+	//Metodo AltaElectrodomestico
+tallerElectromecanica.prototype.altaElectrodomestico = function(oElectrodomestico) {
 	var i = 0;
 	var bClien = false;
 	var bElectro = false;
@@ -272,7 +335,25 @@ tallerElectromecanica.prototype.altaElectrodomestico = function(oElectrodomestic
 			sMensaje = "Electrodoméstico dado ya de alta";
 		}
 	}
+	return sMensaje;
+}
+	//Metodo BajaElectrodomestico
+tallerElectromecanica.prototype.bajaElectrodomestico =  function(oNumRef){
+	var i = 0;
+	var bEnc = false;
+	var sMensaje = "";
+
+	while (i < this.Aelectrodomesticos.length && bEnc == false) {
+		if (this.Aelectrodomesticos[i].num_Refe == oNumRef)
+			bEnc = true;
+		else
+			i++;
+	}
+
+	if (bEnc == true) {
+		this.Aelectrodomesticos.splice(i, 1);
+		sMensaje = "Electrodomestico Baja: OK!";
+	}
 
 	return sMensaje;
-
-}
+}	
