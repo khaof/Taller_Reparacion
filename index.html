@@ -166,13 +166,9 @@
       	<hr>
       <form name="formModificaCli" class="form-horizontal">
       		<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
-	            <div class="col-md-7">
-	              <Select name="txtDNI">
-						<option value="49034017h">49034017h</option>
-						<option value="43333333h">43333333h</option>
-	              </Select>
-	            </div>
+	        <label class="col-md-3 control-label" for="textinput">DNI:</label>	      
+	              <div class="col-md-3" id="comboModClientes">
+	              </div>
 			</div>
 
 	      	<div class="form-group">
@@ -225,13 +221,9 @@
       	<hr>
       <form name="formBajaCliente" class="form-horizontal">
       		<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
-	            <div class="col-md-2" id="comboBajaClientes">
-	              
-
-	            </div>
-	             <div class="col-md-7">
-	              
+	        <label class="col-md-3 control-label" for="textinput">Nombre y DNI:</label>
+	            <div class="col-md-3" id="comboBajaClientes">
+	             
 	            </div>
 			</div>
 	        <!-- Button -->
@@ -250,8 +242,8 @@
       <form name="FormModificaFacturaReparacion" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Id Factura:</label>
-	            <div class="col-md-3">
-	              <input name="txtIdFactura" disabled="disabled" type="text" placeholder="Id factura" class="form-control input-md">
+	            <div class="col-md-3" id="comboFactura">
+	             
 	            </div>
 			</div>
 
@@ -402,7 +394,9 @@
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Nº de Referencia:</label>
 	            <div class="col-md-7">
-	              <input name="txtNumElec" type="text" placeholder="numReferencia" class="form-control input-md">
+	              <Select name="txtNumElec" class="form-control">
+	              	<option value="1">1</option>
+	              </Select>
 	            </div>
 		</div>
 	        <!-- Button -->
@@ -555,9 +549,11 @@
       	<hr>
       <form name="formBajaProveedor" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nif proveedor:</label>
+	        <label class="col-md-3 control-label" for="textinput">DNI proveedor:</label>
 	            <div class="col-md-7">
-	              <input name="txtBajaProveedor" type="text" placeholder="Nif Proveedor" class="form-control input-md">
+	              <Select name="txtDNIProveedor" class="form-control">
+						<option value="12345678A">12345678A</option>
+	              </Select>
 	            </div>
 		</div>
 	        <!-- Button -->
@@ -898,7 +894,9 @@
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
 	            <div class="col-md-7">
-	              <input name="txtDNIEmple" type="text" placeholder="Id factura" class="form-control input-md">
+	              <select name="txtDNIEmple" class="form-control">
+						<option value="32165498A">32165498A</option>
+	              </select>
 	            </div>
 		</div>
 	        <!-- Button -->
@@ -960,7 +958,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/objetos.js"></script>
+<script type="text/javascript" src="js/objeto.js"></script>
 <script type="text/javascript" src="js/principal.js"></script>
 </body>
 </html>
