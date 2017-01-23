@@ -216,6 +216,17 @@ function aceptarAltaCliente(){
 			
 	}
 }
+//modificar datos
+document.getElementById("btnAceptarModCliente").addEventListener("click", modificarDatos);
+function modificarDatos(){
+	var dni = document.getElementById("sltClientes").value;
+	oTaller.nombreModClientes(dni);
+	oTaller.apellidosModClientes(dni);
+	oTaller.telefonoModClientes(dni);
+	oTaller.direccionModClientes(dni);
+	oTaller.mailModClientes(dni);
+
+}
 //***ACEPTA MODIFICAR***
 document.formModificaCli.btnModiCli.addEventListener("click", aceptarModificaCliente);
 function aceptarModificaCliente(){
@@ -1255,7 +1266,7 @@ function validaAltaAveria(oEvento){
 	// Trim
 	document.formAltaAveria.txtDNIEmplead.value = document.formAltaAveria.txtDNIEmplead.value.trim();
 
-	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	var oExpReg = /^\d{8}[a-zA-Z]$/;
 	
 	if (oExpReg.test(sdniEmple) == false){
 	
@@ -1291,7 +1302,7 @@ function validaAltaAveria(oEvento){
 			document.formAltaAveria.txtIdElectro.focus();		
 		}
 	
-		arrayErrores.push("DNI incorrecto");
+		arrayErrores.push("ID Electrodomestico incorrecto");
 		
 		//Marcar error
 		document.formAltaAveria.txtIdElectro.className = "form-control  error";
@@ -1313,6 +1324,19 @@ function validaAltaAveria(oEvento){
 			div.appendChild(document.createElement("br"));
 		}
 		openWindow(div);
+	}else{
+		//datos aqui
+		var idAveria = document.formAltaAveria.txtidAveria.value;
+		var descripcion = document.formAltaAveria.txtDescripAveria.value;
+		var recambio = document.formAltaAveria.comboRecambio.value;
+		var unidades = document.formAltaAveria.txtUnidades.value;
+		var fecha = document.formAltaAveria.fecha.value;
+		var dniEmpleado = document.formAltaAveria.txtDNIEmplead.value;
+		var idElectro = document.formAltaAveria.txtIdElectro.value;
+
+		var oAveria = new Parte_Averia(idElectro, dniEmpleado, recambio, unidades, idAveria, descripcion, fecha);
+		var sMensaje = document.createTextNode(oTaller.altaParteAveria(oAveria));
+		openWindow(sMensaje);
 	}
 	return bValido;
 }
