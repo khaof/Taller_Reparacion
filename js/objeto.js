@@ -28,12 +28,15 @@ Cliente.prototype.toHTMLRow = function() {
 	}
 	//---------------------------------------------
 	//Clase prespuesto 
-function Presupuesto(id_presupuesto, total_presupuesto) {
+function Presupuesto(id_presupuesto, total_presupuesto, id_ParteAveria) {
 	this.id_presupuesto = id_presupuesto;
 	this.total_presupuesto = total_presupuesto;
+	Parte_Averia.call(this, id_ParteAveria);
 }
+Presupuesto.prototype = Object.create(Parte_Averia.prototype);
+Presupuesto.prototype.constructor = Presupuesto;
 Presupuesto.prototype.toHTMLRow = function() {
-		return "<td>" + this.id_presupuesto + "</td><td>" + this.total_presupuesto + "</td>";
+		return "<td>" + this.id_presupuesto + "</td><td>" + this.total_presupuesto + "</td><td>"+this.id_ParteAveria+"</td>";
 	}
 	//-------------------------------------------
 	//Clase Electrodomestico 
@@ -51,20 +54,20 @@ Electrodomestico.prototype.toHTMLRow = function() {
 	}
 	//-------------------------------------------------------------------
 	//Claese Parte_averia 
-function Parte_Averia(id_ParteAveria, descripcion_ParteAveria, fecha_ParteAveria, dni_empleado, id_electrodomestico, id_presupuesto) {
+function Parte_Averia(id_electrodomestico, dni_empleado, nombre_componente, unidades_componente, id_ParteAveria, descripcion_ParteAveria, fecha_ParteAveria) {
 	Electrodomestico.call(this, id_electrodomestico);
 	Empleado.call(this, dni_empleado);
-	Presupuesto.call(this, id_presupuesto);
+	Componentes.call(this, nombre_componente, unidades_componente);
 	this.id_ParteAveria = id_ParteAveria;
 	this.descripcion_ParteAveria = descripcion_ParteAveria;
 	this.fecha_ParteAveria = fecha_ParteAveria;
 }
 Parte_Averia.prototype = Object.create(Electrodomestico.prototype);
+Parte_Averia.prototype = Object.create(Componentes.prototype);
 Parte_Averia.prototype = Object.create(Empleado.prototype);
-Parte_Averia.prototype = Object.create(Presupuesto.prototype);
 Parte_Averia.prototype.constructor = Parte_Averia;
 Parte_Averia.prototype.toHTMLRow = function() {
-		return "<td>" + this.id_ParteAveria + "</td><td>" + this.descripcion_ParteAveria + "</td><td>" + this.fecha_ParteAveria + "</td><td>" + this.id_electrodomestico + "</td><td>" + this.dni_empleado + "</td><td>" + this.id_presupuesto + "</td>";
+		return "<td>" + this.id_ParteAveria + "</td><td>" + this.descripcion_ParteAveria + "</td><td>" + this.fecha_ParteAveria + "</td><td>" + this.nombre_componente + "</td><td>" + this.unidades_componente+ "</td><td>" + this.id_electrodomestico + "</td><td>" + this.dni_empleado + "</td>";
 	}
 	//---------------------------------------------------------------------------------
 	//Clase empleado 
@@ -93,18 +96,19 @@ LineaComponente.prototype.toHTMLRow = function() {
 	}
 	//--------------------------------------------------------------------------------------
 	//Clase componente 
-function Componentes(id_componente, nombre_componente, precio_componente, id_LineaComponente, nif_proveedor) {
+function Componentes(id_componente, nombre_componente, precio_componente, unidades_componente, id_LineaComponente, nif_proveedor) {
 	LineaComponente.call(this, id_LineaComponente);
 	Proveedor.call(this, nif_proveedor);
 	this.id_componente = id_componente;
 	this.nombre_componente = nombre_componente;
 	this.precio_componente = precio_componente;
+	this.unidades_componente = unidades_componente;
 }
 Componentes.prototype = Object.create(LineaComponente.prototype);
 Componentes.prototype = Object.create(Proveedor.prototype);
 Componentes.prototype.constructor = Componentes;
 Componentes.prototype.toHTMLRow = function() {
-		return "<td>" + this.id_componente + "</td><td>" + this.nombre_componente + "</td><td>" + this.precio_componente + "</td><td>" + this.id_LineaComponente + "</td><td>" + this.nif_proveedor + "</td>";
+		return "<td>" + this.id_componente + "</td><td>" + this.nombre_componente + "</td><td>" + this.precio_componente +"</td><td>" +this.unidades_componente+"</td><td>" + this.id_LineaComponente + "</td><td>" + this.nif_proveedor + "</td>";
 	}
 	//------------------------------------------------------------------------
 	//Clase proveedor 
@@ -130,9 +134,104 @@ function tallerElectromecanica() {
 	this.Acomponentes = [];
 	this.Aproveedor = [];
 }
+//------------------------------
+//FUNCIONES PARA MOSTRAR LOS DATOS EN MODIFICAR CLIENTES
+//funcion para ver telefono en modificar clientes
+tallerElectromecanica.prototype.mailModClientes = function(dni){
+	var i = 0;
+	var bEnc = false;
+	while (i < this.Aclientes.length && bEnc == false) {
+		if (this.Aclientes[i].dni_cliente == dni)
+			bEnc = true;
+		else
+			i++;
+	}
 
+	if(bEnc){
+		var mail = document.formModificaCli.txtMail;
+		mail.setAttribute("value", this.Aclientes[i].email_cliente);
+	}
+	return mail;
+}
+//--------------------------------------------------------
+//funcion para ver direccion en modificar clientes
+tallerElectromecanica.prototype.direccionModClientes = function(dni){
+	var i = 0;
+	var bEnc = false;
+	while (i < this.Aclientes.length && bEnc == false) {
+		if (this.Aclientes[i].dni_cliente == dni)
+			bEnc = true;
+		else
+			i++;
+	}
+
+	if(bEnc){
+		var direc = document.formModificaCli.txtDireccion;
+		direc.setAttribute("value", this.Aclientes[i].direccion_cliente);
+	}
+	return direc;
+}
+//--------------------------------------------------------
+//funcion para ver telefono en modificar clientes
+tallerElectromecanica.prototype.telefonoModClientes = function(dni){
+	var i = 0;
+	var bEnc = false;
+	while (i < this.Aclientes.length && bEnc == false) {
+		if (this.Aclientes[i].dni_cliente == dni)
+			bEnc = true;
+		else
+			i++;
+	}
+
+	if(bEnc){
+		var tlfn = document.formModificaCli.txtTelefono;
+		tlfn.setAttribute("value", this.Aclientes[i].telefono_cliente);
+	}
+	return tlfn;
+}
+//--------------------------------------------------------
+//funcion para ver apellido en modificar clientes
+tallerElectromecanica.prototype.apellidosModClientes = function(dni){
+	var i = 0;
+	var bEnc = false;
+	while (i < this.Aclientes.length && bEnc == false) {
+		if (this.Aclientes[i].dni_cliente == dni)
+			bEnc = true;
+		else
+			i++;
+	}
+
+	if(bEnc){
+		var apeliido = document.formModificaCli.txtApellido;
+		apeliido.setAttribute("value", this.Aclientes[i].apellidos_cliente);
+	}
+	return apeliido;
+}
+//--------------------------------------------------------
+//funcion para ver nombre en modificar clientes
+tallerElectromecanica.prototype.nombreModClientes = function(dni){
+	var i = 0;
+	var bEnc = false;
+	while (i < this.Aclientes.length && bEnc == false) {
+		if (this.Aclientes[i].dni_cliente == dni)
+			bEnc = true;
+		else
+			i++;
+	}
+
+	if(bEnc){
+		var nombre = document.formModificaCli.txtNombre;
+		nombre.setAttribute("value", this.Aclientes[i].nombre_cliente);
+	}
+	return nombre;
+}
+//--------------------------------------------------------
+//HASTA AQUI LAS FUNCIONES
+
+//funcion para mostrar un combo de clientes en bajaCliente
 tallerElectromecanica.prototype.getComboClientes = function(){
 	var select = document.createElement("select");
+	select.setAttribute("id", "sltClientes")
 	for (var i = 0; i<this.Aclientes.length; i++){
 		var option = document.createElement("option");
 		option.setAttribute("value", this.Aclientes[i].dni_cliente);
@@ -149,7 +248,7 @@ tallerElectromecanica.prototype.getComboClientes = function(){
 	select.className = "form-control";
 	return select;
 }
-
+//--------------------------------------------------
 //Metodo altaCliente
 tallerElectromecanica.prototype.altaCliente = function(oClientes) {
 		var i = 0;
@@ -197,7 +296,7 @@ tallerElectromecanica.prototype.bajaCliente = function(dniCliente) {
 	}
 	//----------------------------------
 	//Metodo modificarCliente
-tallerElectromecanica.prototype.modificarCliente = function(oClienteMod) {
+/*tallerElectromecanica.prototype.modificarCliente = function(oClienteMod) {
 		var i = 0;
 		var bEnc = false;
 		var sMensaje = "";
@@ -216,7 +315,7 @@ tallerElectromecanica.prototype.modificarCliente = function(oClienteMod) {
 			sMensaje = "Cliente Modificar: No se ha encontrado el DNI";
 		}
 		return sMensaje;
-	}
+	}*/
 	//--------------------------------------
 	//Metodo altaEmpleado
 tallerElectromecanica.prototype.altaEmpleado = function(oEmpleado) {
@@ -296,4 +395,27 @@ tallerElectromecanica.prototype.altaElectrodomestico = function(oElectrodomestic
 
 	return sMensaje;
 
+}
+
+//alta parte_averia
+tallerElectromecanica.prototype.altaParteAveria = function(oAveria){
+	var i = 0;
+	var bEnc = false;
+	var sMensaje = "";
+
+	while (i < this.AparteAveria.length && bEnc == false) {
+		if (this.AparteAveria[i].id_ParteAveria == oAveria.id_ParteAveria)
+			bEnc = true;
+		else
+			i++;
+	}
+
+	if (bEnc == true) {
+		sMensaje = "Parte de Averia registrado";
+	} else {
+		this.AparteAveria.push(oAveria);
+		sMensaje = "Alta Parte de Averia: OK!";
+	}
+
+	return sMensaje;
 }
