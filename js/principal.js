@@ -580,7 +580,7 @@ function aceptarAltaProveedor(){
 	// Trim
 	document.formAltaProveedor.txtNifProveedor.value = document.formAltaProveedor.txtNifProveedor.value.trim();
 
-	var oExpReg = /^\d{8}[a-zA-Z]$/;
+	var oExpReg = /^[a-z A-Z]{1}\d{8}/;
 	
 	if (oExpReg.test(sNif) == false){
 	
@@ -590,7 +590,7 @@ function aceptarAltaProveedor(){
 			document.formAltaProveedor.txtNifProveedor.focus();		
 		}
 	
-		 arrayErrores.push("DNI incorrecto");
+		 arrayErrores.push("NIF incorrecto");
 		
 		//Marcar error
 		document.formAltaProveedor.txtNifProveedor.className = "form-control  error";
@@ -1555,7 +1555,7 @@ function validaAltaRecambio(oEvento){
 	// Trim
 	document.formAltaRecElectrodomestico.txtNifProv.value = document.formAltaRecElectrodomestico.txtNifProv.value.trim();
 
-	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	var oExpReg = /^[a-z A-Z]{1}\d{8}/;
 	
 	if (oExpReg.test(sNifProve) == false){
 	
