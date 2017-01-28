@@ -75,6 +75,18 @@ for (var x = 0; x < oComponentes.length; x++) {
 	oTaller.altaRecambio(oComponente);
 }
 
+for (var x = 0; x < oPartesAverias.length; x++) {
+	var idAveXML = oPartesAverias[x].childNodes[1].innerHTML;
+	var descripcionAveXML = oPartesAverias[x].childNodes[3].innerHTML;
+	var unidadesAveXML = oPartesAverias[x].childNodes[5].innerHTML;;
+	var fechaAverXML = oPartesAverias[x].childNodes[7].innerHTML;
+	var elecAveXML = oPartesAverias[x].childNodes[9].innerHTML;
+	var emplAveXML = oPartesAverias[x].childNodes[11].innerHTML;
+	var recamAveXML = oPartesAverias[x].childNodes[13].innerHTML;
+	
+	var oPartesAverias = new Parte_Averia(idAveXML, descripcionAveXML, unidadesAveXML, fechaAverXML, elecAveXML, emplAveXML, recamAveXML);
+	oTaller.altaParteAveria(oPartesAverias);
+}
 //cerrar ventana emergente
 var closeWindow = document.getElementById("cerrarVentana");
 closeWindow.addEventListener("click", ocultaVentana, false);
@@ -1118,7 +1130,7 @@ function validaAltaAveria(oEvento){
 		var nomRecambio= document.formAltaAveria.SelectRecambios.options[comboRecambio].value;
 		var recambio=null;
 		for(var i=0; i<oTaller.Acomponentes.length; i++){
-			if(oTaller.Acomponentes[i].nombre_componente==nomRecambio){
+			if(oTaller.Acomponentes[i].id_componente==nomRecambio){
 				recambio=oTaller.Acomponentes[i];
 			}
 		}	
@@ -1141,7 +1153,7 @@ function validaAltaAveria(oEvento){
 			}
 		}	
 
-		var oAveria = new Parte_Averia(id_ParteAveria, descripcion_ParteAveria, fecha_ParteAveria, unidades, electrodomestico, empleado, recambio);
+		var oAveria = new Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria, electrodomestico, empleado, recambio);
 		var sMensaje = document.createTextNode(oTaller.altaParteAveria(oAveria));
 		openWindow(sMensaje);
 		document.formAltaAveria.reset();
@@ -1159,7 +1171,7 @@ function mostrarDatosCliente(){
 function mostrarDatosEmpleados(){
 	var combo=document.formModificaEmpleado.SelectEmpleado.selectedIndex;	
 	var dniEmpleadoSeleccionado= document.formModificaEmpleado.SelectEmpleado.options[combo].value;
-	console.log(dniEmpleadoSeleccionado);
+	//console.log(dniEmpleadoSeleccionado);
 	
 	if(dniEmpleadoSeleccionado==0){
 		var apellido = document.formModificaEmpleado.txtApellidoEmplea;
@@ -1179,6 +1191,12 @@ function mostrarDatosProveedor(){
 	var combo=document.formBajaProveedor.SelectProveedor.selectedIndex;
 	var idProveedorSeleccionado= document.formBajaProveedor.SelectProveedor.options[combo].value;
 	oTaller.cargadatosFactura(idProveedorSeleccionado);
+}
+
+function mostrarDatosModAveria(){
+	var combo=document.formModAveria.SelectAverias.selectedIndex;
+	var idParteAveria= document.formModAveria.SelectAverias.options[combo].value;
+	oTaller.cargadatosModAveria(idParteAveria);
 }
 
 function ocultar(){
@@ -1326,12 +1344,39 @@ document.getElementById("btnModificarAvería").addEventListener("click", functio
 	f=f.getDate() +'/'+ meses[f.getMonth()] +'/'+ f.getFullYear();
 	document.formModAveria.fecha.setAttribute("placeholder",f);
 
+	//combo averia para modificar averia
+    var divComboModAveriaId = document.getElementById("comboModAveriaId");
+    divComboModAveriaId.removeChild(divComboModAveriaId.firstChild);
+    divComboModAveriaId.appendChild(oTaller.getComboAverias());
+	//combo empleado para modificar averia
+    var divComboModAveriaEmpleado = document.getElementById("comboModAveriaEmpleado");
+    divComboModAveriaEmpleado.removeChild(divComboModAveriaEmpleado.firstChild);
+    divComboModAveriaEmpleado.appendChild(oTaller.getComboEmpleados());
+    //combo electrodomesticos para modificar averia
+    var divComboModAveriaElectro = document.getElementById("comboModAveriaElectro");
+    divComboModAveriaElectro.removeChild(divComboModAveriaElectro.firstChild);
+    divComboModAveriaElectro.appendChild(oTaller.getComboElectrodomestico());
+    //combo remcabios para modificar averia
+    var divComboModAveriaRecambios = document.getElementById("comboModAveriaRecambios");
+    divComboModAveriaRecambios.removeChild(divComboModAveriaRecambios.firstChild);
+    divComboModAveriaRecambios.appendChild(oTaller.getComboRecambios());
+
     document.getElementById("modificaAveria").style.display = "block";
 });
 document.getElementById("btnConsultaAvería").addEventListener("click", function(){
 	ocultar();
 	//Muestra  
     document.getElementById("consultarAveria").style.display = "block";
+});
+document.getElementById("btnBajaAveria").addEventListener("click", function(){
+	ocultar();
+	//Muestra  
+    document.getElementById("bajaAveria").style.display = "block";
+     //combo de averias para baja averia
+    var divComboBajaAveria = document.getElementById("comboBajaAveria");
+    divComboBajaAveria.removeChild(divComboBajaAveria.firstChild);
+    divComboBajaAveria.appendChild(oTaller.getComboAverias());
+
 });
 document.getElementById("btnLineaComponente").addEventListener("click", function(){
 	ocultar();
@@ -1429,39 +1474,14 @@ function validaFecha(oEvento){
 	}
 	return bValido;	
 }
-
+var modAveria = document.formModAveria.btnModAver;
+modAveria.addEventListener("click", validaModifAveria);
 function validaModifAveria(oEvento){
 	var oE = oEvento || window.event;
 	var bValido = true;
 	var arrayErrores = [];
 	
 	// Validaciones
-
-	//Campo idAveria
-	var sIdAveria = document.formModAveria.txtidAveria.value.trim();
-	// Trim
-	document.formModAveria.txtidAveria.value = document.formModAveria.txtidAveria.value.trim();
-
-	var oExpReg = /^\d{3}[a-zA-Z]$/;
-	
-	if (oExpReg.test(sIdAveria) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formModAveria.txtidAveria.focus();		
-		}
-	
-		arrayErrores.push("Id incorrecto");
-		
-		//Marcar error
-		document.formModAveria.txtidAveria.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formModAveria.txtidAveria.className = "form-control control";	
-	}
 
 	//Campo descripcion
 	var sDescripcionAver = document.formModAveria.txtDescripAveria.value.trim();
@@ -1489,56 +1509,42 @@ function validaModifAveria(oEvento){
 		document.formModAveria.txtDescripAveria.className = "form-control control";	
 	}
 
-	//DNI EMPLEADO
-	var sdniEmple = document.formModAveria.txtDNIEmplead.value.trim();
-	// Trim
-	document.formModAveria.txtDNIEmplead.value = document.formModAveria.txtDNIEmplead.value.trim();
-
-	var oExpReg = /^\d{8}[a-zA-Z]$/;
-	
-	if (oExpReg.test(sdniEmple) == false){
-	
+	//campo unidades
+	var sUnidades = document.formModAveria.txtUnidades.value.trim();
+	var oExpReg = /^\d{2}$/;
+	if(oExpReg.test(sUnidades)==false){
 		if(bValido == true){
 			bValido = false;		
 			//Este campo obtiene el foco
-			document.formModAveria.txtDNIEmplead.focus();		
+			document.formModAveria.txtUnidades.focus();		
 		}
 	
-		arrayErrores.push("DNI incorrecto");
+		arrayErrores.push("Unidades incorrecta: Hasta 99 unidades");
 		
 		//Marcar error
-		document.formModAveria.txtDNIEmplead.className = "form-control  error";
-	
-	}
-	else {
+		document.formModAveria.txtUnidades.className = "form-control  error";
+	}else{
 		//Desmarcar error
-		document.formModAveria.txtDNIEmplead.className = "form-control control";	
+		document.formModAveria.txtUnidades.className = "form-control control";
 	}
 
-	//ID ELECTRODOMESTICO
-	var sIDElec = document.formModAveria.txtIdElectro.value.trim();
-	// Trim
-	document.formModAveria.txtIdElectro.value = document.formModAveria.txtIdElectro.value.trim();
-
-	var oExpReg = /^\d{3}[a-zA-Z]$/;
+	//campo fecha
+	var sFecha = document.formModAveria.fecha.value.trim();
+	var oExpReg = /^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$/;
 	
-	if (oExpReg.test(sIDElec) == false){
-	
+	if (oExpReg.test(sFecha) == false){
 		if(bValido == true){
 			bValido = false;		
 			//Este campo obtiene el foco
-			document.formModAveria.txtIdElectro.focus();		
+			document.formModAveria.fecha.focus();		
 		}
-	
-		arrayErrores.push("ID incorrecto");
-		
+		arrayErrores.push("Fecha incorrecta. Formato DD/MM/YY");
 		//Marcar error
-		document.formModAveria.txtIdElectro.className = "form-control  error";
-	
+		document.formModAveria.fecha.className = "form-control  error";
 	}
 	else {
 		//Desmarcar error
-		document.formModAveria.txtIdElectro.className = "form-control control";	
+		document.formModAveria.fecha.className = "form-control control";	
 	}
 
 	//Resultado
@@ -1552,9 +1558,58 @@ function validaModifAveria(oEvento){
 			div.appendChild(document.createElement("br"));
 		}
 		openWindow(div);
+	}else{
+		var comboIdAveria=document.formModAveria.SelectAverias.selectedIndex;
+		var idAveria= document.formModAveria.SelectAverias.options[comboIdAveria].value;
+
+		var descripcion_ParteAveria = document.formModAveria.txtDescripAveria.value;
+		var unidades = document.formModAveria.txtUnidades.value;
+		var fecha_ParteAveria = document.formModAveria.fecha.value;
+		
+		var comboRecambio=document.formModAveria.SelectRecambios.selectedIndex;
+		var nomRecambio= document.formModAveria.SelectRecambios.options[comboRecambio].value;
+		var recambio=null;
+		for(var i=0; i<oTaller.AparteAveria.length; i++){
+			if(oTaller.AparteAveria[i].id_componente==nomRecambio){
+				recambio=oTaller.AparteAveria[i];
+			}
+		}	
+
+		var comboEmpleado=document.formModAveria.SelectEmpleado.selectedIndex;
+		var dniEmpleado= document.formModAveria.SelectEmpleado.options[comboEmpleado].value;
+		var empleado=null;
+		for(var i=0; i<oTaller.AparteAveria.length; i++){
+			if(oTaller.AparteAveria[i].dni_empleado==dniEmpleado){
+				empleado=oTaller.AparteAveria[i];
+			}
+		}	
+
+		var comboElectro=document.formModAveria.SelectElectrodomestico.selectedIndex;
+		var idElectrodomestico= document.formModAveria.SelectElectrodomestico.options[comboElectro].value;
+		var electrodomestico=null;
+		for(var i=0; i<oTaller.AparteAveria.length; i++){
+			if(oTaller.AparteAveria[i].num_Refe==idElectrodomestico){
+				electrodomestico=oTaller.AparteAveria[i];
+			}
+		}	
+
+		var oAveria = new Parte_Averia(idAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria, electrodomestico, empleado, recambio);
+		var sMensaje = document.createTextNode(oTaller.modificarParteAveria(oAveria));
+		openWindow(sMensaje);
+		document.formModAveria.reset();
 	}
 	return bValido;
 }
+
+document.formBajaAveria.btnBajaAve.addEventListener("click", aceptarBajaAveria);
+function aceptarBajaAveria(){
+	var combo=document.formBajaAveria.SelectAverias.selectedIndex;
+	var idAveria= document.formBajaAveria.SelectAverias.options[combo].value;
+	
+	var sMensaje = document.createTextNode(oTaller.bajaParteAveria(idAveria));
+	openWindow(sMensaje);
+}
+
 function validaBajaRecambio(oEvento){
 	var oE = oEvento || window.event;
 	var bValido = true;
