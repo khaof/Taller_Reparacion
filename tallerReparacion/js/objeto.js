@@ -32,7 +32,7 @@ function Electrodomestico(num_Refe, nombre_Electro, marca, cliente) {
 }
 //-------------------------------------------------------------------
 	//Claese Parte_averia 
-function Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria,  electrodomestico, empleado, recambio) {
+function Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria, electrodomestico, empleado, recambio) {
 	this.electrodomestico = electrodomestico;
 	this.empleado = empleado;
 	this.recambio = recambio;
@@ -199,6 +199,7 @@ tallerElectromecanica.prototype.getComboClientes = function(){
 	select.className = "form-control";
 	return select;
 }
+
 tallerElectromecanica.prototype.getComboFacturas = function(){
 	var selectFac = document.createElement("select");
 	selectFac.setAttribute("width","100%");
@@ -220,6 +221,7 @@ tallerElectromecanica.prototype.getComboFacturas = function(){
 	selectFac.className = "form-control";
 	return selectFac;
 }
+
 tallerElectromecanica.prototype.getComboElectrodomestico = function(){
 	var selectElect = document.createElement("select");
 	selectElect.setAttribute("width","100%");
@@ -245,6 +247,7 @@ tallerElectromecanica.prototype.getComboElectrodomestico = function(){
 	selectElect.className = "form-control";
 	return selectElect;
 }
+
 tallerElectromecanica.prototype.getComboProveedor = function(){
 	var select = document.createElement("select");
 	select.setAttribute("width","100%");
@@ -270,28 +273,6 @@ tallerElectromecanica.prototype.getComboProveedor = function(){
 	}
 	select.className = "form-control";
 	return select;
-}
-tallerElectromecanica.prototype.getcomboIdAverias = function(){
-	var selectAver = document.createElement("select");
-	selectAver.setAttribute("width","100%");
-	selectAver.setAttribute("name","selectIdAverias");
-	selectAver.setAttribute("onchange", "mostrarDatosAver()");
-	for (var i = 0; i < this.AparteAveria.length; i++) {
-		var option = document.createElement("option");
-		option.setAttribute("value", this.AparteAveria[i].id_ParteAveria);
-		var texto = document.createTextNode(this.AparteAveria[i].id_ParteAveria);
-		option.appendChild(texto);
-		selectAver.appendChild(option);
-	}
-	if(this.AparteAveria.length<=0){
-		var option = document.createElement("option");
-		var texto = document.createTextNode("No existen averías");
-		option.appendChild(texto);
-		selectAver.appendChild(option);
-	}
-	selectAver.className = "form-control";
-	return selectAver;
-
 }
 
 //-------------------------------------------------------------------------
@@ -365,17 +346,7 @@ tallerElectromecanica.prototype.cargadatosModAveria = function(idParteAveriaSele
 			i++;
 	}
 	if(bEnc){
-/*
-		var precio = this.AparteAveria[i].recambio.precio_componente;
-		var unidades = this.AparteAveria[i].unidades;
-		alert(precio);
-		alert(unidades);
 
-		var precioTotal = (precio*unidades);
-		var total = document.FormAltaPresupuesto.txtTotalPresu;
-		total.setAttribute("value", precioTotal);		
-	}
-}*/
 		var descripcion = document.formModAveria.txtDescripAveria;
 		var valorDescripcion = document.createTextNode(this.AparteAveria[i].descripcion_ParteAveria);
 		descripcion.appendChild(valorDescripcion);
@@ -667,7 +638,7 @@ tallerElectromecanica.prototype.altaParteAveria = function(oAveria){
 
 	return sMensaje;
 }
-//Metodo baja Parte Averia
+	//Metodo baja Parte Averia
 tallerElectromecanica.prototype.bajaParteAveria = function(idAveria){
 	var i = 0;
 	var bEnc = false;
@@ -711,4 +682,3 @@ tallerElectromecanica.prototype.modificarParteAveria = function(oAveria) {
 		return sMensaje;
 
 }
-
