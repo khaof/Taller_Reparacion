@@ -404,8 +404,8 @@ function aceptarModificaCliente(){
 //***ACEPTA BAJA***
 document.formBajaCliente.btnBajaCliente.addEventListener("click", aceptarBajaCliente);
 function aceptarBajaCliente(){
-	var combo=document.formModificaCli.SelectCliente.selectedIndex;
-	var dniCliente= document.formModificaCli.SelectCliente.options[combo].value;
+	var combo=document.formBajaCliente.SelectCliente.selectedIndex;
+	var dniCliente= document.formBajaCliente.SelectCliente.options[combo].value;
 	
 	var info = document.getElementById("txtMensaje");
 	var sMensaje = document.createTextNode(oTaller.bajaCliente(dniCliente));

@@ -98,11 +98,10 @@ tallerElectromecanica.prototype.getComboRecambios = function(){
 	var select = document.createElement("select");
 	select.setAttribute("width","100%");
 	select.setAttribute("name","SelectRecambios");
-	select.setAttribute("onchange", "mostrarDatosRecambios()");
 	for (var i = 0; i<this.Acomponentes.length; i++){
 		var option = document.createElement("option");
 		option.setAttribute("value", this.Acomponentes[i].id_componente);
-		var texto = document.createTextNode(this.Acomponentes[i].id_componente);
+		var texto = document.createTextNode(this.Acomponentes[i].nombre_componente);
 		option.appendChild(texto);
 		select.appendChild(option);
 	}
@@ -149,6 +148,7 @@ tallerElectromecanica.prototype.getComboClientes = function(){
 	select.setAttribute("width","100%");
 	select.setAttribute("name","SelectCliente");
 	select.setAttribute("onchange", "mostrarDatosCliente()");
+
 	for (var i = 0; i<this.Aclientes.length; i++){
 		var option = document.createElement("option");
 		option.setAttribute("value", this.Aclientes[i].dni_cliente);
@@ -513,7 +513,7 @@ tallerElectromecanica.prototype.altaProveedor = function(oProveedor) {
 		var sMensaje = "";
 
 		while (i < this.Aproveedor.length && bEnc == false) {
-			if (this.Aproveedor[i].nif_proveedor == oProveedor.nif_proveedor)
+			if (this.Aproveedor[i].dni_proveedor == oProveedor.dni_proveedor)
 				bEnc = true;
 			else
 				i++;
