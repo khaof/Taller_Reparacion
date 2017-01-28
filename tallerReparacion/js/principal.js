@@ -1,7 +1,7 @@
 ﻿var oTaller = new tallerElectromecanica;
 
 //LECTURA DEL XML
-function loadXMLDoc(filename){
+/*function loadXMLDoc(filename){
     if (window.XMLHttpRequest)
     {
         xhttp = new XMLHttpRequest();
@@ -43,9 +43,21 @@ for (var i= 0; i < oElectrodomesticos.length; i++) {
 	var nombreXML = oElectrodomesticos[i].childNodes[3].innerHTML;
 	var marcaXML = oElectrodomesticos[i].childNodes[5].innerHTML;
 	var dniXML = oElectrodomesticos[i].childNodes[7].innerHTML;
-	
-	var oElectrodomestico = new Electrodomestico(idXML, nombreXML, marcaXML,dniXML);
-	oTaller.altaElectrodomestico(oElectrodomestico);
+
+	var clienteXML=null;
+		for(var a=0; a<oClientes.length; a++){
+			var dniClienteXML = oClientes[a].childNodes[1].innerHTML;	
+			console.log("DNI CLIENTE "+dniClienteXML);
+			console.log("Cliente de electrodomestico "+dniXML);		
+			if(dniClienteXML==dniXML){
+				console.log("Esto es un cliente "+oClientes[a]);
+				clienteXML=oClientes[a];
+			}
+		}	
+	if(clienteXML!=null){
+		var oElectrodomestico = new Electrodomestico(idXML, nombreXML, marcaXML, clienteXML);
+		oTaller.altaElectrodomestico(oElectrodomestico);
+	}
 }
 for (var z= 0; z < oEmpleados.length; z++) {
 	var dniEmpleadoXML = oEmpleados[z].childNodes[1].innerHTML;
@@ -64,7 +76,6 @@ for (var c = 0; c < oProveedores.length; c++) {
 	var oProveedor = new Proveedor(nifproXML, nombreproXML, direccionproXML, telefonoproXML);
 	oTaller.altaProveedor(oProveedor);
 }
-
 for (var x = 0; x < oComponentes.length; x++) {
 	var idComXML = oComponentes[x].childNodes[1].innerHTML;
 	var nombreComXML = oComponentes[x].childNodes[3].innerHTML;
@@ -73,7 +84,7 @@ for (var x = 0; x < oComponentes.length; x++) {
 	
 	var oComponente = new Componentes(idComXML, nombreComXML, precioComXML, nifProveXML);
 	oTaller.altaRecambio(oComponente);
-}
+}*/
 
 //cerrar ventana emergente
 var closeWindow = document.getElementById("cerrarVentana");
@@ -651,7 +662,7 @@ function aceptarAltaElectrodomestico(){
 	// Trim
 	document.formAltaElectrodomestico.txtNombreElec.value = document.formAltaElectrodomestico.txtNombreElec.value.trim();
 
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	var oExpReg = /^[a-zA-Z\s\d]{3,40}$/;
 	
 	if (oExpReg.test(sNombreElectr) == false){
 	
@@ -1038,7 +1049,7 @@ function validaAltaAveria(oEvento){
 	//Campo descripcion
 	var sDescripcionAver = document.formAltaAveria.txtDescripAveria.value.trim();
 
-	var oExpReg = /^[A-Za-z]{10,100}$/;
+	var oExpReg = /^((\w{1,20})\s?){2,50}$/;
 	
 	if (oExpReg.test(sDescripcionAver) == false){
 	
@@ -1062,7 +1073,7 @@ function validaAltaAveria(oEvento){
 
 	//campo unidades
 	var sUnidades = document.formAltaAveria.txtUnidades.value.trim();
-	var oExpReg = /^\d{2}$/;
+	var oExpReg = /^\d{1,2}$/;
 	if(oExpReg.test(sUnidades)==false){
 		if(bValido == true){
 			bValido = false;		
@@ -1118,7 +1129,7 @@ function validaAltaAveria(oEvento){
 		var nomRecambio= document.formAltaAveria.SelectRecambios.options[comboRecambio].value;
 		var recambio=null;
 		for(var i=0; i<oTaller.Acomponentes.length; i++){
-			if(oTaller.Acomponentes[i].nombre_componente==nomRecambio){
+			if(oTaller.Acomponentes[i].id_componente==nomRecambio){
 				recambio=oTaller.Acomponentes[i];
 			}
 		}	
@@ -1141,7 +1152,7 @@ function validaAltaAveria(oEvento){
 			}
 		}	
 
-		var oAveria = new Parte_Averia(id_ParteAveria, descripcion_ParteAveria, fecha_ParteAveria, unidades, electrodomestico, empleado, recambio);
+		var oAveria = new Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria,  electrodomestico, empleado, recambio);
 		var sMensaje = document.createTextNode(oTaller.altaParteAveria(oAveria));
 		openWindow(sMensaje);
 		document.formAltaAveria.reset();
@@ -1159,7 +1170,6 @@ function mostrarDatosCliente(){
 function mostrarDatosEmpleados(){
 	var combo=document.formModificaEmpleado.SelectEmpleado.selectedIndex;	
 	var dniEmpleadoSeleccionado= document.formModificaEmpleado.SelectEmpleado.options[combo].value;
-	console.log(dniEmpleadoSeleccionado);
 	
 	if(dniEmpleadoSeleccionado==0){
 		var apellido = document.formModificaEmpleado.txtApellidoEmplea;
@@ -1180,6 +1190,11 @@ function mostrarDatosProveedor(){
 	var idProveedorSeleccionado= document.formBajaProveedor.SelectProveedor.options[combo].value;
 	oTaller.cargadatosFactura(idProveedorSeleccionado);
 }
+function mostrarDatosAver(){
+	var combo=document.FormAltaPresupuesto.selectIdAverias.selectedIndex;
+	var idAveriaSeleccionada= document.FormAltaPresupuesto.selectIdAverias.options[combo].value;
+	oTaller.cargaDatosAveria(idAveriaSeleccionada);
+}
 
 function ocultar(){
 	var estolado = document.querySelectorAll('.formulario');
@@ -1199,7 +1214,6 @@ document.getElementById("btnModificaCliente").addEventListener("click", function
     comboModClientes.removeChild(comboModClientes.firstChild);
     comboModClientes.appendChild(oTaller.getComboClientes());
     document.getElementById("modificaCliente").style.display = "block";
-
 });
 document.getElementById("btnBajaCliente").addEventListener("click", function(){
 	ocultar();
@@ -1341,6 +1355,9 @@ document.getElementById("btnLineaComponente").addEventListener("click", function
 document.getElementById("btnAltaPresupuesto").addEventListener("click", function(){
 	ocultar();
 	//Muestra  
+	var comboIdAverias = document.getElementById("comboIdAverias");
+	comboIdAverias.removeChild(comboIdAverias.firstChild);
+    comboIdAverias.appendChild(oTaller.getcomboIdAverias());
     document.getElementById("altaPresupuesto").style.display = "block";
 });
 document.getElementById("btnModificaPresupuesto").addEventListener("click", function(){
