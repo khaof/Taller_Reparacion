@@ -94,10 +94,43 @@ function tallerElectromecanica() {
 	this.Aproveedor = [];
 }
 
+tallerElectromecanica.prototype.getComboAverias = function(){
+	var select = document.createElement("select");
+	select.setAttribute("width","100%");
+	select.setAttribute("name","SelectAverias");
+	select.setAttribute("onchange", "mostrarDatosModAveria()");
+
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija una Averia---");
+	option.appendChild(texto);
+	select.appendChild(option);
+	for (var i = 0; i<this.AparteAveria.length; i++){
+		var option = document.createElement("option");
+		option.setAttribute("value", this.AparteAveria[i].id_ParteAveria);
+		var texto = document.createTextNode(this.AparteAveria[i].id_ParteAveria);
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+
+	if(this.AparteAveria.length<=0){
+		var option = document.createElement("option");
+		var texto = document.createTextNode("No existen Averias");
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+	select.className = "form-control";
+	return select;
+}
 tallerElectromecanica.prototype.getComboRecambios = function(){
 	var select = document.createElement("select");
 	select.setAttribute("width","100%");
 	select.setAttribute("name","SelectRecambios");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un recambio---");
+	option.appendChild(texto);
+	select.appendChild(option);
 	for (var i = 0; i<this.Acomponentes.length; i++){
 		var option = document.createElement("option");
 		option.setAttribute("value", this.Acomponentes[i].id_componente);
@@ -191,6 +224,11 @@ tallerElectromecanica.prototype.getComboElectrodomestico = function(){
 	var selectElect = document.createElement("select");
 	selectElect.setAttribute("width","100%");
 	selectElect.setAttribute("name","SelectElectrodomestico");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un id---");
+	option.appendChild(texto);
+	selectElect.appendChild(option);
 	for (var i = 0; i < this.Aelectrodomesticos.length; i++) {
 		var option = document.createElement("option");
 		option.setAttribute("value", this.Aelectrodomesticos[i].num_Refe);
@@ -213,7 +251,7 @@ tallerElectromecanica.prototype.getComboProveedor = function(){
 	select.setAttribute("name","SelectProveedor");
 	var option = document.createElement("option");
 	option.setAttribute("value", "0");
-	var texto = document.createTextNode("---Elija un DNI---");
+	var texto = document.createTextNode("---Elija un NIF---");
 	option.appendChild(texto);
 	select.appendChild(option);
 	for (var i = 0; i<this.Aproveedor.length; i++){
@@ -317,17 +355,26 @@ tallerElectromecanica.prototype.cargadatosEmpleado = function (dniEmpleadoSelecc
 		fecha.setAttribute("value", this.Afacturas[i].fecha_factura);
 	}
 }
+<<<<<<< HEAD
 */
 tallerElectromecanica.prototype.cargaDatosAveria = function(idAveriaSeleccionada){
 	var i = 0;
 	var bEnc = false;
 	while (i < this.AparteAveria.length && bEnc == false) {
 		if (this.AparteAveria[i].id_ParteAveria == idAveriaSeleccionada)
+=======
+tallerElectromecanica.prototype.cargadatosModAveria = function(idParteAveriaSeleccionado){
+	var i = 0;
+	var bEnc = false;
+	while (i < this.AparteAveria.length && bEnc == false) {
+		if (this.AparteAveria[i].id_ParteAveria == idParteAveriaSeleccionado)
+>>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 			bEnc = true;
 		else
 			i++;
 	}
 	if(bEnc){
+<<<<<<< HEAD
 		var precio = this.AparteAveria[i].recambio.precio_componente;
 		var unidades = this.AparteAveria[i].unidades;
 		alert(precio);
@@ -338,7 +385,19 @@ tallerElectromecanica.prototype.cargaDatosAveria = function(idAveriaSeleccionada
 		total.setAttribute("value", precioTotal);		
 	}
 }
+=======
+>>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 
+		var descripcion = document.formModAveria.txtDescripAveria;
+		var valorDescripcion = document.createTextNode(this.AparteAveria[i].descripcion_ParteAveria);
+		descripcion.appendChild(valorDescripcion);
+		var unidades = document.formModAveria.txtUnidades;
+		unidades.setAttribute("value", this.AparteAveria[i].unidades);
+		var fecha = document.formModAveria.fecha;
+		fecha.setAttribute("value", this.AparteAveria[i].fecha_ParteAveria);
+		
+	}
+}
 //--------------------------------------------------------------------------
 	//Metodo altaCliente
 tallerElectromecanica.prototype.altaCliente = function(oClientes) {
@@ -634,25 +693,37 @@ tallerElectromecanica.prototype.bajaParteAveria = function(idAveria){
 	}
 
 	if (bEnc == true) {
-		this.Aproveedor.splice(i, 1);
+		this.AparteAveria.splice(i, 1);
 		sMensaje = "Parte Averia Baja: OK!";
 	}
 
 	return sMensaje;
 }
+<<<<<<< HEAD
 //altaPresupuesto
 tallerElectromecanica.prototype.altaPresupuesto = function (idPresupuesto){
+=======
+
+//metodo para modificar averia
+tallerElectromecanica.prototype.modificarParteAveria = function(oAveria) {
+>>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 	var i = 0;
 	var bEnc = false;
 	var sMensaje = "";
 
+<<<<<<< HEAD
 	while (i < this.Apresupuestos.length && bEnc == false) {
 		if (this.Apresupuestos[i].id_presupuesto == idPresupuesto)
+=======
+	while (i < this.AparteAveria.length && bEnc == false) {
+		if (this.AparteAveria[i].id_ParteAveria == oAveria.id_ParteAveria)
+>>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 			bEnc = true;
 		else
 			i++;
 	}
 
+<<<<<<< HEAD
 	if (bEnc == false) {
 		this.Aproveedor.splice(i, 1);
 		sMensaje = "Factura generada!";
@@ -661,3 +732,15 @@ tallerElectromecanica.prototype.altaPresupuesto = function (idPresupuesto){
 	return sMensaje;
 }
 
+=======
+		if (bEnc == true) {
+			this.AparteAveria.splice(i, 1, oAveria);
+			sMensaje = "Parte Averia Modificar: OK!";
+
+		} else {
+			sMensaje = "No se ha podido modificar Parte Averia";
+		}
+		return sMensaje;
+
+}
+>>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56

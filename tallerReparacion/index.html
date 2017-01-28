@@ -83,7 +83,7 @@
 		        </ul>
       		  </li>    
       		  <li><a  id="btnLineaComponente">Linea de Componente</a></li>  		  
-	          <li><a >Baja avería</a></li>
+	          <li><a id="btnBajaAveria">Baja avería</a></li>
 	        </ul>
       	</li>
             
@@ -585,16 +585,16 @@
 	            <div class="col-md-3" id="comboAveriaRecambios">
 	              
 	            </div>
-	        <label class="col-md-1 control-label" for="textinput">Unidades:</label>
+	        <label class="col-md-2 control-label" for="textinput">Unidades:</label>
 	            <div class="col-md-2">
-	             <input type="text" size="2" name="txtUnidades" />
+	             <input type="text" size="2" name="txtUnidades" class="form-control input-md"/>
 	            </div>
 			</div>
 
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Fecha parte avería:</label>
-	            <div class="col-md-7">         
-	             	<input type="text" name="fecha" placeholder="." />
+	            <div class="col-md-3">         
+	             	<input type="text" name="fecha" placeholder="." class="form-control input-md"/>
 	            </div>
 			</div>		
 
@@ -629,8 +629,8 @@
       <form name="formModAveria" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Id Avería:</label>
-	            <div class="col-md-7">
-	              <input name="txtidAveria" type="text" placeholder="id Averia" class="form-control input-md">
+	            <div class="col-md-7" id="comboModAveriaId">
+	              
 	            </div>
 			</div>
 
@@ -643,36 +643,33 @@
 
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Recambios:</label>
-	            <div class="col-md-2">
-	              <select name="comboRecambio">
-	              	<option>Fusibles</option>
-	              	<option>Cables</option>
-	              </select> 
+	            <div class="col-md-3" id="comboModAveriaRecambios">
+	              
 	            </div>
-	        <label class="col-md-3 control-label" for="textinput">Unidades:</label>
-	            <div class="col-md-3">
-	             <input type="text" size="2" name="txtUnidades" />
+	        <label class="col-md-2 control-label" for="textinput">Unidades:</label>
+	            <div class="col-md-2">
+	             <input type="text" size="2" name="txtUnidades" class="form-control input-md"/>
 	            </div>
 			</div>
 
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Fecha parte avería:</label>
-	            <div class="col-md-7">         
-	             	<input type="text" name="fecha" placeholder="." />
+	            <div class="col-md-3">         
+	             	<input type="text" name="fecha" placeholder="." class="form-control input-md"/>
 	            </div>
 			</div>		
 
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">DNI empleado:</label>
-	            <div class="col-md-7">
-	              <input name="txtDNIEmplead" type="text" placeholder="DNI empleado" class="form-control input-md">
+	            <div class="col-md-7" id="comboModAveriaEmpleado">
+	             
 	            </div>
 			</div>
 
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Id Electrodomestico:</label>
-	            <div class="col-md-7">
-	              <input name="txtIdElectro" type="text" placeholder="Id electrodomestico" class="form-control input-md">
+	            <div class="col-md-7"m id="comboModAveriaElectro">
+	              
 	            </div>
 			</div>
 			
@@ -686,6 +683,25 @@
 	        </div>        
       </form>
     </div> 
+    <div class="col-sm-8 text-left formulario" id="bajaAveria"> 
+      	<h1>Dar de baja a un Parte de Averia </h1>
+      	<hr>
+      <form name="formBajaAveria" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">ID Parte de Averia:</label>
+	            <div class="col-md-7" id="comboBajaAveria">
+	              
+	            </div>
+		</div>
+	        <!-- Button -->
+	        <div class="form-group" align="center">
+	        <label class="col-md-3 control-label" for="singlebutton"></label>
+	            <div class="col-md-7" align="center">
+	              <input type="button" id="singlebutton" name="btnBajaAve" class="btn btn-danger" value="Dar de Baja"/>
+	            </div>
+	        </div>        
+      </form>
+    </div>
 
 	<div class="col-sm-8 text-left formulario" id="consultarAveria"> 
       	<h1>Listado de averías registradas</h1>
