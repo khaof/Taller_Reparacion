@@ -86,7 +86,7 @@ for (var x = 0; x < oComponentes.length; x++) {
 	oTaller.altaRecambio(oComponente);
 }*/
 
-for (var x = 0; x < oPartesAverias.length; x++) {
+/*for (var x = 0; x < oPartesAverias.length; x++) {
 	var idAveXML = oPartesAverias[x].childNodes[1].innerHTML;
 	var descripcionAveXML = oPartesAverias[x].childNodes[3].innerHTML;
 	var unidadesAveXML = oPartesAverias[x].childNodes[5].innerHTML;;
@@ -97,7 +97,7 @@ for (var x = 0; x < oPartesAverias.length; x++) {
 	
 	var oPartesAverias = new Parte_Averia(idAveXML, descripcionAveXML, unidadesAveXML, fechaAverXML, elecAveXML, emplAveXML, recamAveXML);
 	oTaller.altaParteAveria(oPartesAverias);
-}
+}*/
 //cerrar ventana emergente
 var closeWindow = document.getElementById("cerrarVentana");
 closeWindow.addEventListener("click", ocultaVentana, false);
@@ -1164,11 +1164,7 @@ function validaAltaAveria(oEvento){
 			}
 		}	
 
-<<<<<<< HEAD
-		var oAveria = new Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria,  electrodomestico, empleado, recambio);
-=======
 		var oAveria = new Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria, electrodomestico, empleado, recambio);
->>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 		var sMensaje = document.createTextNode(oTaller.altaParteAveria(oAveria));
 		openWindow(sMensaje);
 		document.formAltaAveria.reset();
@@ -1186,10 +1182,8 @@ function mostrarDatosCliente(){
 function mostrarDatosEmpleados(){
 	var combo=document.formModificaEmpleado.SelectEmpleado.selectedIndex;	
 	var dniEmpleadoSeleccionado= document.formModificaEmpleado.SelectEmpleado.options[combo].value;
-<<<<<<< HEAD
-=======
+
 	//console.log(dniEmpleadoSeleccionado);
->>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 	
 	if(dniEmpleadoSeleccionado==0){
 		var apellido = document.formModificaEmpleado.txtApellidoEmplea;

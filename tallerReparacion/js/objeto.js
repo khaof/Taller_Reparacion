@@ -336,7 +336,7 @@ tallerElectromecanica.prototype.cargadatosEmpleado = function (dniEmpleadoSelecc
 	}	
 }
 
-/*tallerElectromecanica.prototype.cargadatosFactura = function(idFacturaSeleccionada){
+tallerElectromecanica.prototype.cargadatosFactura = function(idFacturaSeleccionada){
 	var i = 0;
 	var bEnc = false;
 	while (i < this.Afacturas.length && bEnc == false) {
@@ -355,26 +355,17 @@ tallerElectromecanica.prototype.cargadatosEmpleado = function (dniEmpleadoSelecc
 		fecha.setAttribute("value", this.Afacturas[i].fecha_factura);
 	}
 }
-<<<<<<< HEAD
-*/
-tallerElectromecanica.prototype.cargaDatosAveria = function(idAveriaSeleccionada){
-	var i = 0;
-	var bEnc = false;
-	while (i < this.AparteAveria.length && bEnc == false) {
-		if (this.AparteAveria[i].id_ParteAveria == idAveriaSeleccionada)
-=======
 tallerElectromecanica.prototype.cargadatosModAveria = function(idParteAveriaSeleccionado){
 	var i = 0;
 	var bEnc = false;
 	while (i < this.AparteAveria.length && bEnc == false) {
 		if (this.AparteAveria[i].id_ParteAveria == idParteAveriaSeleccionado)
->>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 			bEnc = true;
 		else
 			i++;
 	}
 	if(bEnc){
-<<<<<<< HEAD
+/*
 		var precio = this.AparteAveria[i].recambio.precio_componente;
 		var unidades = this.AparteAveria[i].unidades;
 		alert(precio);
@@ -384,10 +375,7 @@ tallerElectromecanica.prototype.cargadatosModAveria = function(idParteAveriaSele
 		var total = document.FormAltaPresupuesto.txtTotalPresu;
 		total.setAttribute("value", precioTotal);		
 	}
-}
-=======
->>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
-
+}*/
 		var descripcion = document.formModAveria.txtDescripAveria;
 		var valorDescripcion = document.createTextNode(this.AparteAveria[i].descripcion_ParteAveria);
 		descripcion.appendChild(valorDescripcion);
@@ -699,40 +687,20 @@ tallerElectromecanica.prototype.bajaParteAveria = function(idAveria){
 
 	return sMensaje;
 }
-<<<<<<< HEAD
-//altaPresupuesto
-tallerElectromecanica.prototype.altaPresupuesto = function (idPresupuesto){
-=======
 
 //metodo para modificar averia
 tallerElectromecanica.prototype.modificarParteAveria = function(oAveria) {
->>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 	var i = 0;
 	var bEnc = false;
 	var sMensaje = "";
 
-<<<<<<< HEAD
-	while (i < this.Apresupuestos.length && bEnc == false) {
-		if (this.Apresupuestos[i].id_presupuesto == idPresupuesto)
-=======
 	while (i < this.AparteAveria.length && bEnc == false) {
 		if (this.AparteAveria[i].id_ParteAveria == oAveria.id_ParteAveria)
->>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
 			bEnc = true;
 		else
 			i++;
 	}
 
-<<<<<<< HEAD
-	if (bEnc == false) {
-		this.Aproveedor.splice(i, 1);
-		sMensaje = "Factura generada!";
-	}
-
-	return sMensaje;
-}
-
-=======
 		if (bEnc == true) {
 			this.AparteAveria.splice(i, 1, oAveria);
 			sMensaje = "Parte Averia Modificar: OK!";
@@ -743,4 +711,4 @@ tallerElectromecanica.prototype.modificarParteAveria = function(oAveria) {
 		return sMensaje;
 
 }
->>>>>>> 5720fe670ed3018bfc3d1159566fd3f4c6bc5b56
+
