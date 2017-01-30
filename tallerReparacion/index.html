@@ -262,10 +262,8 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
 	            <div class="col-md-2">
-	              <select name="txtFacPaga">
-	              	<option value="si">Si</option>
-	              	<option value="no">No</option>
-	              </select>
+	                <input type="radio" name="facPagadas" value="si">Si<br>
+  					<input type="radio" name="facPagadan" value="no">No<br>
 	            </div>
 			</div>
 
@@ -296,10 +294,10 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
 	            <div class="col-md-2">
-	              <select name="txtFacPaga">
+	              <checked name="rdbFacPaga">
 	              	<option value="si">Si</option>
 	              	<option value="no">No</option>
-	              </select>
+	              </checked>
 	            </div>
 			</div>
 
@@ -683,6 +681,7 @@
 	        </div>        
       </form>
     </div> 
+
     <div class="col-sm-8 text-left formulario" id="bajaAveria"> 
       	<h1>Dar de baja a un Parte de Averia </h1>
       	<hr>
@@ -718,14 +717,18 @@
       	<hr>
       <form name="FormAltaPresupuesto" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">ID Presupuesto:</label>
-	            <div class="col-md-7">
-	              <Select name="txtIdPresupuesto">
-	              	<option>pres01</option>
-	              	<option>pres02</option>
-	              </Select>
+	        <label class="col-md-3 control-label" for="textinput">ID avería:</label>
+	            <div class="col-md-7" id="comboIdAverias">
+	              
 	            </div>
-			</div>
+		</div>
+		<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">id presupuesto:</label>
+	            <div class="col-md-2">
+	              <input name="txtIdPreuspuesto" type="text" placeholder="id Presupuesto" class="form-control input-md"> 
+	            </div>
+	           
+		</div>	
 
 	      	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Total presupuesto:</label>
@@ -809,33 +812,38 @@
       <form name="formaltaLineaComponente" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">ID Presupuesto:</label>
-	            <div class="col-md-7">
-	              <Select name="txtIdPresupuesto">
-	              	<option>pres01</option>
-	              	<option>pres02</option>
-	              </Select>
+	            <div class="col-md-7" id="comboPresupuestoLinea">
+	              
 	            </div>
-			</div>
-
-	      	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">ID Recambio:</label>
+		</div>
+		 <form name="formAltaCliente" class="form-horizontal">
+      	<div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">DNI cliente:</label>
 	            <div class="col-md-7">
-		            <Select name="txtIdRecambio">
-		              	<option>rec01</option>
-		              	<option>rec02</option>
-		             </Select>
-		        </div>
-			</div>		
-	
+	              <input name="txtDNICliente" type="text" disabled="disabled" placeholder="DNI" class="form-control input-md">
+	            </div>
+		</div>
+
+	    <div class="form-group">
+	        <label class="col-md-3 control-label" for="textinput">Nombre y Apellidos:</label>
+	            <div class="col-md-7">
+	              <input name="txtNombreYApellidos" type="text" disabled="disabled" placeholder="nombre y apellidos" class="form-control input-md">
+	            </div>
+		</div>
+
 	        <!-- Button -->
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnGeneraFactura" class="btn btn-primary" value="Generar Linea Componente"/>
+	              <input type="button" id="singlebutton" name="btnGenerarLineaComponente" class="btn btn-primary" value="Generar Linea Componente"/>
 	              
 	            </div>
 	        </div>        
       </form>
+      <!--modificacion juanjo 29/01/2017-->
+      <div class="col-md-10 col-md-offset-2" id="tablaLineaComponente">
+	            	
+	  </div>
     </div>
 
 	<!--FORMULARIOS GESTION EMPLEADO-->

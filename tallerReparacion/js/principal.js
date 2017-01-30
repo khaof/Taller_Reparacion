@@ -15,7 +15,6 @@ function loadXMLDoc(filename){
 
     return xhttp.responseXML;
 }
-
 var oXML = loadXMLDoc("taller.xml");
 
 var oClientes = oXML.getElementsByTagName("cliente");
@@ -43,9 +42,18 @@ for (var i= 0; i < oElectrodomesticos.length; i++) {
 	var nombreXML = oElectrodomesticos[i].childNodes[3].innerHTML;
 	var marcaXML = oElectrodomesticos[i].childNodes[5].innerHTML;
 	var dniXML = oElectrodomesticos[i].childNodes[7].innerHTML;
-	
-	var oElectrodomestico = new Electrodomestico(idXML, nombreXML, marcaXML,dniXML);
-	oTaller.altaElectrodomestico(oElectrodomestico);
+
+	var clienteXML=null;
+		for(var a=0; a<oClientes.length; a++){
+			var dniClienteXML = oClientes[a].childNodes[1].innerHTML;						
+			if(dniClienteXML==dniXML){
+				clienteXML=oClientes[a];
+			}
+		}	
+	if(clienteXML!=null){
+		var oElectrodomestico = new Electrodomestico(idXML, nombreXML, marcaXML, clienteXML);
+		oTaller.altaElectrodomestico(oElectrodomestico);
+	}
 }
 for (var z= 0; z < oEmpleados.length; z++) {
 	var dniEmpleadoXML = oEmpleados[z].childNodes[1].innerHTML;
@@ -64,7 +72,6 @@ for (var c = 0; c < oProveedores.length; c++) {
 	var oProveedor = new Proveedor(nifproXML, nombreproXML, direccionproXML, telefonoproXML);
 	oTaller.altaProveedor(oProveedor);
 }
-
 for (var x = 0; x < oComponentes.length; x++) {
 	var idComXML = oComponentes[x].childNodes[1].innerHTML;
 	var nombreComXML = oComponentes[x].childNodes[3].innerHTML;
@@ -87,6 +94,7 @@ for (var x = 0; x < oPartesAverias.length; x++) {
 	var oPartesAverias = new Parte_Averia(idAveXML, descripcionAveXML, unidadesAveXML, fechaAverXML, elecAveXML, emplAveXML, recamAveXML);
 	oTaller.altaParteAveria(oPartesAverias);
 }
+
 //cerrar ventana emergente
 var closeWindow = document.getElementById("cerrarVentana");
 closeWindow.addEventListener("click", ocultaVentana, false);
@@ -461,7 +469,7 @@ function aceptarAltaEmpleado(){
 	// Trim
 	document.formAltaEmpleado.txtNombreEmple.value = document.formAltaEmpleado.txtNombreEmple.value.trim();
 
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	var oExpReg = /^[a-zA-ZñÁÉÍÓÚáéíóú\s]{3,40}$/;
 	
 	if (oExpReg.test(sNombreEmple) == false){
 	
@@ -487,7 +495,7 @@ function aceptarAltaEmpleado(){
 	// Trim
 	document.formAltaEmpleado.txtApellidosEmple.value = document.formAltaEmpleado.txtApellidosEmple.value.trim();
 
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	var oExpReg = /^[a-zA-ZñÁÉÍÓÚáéíóú\s]{3,40}$/;
 	
 	if (oExpReg.test(sApellidoEmple) == false){
 	
@@ -663,7 +671,7 @@ function aceptarAltaElectrodomestico(){
 	// Trim
 	document.formAltaElectrodomestico.txtNombreElec.value = document.formAltaElectrodomestico.txtNombreElec.value.trim();
 
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	var oExpReg = /^[a-zA-Z\s\d]{3,40}$/;
 	
 	if (oExpReg.test(sNombreElectr) == false){
 	
@@ -787,7 +795,7 @@ function aceptaAltaRecambio(){
 	// Trim
 	document.formAltaRecElectrodomestico.txtNombreRecambio.value = document.formAltaRecElectrodomestico.txtNombreRecambio.value.trim();
 
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	var oExpReg = /^((\w{1,20})\s?){2,30}$/;
 	
 	if (oExpReg.test(sNombreRec) == false){
 	
@@ -1016,6 +1024,7 @@ function aceptarBajaProveedor(){
 
 //******************************GESTION AVERIA**************************
 //ACEPTAR ALTA
+document.formAltaAveria.btnAltaAver.addEventListener("click", validaAltaAveria);
 function validaAltaAveria(oEvento){
 	var bValido = true;
 	var arrayErrores = [];
@@ -1050,7 +1059,7 @@ function validaAltaAveria(oEvento){
 	//Campo descripcion
 	var sDescripcionAver = document.formAltaAveria.txtDescripAveria.value.trim();
 
-	var oExpReg = /^[A-Za-z]{10,100}$/;
+	var oExpReg = /^([a-zA-ZñÁÉÍÓÚáéíóú\s]\s?){2,50}$/;
 	
 	if (oExpReg.test(sDescripcionAver) == false){
 	
@@ -1074,7 +1083,7 @@ function validaAltaAveria(oEvento){
 
 	//campo unidades
 	var sUnidades = document.formAltaAveria.txtUnidades.value.trim();
-	var oExpReg = /^\d{2}$/;
+	var oExpReg = /^\d{1,2}$/;
 	if(oExpReg.test(sUnidades)==false){
 		if(bValido == true){
 			bValido = false;		
@@ -1153,12 +1162,116 @@ function validaAltaAveria(oEvento){
 			}
 		}	
 
-		var oAveria = new Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria, electrodomestico, empleado, recambio);
+		var oAveria = new Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_ParteAveria,  electrodomestico, empleado, recambio);
 		var sMensaje = document.createTextNode(oTaller.altaParteAveria(oAveria));
 		openWindow(sMensaje);
 		document.formAltaAveria.reset();
 	}
 	return bValido;
+}
+//ACEPTAR PRESUPUESTO
+document.FormAltaPresupuesto.btnGeneraFactura.addEventListener("click", aceptarPresupuesto);
+function aceptarPresupuesto() {
+	var arrayErrores = [];
+	bValido = true;
+
+	var sIdpresupuesto = document.FormAltaPresupuesto.txtIdPreuspuesto.value.trim();
+	var oExpReg = /^[a-zA-Z]{3}\d{4}/;
+	
+	if (oExpReg.test(sIdpresupuesto) == false){
+	
+		if(bValido == true){
+			bValido = false;		
+			//Este campo obtiene el foco
+			document.FormAltaPresupuesto.txtIdPreuspuesto.focus();		
+		}
+	
+		arrayErrores.push("Id presupuesto incorrecto: pre0000");
+		
+		//Marcar error
+		document.FormAltaPresupuesto.txtIdPreuspuesto.className = "form-control  error";
+	
+	}
+	else {
+		//Desmarcar error
+		document.FormAltaPresupuesto.txtIdPreuspuesto.className = "form-control control";	
+	}
+
+	//Resultado
+	if (bValido == false){
+		//Mostrar errores
+		var div = document.createElement("div");
+		for(var i =0; i<arrayErrores.length;i++){
+			div.appendChild(document.createTextNode(arrayErrores[i]));
+			div.appendChild(document.createElement("br"));
+		}
+		openWindow(div);
+	}else{
+		//aqui
+		var idPresupuesto = document.FormAltaPresupuesto.txtIdPreuspuesto.value;
+		var precioTotal = document.FormAltaPresupuesto.txtTotalPresu.value;
+		
+		var comboAveria=document.FormAltaPresupuesto.selectIdAverias.selectedIndex;
+		var idAveria= document.FormAltaPresupuesto.selectIdAverias.options[comboAveria].value;
+		var parteAveria=null;
+		for(var i=0; i<oTaller.AparteAveria.length; i++){
+			if(oTaller.AparteAveria[i].id_ParteAveria==idAveria){
+				parteAveria=oTaller.AparteAveria[i];
+			}
+		}	
+
+		var oPresupuesto = new Presupuesto(idPresupuesto, precioTotal, parteAveria);
+		var info = document.getElementById("txtMensaje");
+		var sMensaje = document.createTextNode(oTaller.altaPresupuesto(oPresupuesto));
+		openWindow(sMensaje);
+		
+	}
+	return bValido;
+}
+/*MODIFICACION MARIO 29/01/2017*/
+
+//GENERAR LINEA DE COMPONENTE
+document.formaltaLineaComponente.btnGenerarLineaComponente.addEventListener("click", generarLineaComponente);
+function generarLineaComponente(){
+	var arrayErrores = [];
+	bValido = true;
+	var dniClientito= document.formaltaLineaComponente.txtDNICliente.value;
+	if(dniClientito==""){
+		arrayErrores.push("Para generar la linea de componente debe escoger un presupuesto");
+		bValido=false;
+		var div = document.createElement("div");
+		for(var i =0; i<arrayErrores.length;i++){
+			div.appendChild(document.createTextNode(arrayErrores[i]));
+			div.appendChild(document.createElement("br"));
+		}
+		openWindow(div);
+	}else{
+		var comboPresupuesto=document.formaltaLineaComponente.selectPresupuestoLinea.selectedIndex;
+		var idPresupuestito= document.formaltaLineaComponente.selectPresupuestoLinea.options[comboPresupuesto].value;
+
+		oTaller.mostrarLineaPresupuesto(idPresupuestito);
+	}
+	return bValido;
+}
+//GENERAR FACTURA (Si le das al boton aceptar presupuesto, tambien se generará la factura)
+document.FormAltaPresupuesto.btnGeneraFactura.addEventListener("click", generarFactura);
+function generarFactura(){
+	//La factura lleva el mismo id del presupuesto
+	var id_factura = document.FormAltaPresupuesto.txtIdPreuspuesto.value;
+	var precioTotal = document.FormAltaPresupuesto.txtTotalPresu.value;
+
+	var comboAveria=document.FormAltaPresupuesto.selectIdAverias.selectedIndex;
+	var idAveria= document.FormAltaPresupuesto.selectIdAverias.options[comboAveria].value;
+	var presupuesto=null;
+		for(var i=0; i<oTaller.Apresupuestos.length; i++){
+			if(oTaller.Apresupuestos[i].parteAveria.id_ParteAveria==idAveria){
+				presupuesto=oTaller.Apresupuestos[i].parteAveria;
+				var fecha_factura = oTaller.Apresupuestos[i].parteAveria.fecha_ParteAveria;
+			}
+		}	
+
+	var oFactura = new Factura(id_factura, precioTotal, fecha_factura, presupuesto);
+	oTaller.altaFactura(oFactura);
 }
 
 
@@ -1171,7 +1284,6 @@ function mostrarDatosCliente(){
 function mostrarDatosEmpleados(){
 	var combo=document.formModificaEmpleado.SelectEmpleado.selectedIndex;	
 	var dniEmpleadoSeleccionado= document.formModificaEmpleado.SelectEmpleado.options[combo].value;
-	//console.log(dniEmpleadoSeleccionado);
 	
 	if(dniEmpleadoSeleccionado==0){
 		var apellido = document.formModificaEmpleado.txtApellidoEmplea;
@@ -1184,7 +1296,7 @@ function mostrarDatosEmpleados(){
 }
 function mostrarDatosFact(){
 	var combo=document.FormModificaFacturaReparacion.SelectFactura.selectedIndex;
-	var idFacturaSeleccionada= document.formModificaCli.SelectFactura.options[combo].value;
+	var idFacturaSeleccionada= document.FormModificaFacturaReparacion.SelectFactura.options[combo].value;
 	oTaller.cargadatosFactura(idFacturaSeleccionada);
 }
 function mostrarDatosProveedor(){
@@ -1192,12 +1304,23 @@ function mostrarDatosProveedor(){
 	var idProveedorSeleccionado= document.formBajaProveedor.SelectProveedor.options[combo].value;
 	oTaller.cargadatosFactura(idProveedorSeleccionado);
 }
-
+function mostrarDatosAver(){
+	var combo=document.FormAltaPresupuesto.selectIdAverias.selectedIndex;
+	var idAveriaSeleccionada= document.FormAltaPresupuesto.selectIdAverias.options[combo].value;
+	oTaller.cargaDatosAveria(idAveriaSeleccionada);
+}
+function mostrarDatosPresupuesto(){
+	var combo=document.formaltaLineaComponente.selectPresupuestoLinea.selectedIndex;
+	var idPresupuestoSeleccionado= document.formaltaLineaComponente.selectPresupuestoLinea.options[combo].value;
+	oTaller.cargaDatosPresupuesto(idPresupuestoSeleccionado);
+}
 function mostrarDatosModAveria(){
 	var combo=document.formModAveria.SelectAverias.selectedIndex;
 	var idParteAveria= document.formModAveria.SelectAverias.options[combo].value;
 	oTaller.cargadatosModAveria(idParteAveria);
 }
+
+
 
 function ocultar(){
 	var estolado = document.querySelectorAll('.formulario');
@@ -1217,7 +1340,6 @@ document.getElementById("btnModificaCliente").addEventListener("click", function
     comboModClientes.removeChild(comboModClientes.firstChild);
     comboModClientes.appendChild(oTaller.getComboClientes());
     document.getElementById("modificaCliente").style.display = "block";
-
 });
 document.getElementById("btnBajaCliente").addEventListener("click", function(){
 	ocultar();
@@ -1376,16 +1498,22 @@ document.getElementById("btnBajaAveria").addEventListener("click", function(){
     var divComboBajaAveria = document.getElementById("comboBajaAveria");
     divComboBajaAveria.removeChild(divComboBajaAveria.firstChild);
     divComboBajaAveria.appendChild(oTaller.getComboAverias());
-
 });
 document.getElementById("btnLineaComponente").addEventListener("click", function(){
 	ocultar();
 	//Muestra  
+	var comboPresupuestoLinea = document.getElementById("comboPresupuestoLinea");
+	comboPresupuestoLinea.removeChild(comboPresupuestoLinea.firstChild);
+    comboPresupuestoLinea.appendChild(oTaller.getComboPresupuestos());
+
     document.getElementById("altaLineaComponente").style.display = "block";
 });
 document.getElementById("btnAltaPresupuesto").addEventListener("click", function(){
 	ocultar();
 	//Muestra  
+	var comboIdAverias = document.getElementById("comboIdAverias");
+	comboIdAverias.removeChild(comboIdAverias.firstChild);
+    comboIdAverias.appendChild(oTaller.getcomboIdAverias());
     document.getElementById("altaPresupuesto").style.display = "block";
 });
 document.getElementById("btnModificaPresupuesto").addEventListener("click", function(){
@@ -1399,14 +1527,6 @@ document.getElementById("btnAltaEmpleado").addEventListener("click", function(){
 
     document.getElementById("altaEmpleado").style.display = "block";
 });
-document.getElementById("btnBajaEmpleado").addEventListener("click", function(){
-	ocultar();
-	//Muestra  
-	var divComboBajaEmpleado = document.getElementById("comboBajaEmpleados");
-    divComboBajaEmpleado.removeChild(divComboBajaEmpleado.firstChild);
-    divComboBajaEmpleado.appendChild(oTaller.getComboEmpleados());
-    document.getElementById("bajaEmpleado").style.display = "block";
-});
 document.getElementById("btnModificaEmpleado").addEventListener("click", function(){
 	ocultar();
 	//Muestra  
@@ -1415,20 +1535,22 @@ document.getElementById("btnModificaEmpleado").addEventListener("click", functio
     divComboEmpleado.appendChild(oTaller.getComboEmpleados());
     document.getElementById("modificaEmpleado").style.display = "block";
 });
+
+document.getElementById("btnBajaEmpleado").addEventListener("click", function(){
+	ocultar();
+	//Muestra  
+	var divComboBajaEmpleado = document.getElementById("comboBajaEmpleados");	
+	divComboBajaEmpleado.removeChild(divComboBajaEmpleado.firstChild);
+    divComboBajaEmpleado.appendChild(oTaller.getComboEmpleados());
+
+    document.getElementById("bajaEmpleado").style.display = "block";
+});
+
 //FIN OCULTAR FORMULARIOS
 //VALIDAR FORMULARIO
 
 
-
-
-
-document.formAltaAveria.btnAltaAver.addEventListener("click", validaAltaAveria);
-document.formModAveria.btnModAver.addEventListener("click", validaModifAveria);
-document.formBajaRecambio.btnBajaRecam.addEventListener("click", validaBajaRecambio);
 document.FormListarFacturaReparacion.btnListarFacRepa.addEventListener("click",validaFecha);
-
-
-
 function validaFecha(oEvento){
 	var oE = oEvento || window.event;
 	var bValido = true;
@@ -1474,6 +1596,7 @@ function validaFecha(oEvento){
 	}
 	return bValido;	
 }
+
 var modAveria = document.formModAveria.btnModAver;
 modAveria.addEventListener("click", validaModifAveria);
 function validaModifAveria(oEvento){
@@ -1600,7 +1723,7 @@ function validaModifAveria(oEvento){
 	}
 	return bValido;
 }
-
+//Para la baja averia
 document.formBajaAveria.btnBajaAve.addEventListener("click", aceptarBajaAveria);
 function aceptarBajaAveria(){
 	var combo=document.formBajaAveria.SelectAverias.selectedIndex;
@@ -1610,50 +1733,13 @@ function aceptarBajaAveria(){
 	openWindow(sMensaje);
 }
 
-function validaBajaRecambio(oEvento){
-	var oE = oEvento || window.event;
-	var bValido = true;
-	var arrayErrores =[];
+document.formBajaRecambio.btnBajaRecam.addEventListener("click", aceptarBajaRecambio);
+function aceptarBajaRecambio(){
+	var combo=document.formBajaRecambio.SelectRecambios.selectedIndex;
+	var idComponente= document.formBajaRecambio.SelectRecambios.options[combo].value;
 	
-	// Validaciones
-	//Campo id recambio
-	var sIdRecam = document.formBajaRecambio.txtIdRecam.value.trim();
-	// Trim
-	document.formBajaRecambio.txtIdRecam.value = document.formBajaRecambio.txtIdRecam.value.trim();
-
-	var oExpReg = /^\d{8}[a-zA-Z]$/;
-	
-	if (oExpReg.test(sIdRecam) == false){
-	
-		if(bValido == true){
-			bValido = false;		
-			//Este campo obtiene el foco
-			document.formBajaRecambio.txtIdRecam.focus();		
-		}
-	
-		arrayErrores.push("ID incorrecto");
-		
-		//Marcar error
-		document.formBajaRecambio.txtIdRecam.className = "form-control  error";
-	
-	}
-	else {
-		//Desmarcar error
-		document.formBajaRecambio.txtIdRecam.className = "form-control control";	
-	}
-	//Resultado
-	if (bValido == false){
-		//Cancelar envio del formulario
-		oE.preventDefault();
-		//Mostrar errores
-		var div = document.createElement("div");
-		for(var i =0; i<arrayErrores.length;i++){
-			div.appendChild(document.createTextNode(arrayErrores[i]));
-			div.appendChild(document.createElement("br"));
-		}
-		openWindow(div);
-	}
-	return bValido;	
+	var sMensaje = document.createTextNode(oTaller.bajaRecambio(idComponente));
+	openWindow(sMensaje);
 }
 //FIN VALIDAR
 

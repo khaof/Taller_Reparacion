@@ -30,8 +30,8 @@ footer {
 #altaCliente, #modificaCliente, #bajaCliente, #altaFacturaReparacion, #ListarFacturaReparacion, #bajaFacturaReparación, #modificaFacturaReparacion, 
 #altaAveria, #altaElectrodomestico, #consultarElectrodomesticos, 
 #bajaElectrodomestico, #altaRecambio, #consultarRecambio, #bajaRecambio, #altaLineaComponente, 
-#altaProveedor, #consultarProveedor, #bajaProveedor, #altaAveria, #modificaAveria, #consultarAveria,
-#bajaAveria, #altaPresupuesto, #modificaPresupuesto, #altaEmpleado, #bajaEmpleado, #modificaEmpleado{
+#altaProveedor, #consultarProveedor, #bajaProveedor, #altaAveria, #modificaAveria, #bajaAveria, #consultarAveria,
+#altaPresupuesto, #modificaPresupuesto, #altaEmpleado, #bajaEmpleado, #modificaEmpleado{
 	display: none;
 }
 

@@ -34,22 +34,22 @@
 	</electrodomesticos>
 	<partesAverias>
 		<parteAveria>
-			<idAveria>avr0001</idAveria>
+			<idAveria>000A</idAveria>
 			<descripcion>No calienta</descripcion>
-			<unidades>10</unidades>
 			<fecha>17/01/2017</fecha>
-			<idElec>ele0001</idElec>
-			<dni>43216598A</dni>
-			<componente>AAA1111</componente>	
+			<componente>fusible</componente>
+			<unidades>5</unidades>
+			<dni>30000011k</dni>
+			<idElec>0</idElec>
 		</parteAveria>
 		<parteAveria>
-			<idAveria>avr0002</idAveria>
+			<idAveria>000B</idAveria>
 			<descripcion>No enciende</descripcion>
-			<unidades>20</unidades>
 			<fecha>01/01/2017</fecha>
-			<idElec>ele0002</idElec>
-			<dni>78945612G</dni>
-			<componente>AAA2222</componente>
+			<componente>Cables</componente>
+			<unidades>5</unidades>
+			<dni>31122011G</dni>
+			<idElec>1</idElec>
 		</parteAveria>
 	</partesAverias>
 	<empleados>
@@ -98,12 +98,11 @@
 			<telefono>954000222</telefono>
 		</prove>	
 		<prove>
-			<nif>87654321D</nif>
-			<nombre>LG</nombre>
-			<direccion>Avenida el Cuento</direccion>
+			<nif>12345675B</nif>
+			<nombre>Philis</nombre>
+			<direccion>Avenida el paraiso</direccion>
 			<telefono>954111222</telefono>
-		</prove>
-					
+		</prove>			
 	</proveedores>
 	<componentes>
 		<com>
