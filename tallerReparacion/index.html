@@ -262,8 +262,8 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
 	            <div class="col-md-2">
-	                <input type="radio" name="facPagadas" value="si">Si<br>
-  					<input type="radio" name="facPagadan" value="no">No<br>
+	                <input type="radio" id="si" name="facPagada" value="si">Si<br>
+  					<input type="radio" id="no" name="facPagada" value="no">No<br>
 	            </div>
 			</div>
 
@@ -290,17 +290,15 @@
       	<hr>
       <form name="FormListarFacturaReparacion" class="form-horizontal">
       	<div class="form-group">
-
+<!--MODIFICACION MARIO 30/01-->
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
-	            <div class="col-md-2">
-	              <checked name="rdbFacPaga">
-	              	<option value="si">Si</option>
-	              	<option value="no">No</option>
-	              </checked>
+	            <div class="col-md-2">	             
+	                <input type="radio" id="si" name="facPagada" value="si">Si<br>
+  					<input type="radio" id="no" name="facPagada" value="no">No<br>
 	            </div>
 			</div>
-
+<!--FIN-->
 			<div class="form-group">			
 	        <label class="col-md-3 control-label" for="textinput">Fecha factura:</label>	        
 	            <div class="col-md-3">         
@@ -882,14 +880,14 @@
 	        </div>        
       </form>
     </div> 
-
+<!--MODIFIcACION MARIO 30/01-->
 	<div class="col-sm-8 text-left formulario" id="bajaEmpleado"> 
       	<h1>Dar de baja a un empleado </h1>
       	<hr>
 	    <form name="formBajaEmpleado" class="form-horizontal">
 	      	<div class="form-group">
 		        <label class="col-md-3 control-label" for="textinput">DNI:</label>
-		           <div class="col-md-7" id="comboModEmpleados">
+		           <div class="col-md-7" id="comboBajaEmpleados">
 		              
 		           </div>
 		    </div>
@@ -902,14 +900,14 @@
 		    </div> 
 	    </form>
     </div>
-	
+<!--FIN-->
 	<div class="col-sm-8 text-left formulario" id="modificaEmpleado"> 
       	<h1>Ver/Modificar Empleado</h1>
       	<hr>
       <form name="formModificaEmpleado" class="form-horizontal">
 	      	<div class="form-group">
 		        <label class="col-md-3 control-label" for="textinput">DNI:</label>
-		             <div class="col-md-7" id="comboBajaEmpleados">
+		             <div class="col-md-7" id="comboModEmpleados">
 		              
 		            </div>
 			</div>

@@ -33,24 +33,24 @@
 		</electrodomestico>
 	</electrodomesticos>
 	<partesAverias>
-		<parteAveria>
-			<idAveria>000A</idAveria>
-			<descripcion>No calienta</descripcion>
-			<fecha>17/01/2017</fecha>
-			<componente>fusible</componente>
+		<parte_Averia>
+			<id_ParteAveria>avr0001</id_ParteAveria>
+			<descripcion_ParteAveria>No calienta</descripcion_ParteAveria>
+			<fecha_ParteAveria>17/01/2017</fecha_ParteAveria>
+			<nom_recambio>Fusible</nom_recambio>
 			<unidades>5</unidades>
-			<dni>30000011k</dni>
-			<idElec>0</idElec>
-		</parteAveria>
-		<parteAveria>
-			<idAveria>000B</idAveria>
-			<descripcion>No enciende</descripcion>
-			<fecha>01/01/2017</fecha>
-			<componente>Cables</componente>
+			<dni_empleado>43216598A</dni_empleado>
+			<id_electrodomestico>ele0001</id_electrodomestico>
+		</parte_Averia>
+		<parte_Averia>
+			<id_ParteAveria>avr0002</id_ParteAveria>
+			<descripcion_ParteAveria>No enciende</descripcion_ParteAveria>
+			<fecha_ParteAveria>01/01/2017</fecha_ParteAveria>
+			<nom_recambio>Cables</nom_recambio>
 			<unidades>5</unidades>
-			<dni>31122011G</dni>
-			<idElec>1</idElec>
-		</parteAveria>
+			<dni_empleado>78945612G</dni_empleado>
+			<id_electrodomestico>ele0002</id_electrodomestico>
+		</parte_Averia>
 	</partesAverias>
 	<empleados>
 		<empleado>
@@ -66,28 +66,28 @@
 	</empleados>
 	<presupuestos>
 		<presupuesto>
-			<id>pres01</id>
-			<idFactura>fac01</idFactura>
+			<id_Averia>avr0001</id_Averia>
+			<id_presu>pre0001</id_presu>
 			<total>200</total>
 		</presupuesto>
 		<presupuesto>
-			<id>pres02</id>
-			<idFactura>fac02</idFactura>
+			<id_Averia>avr0002</id_Averia>
+			<id_presu>pre0002</id_presu>
 			<total>85</total>
 		</presupuesto>
 	</presupuestos>
 	<facturas>
 		<factura>
-			<idFactura>fac01</idFactura>
+			<idFactura>pre0001</idFactura>
 			<fecha>17/01/2017</fecha>
-			<dniCliente>0001</dniCliente>
 			<total>200</total>
+			<pagada>No</pagada>
 		</factura>
 		<factura>
-			<idFactura>fac02</idFactura>
+			<idFactura>pre0002</idFactura>
 			<fecha>01/01/2017</fecha>
-			<dniCliente>0001</dniCliente>
 			<total>85</total>
+			<pagada>No</pagada>
 		</factura>
 	</facturas>
 	<proveedores>
@@ -108,14 +108,14 @@
 		<com>
 			<idcomponente>AAA1111</idcomponente>
 			<nombre>Fusible</nombre>
-			<precio>1000</precio>
-			<nif>A12345675</nif>
+			<precio>10</precio>
+			<nif>12345675A</nif>
 		</com>
 		<com>
 			<idcomponente>AAA2222</idcomponente>
 			<nombre>Cables</nombre>
-			<precio>1200</precio>
-			<nif>B12345675</nif>
+			<precio>12</precio>
+			<nif>12345675B</nif>
 		</com>
 	</componentes>
 </root>

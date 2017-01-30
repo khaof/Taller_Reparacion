@@ -345,6 +345,7 @@ tallerElectromecanica.prototype.cargadatosEmpleado = function (dniEmpleadoSelecc
 		nombre.setAttribute("value", this.Aempleados[i].nombre_empleado);
 	}	
 }
+//MODIFICACION MARIO 30/01
 tallerElectromecanica.prototype.cargadatosFactura = function(idFacturaSeleccionada){
 	var i = 0;
 	var bEnc = false;
@@ -356,11 +357,15 @@ tallerElectromecanica.prototype.cargadatosFactura = function(idFacturaSelecciona
 	}
 	if(bEnc){
 
-		var dniCli = document.FormModificaFacturaReparacion.txtDNIClie;		
+		var dniCli = document.FormModificaFacturaReparacion.txtDNIClie;	
+		dniCli.setAttribute("value", this.Afacturas[i].presupuesto.parteAveria.electrodomestico.cliente.dni_cliente);	
 		var precio = document.FormModificaFacturaReparacion.txtPrecio;
+		precio.setAttribute("value", this.Afacturas[i].precioTotal);
 		var fecha = document.FormModificaFacturaReparacion.fecha;
-		var facPagadaSi = document.FormModificaFacturaReparacion.facPagadas;
-		var facPagadaNo = document.FormModificaFacturaReparacion.facPagadan;
+		fecha.setAttribute("value", this.Afacturas[i].fecha_factura);
+
+		var facPagadaSi = document.getElementById("si");
+		var facPagadaNo = document.getElementById("no");
 
 		var pagada_factura = this.Afacturas[i].pagada_factura;
 		if(pagada_factura==false){
@@ -369,13 +374,10 @@ tallerElectromecanica.prototype.cargadatosFactura = function(idFacturaSelecciona
 		}else{
 			facPagadaSi.setAttribute("checked", "checked");
 			facPagadaNo.removeAttribute("checked", "checked");
-		}
-
-		precio.setAttribute("value", this.Afacturas[i].precioTotal);
-		dniCli.setAttribute("value", this.Afacturas[i].presupuesto.electrodomestico.cliente.dni_cliente);
-		fecha.setAttribute("value", this.Afacturas[i].fecha_factura);
+		}	
 	}
 }
+//FIN MODIFICACION
 tallerElectromecanica.prototype.cargadatosModAveria = function(idParteAveriaSeleccionado){
 	var i = 0;
 	var bEnc = false;
@@ -419,13 +421,16 @@ tallerElectromecanica.prototype.cargaDatosPresupuesto = function(idPresupuestoSe
 	var i = 0;
 	var bEnc = false;
 	while (i < this.Apresupuestos.length && bEnc == false) {
-		if (this.Apresupuestos[i].id_presupuesto == idPresupuestoSeleccionado)
+		if (this.Apresupuestos[i].id_presupuesto == idPresupuestoSeleccionado){
+			console.log(this.Apresupuestos[i].id_presupuesto);
 			bEnc = true;
-		else
+		}else{
 			i++;
+		}
 	}
 	if(bEnc){
 		var DNI = this.Apresupuestos[i].parteAveria.electrodomestico.cliente.dni_cliente;
+		
 		var nombre = this.Apresupuestos[i].parteAveria.electrodomestico.cliente.nombre_cliente;
 		var apellidos = this.Apresupuestos[i].parteAveria.electrodomestico.cliente.apellidos_cliente;
 

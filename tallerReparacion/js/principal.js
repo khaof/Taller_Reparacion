@@ -19,7 +19,7 @@ var oXML = loadXMLDoc("taller.xml");
 
 var oClientes = oXML.getElementsByTagName("cliente");
 var oElectrodomesticos = oXML.getElementsByTagName("electrodomestico");
-var oPartesAverias = oXML.getElementsByTagName("parteAveria");
+var oPartesAverias = oXML.getElementsByTagName("parte_Averia");
 var oEmpleados = oXML.getElementsByTagName("empleado");
 var oPresupuestos = oXML.getElementsByTagName("presupuesto");
 var oFacturas = oXML.getElementsByTagName("factura");
@@ -43,15 +43,14 @@ for (var i= 0; i < oElectrodomesticos.length; i++) {
 	var marcaXML = oElectrodomesticos[i].childNodes[5].innerHTML;
 	var dniXML = oElectrodomesticos[i].childNodes[7].innerHTML;
 
-	var clienteXML=null;
-		for(var a=0; a<oClientes.length; a++){
-			var dniClienteXML = oClientes[a].childNodes[1].innerHTML;						
-			if(dniClienteXML==dniXML){
-				clienteXML=oClientes[a];
+	var cliente=null;
+		for(var a=0; a<oTaller.Aclientes.length; a++){
+			if(oTaller.Aclientes[a].dni_cliente==dniXML){
+				cliente=oTaller.Aclientes[a];
 			}
 		}	
-	if(clienteXML!=null){
-		var oElectrodomestico = new Electrodomestico(idXML, nombreXML, marcaXML, clienteXML);
+	if(cliente!=null){
+		var oElectrodomestico = new Electrodomestico(idXML, nombreXML, marcaXML, cliente);
 		oTaller.altaElectrodomestico(oElectrodomestico);
 	}
 }
@@ -72,28 +71,85 @@ for (var c = 0; c < oProveedores.length; c++) {
 	var oProveedor = new Proveedor(nifproXML, nombreproXML, direccionproXML, telefonoproXML);
 	oTaller.altaProveedor(oProveedor);
 }
-for (var x = 0; x < oComponentes.length; x++) {
-	var idComXML = oComponentes[x].childNodes[1].innerHTML;
-	var nombreComXML = oComponentes[x].childNodes[3].innerHTML;
-	var precioComXML = oComponentes[x].childNodes[5].innerHTML;;
-	var nifProveXML = oComponentes[x].childNodes[7].innerHTML;
+for (var a = 0; a < oComponentes.length; a++) {
+	var idComXML = oComponentes[a].childNodes[1].innerHTML;
+	var nombreComXML = oComponentes[a].childNodes[3].innerHTML;
+	var precioComXML = oComponentes[a].childNodes[5].innerHTML;;
+	var nifProveXML = oComponentes[a].childNodes[7].innerHTML;
+	var proveedor=null;
+		for(var i=0; i<oTaller.Aproveedor.length; i++){
+			if(oTaller.Aproveedor[i].DNI_proveedor==nifProveXML){
+				proveedor=oTaller.Aproveedor[i];
+			}
+		}
+	if(proveedor!=null){	
+		var oComponente = new Componentes(idComXML, nombreComXML, precioComXML, proveedor);
+		oTaller.altaRecambio(oComponente);
+	}	
+}
+for (var b = 0; b < oPartesAverias.length; b++) {
+	var idAveXML = oPartesAverias[b].childNodes[1].innerHTML;
+	var descripcionAveXML = oPartesAverias[b].childNodes[3].innerHTML;
+	var fechaAverXML = oPartesAverias[b].childNodes[5].innerHTML;
+	var recamAveXML = oPartesAverias[b].childNodes[7].innerHTML;
+	var unidadesAveXML = oPartesAverias[b].childNodes[9].innerHTML;
+	var emplAveXML = oPartesAverias[b].childNodes[11].innerHTML;
+	var elecAveXML = oPartesAverias[b].childNodes[13].innerHTML;
 	
-	var oComponente = new Componentes(idComXML, nombreComXML, precioComXML, nifProveXML);
-	oTaller.altaRecambio(oComponente);
+	var recambio = null;
+	for(var i=0; i<oTaller.Acomponentes.length; i++){
+		if(oTaller.Acomponentes[i].nombre_componente==recamAveXML){
+			recambio=oTaller.Acomponentes[i];
+		}
+	}	
+
+	var empleado=null;
+	for(var i=0; i<oTaller.Aempleados.length; i++){
+		if(oTaller.Aempleados[i].dni_empleado==emplAveXML){
+			empleado=oTaller.Aempleados[i];
+		}
+	}	
+
+	var electrodomestico=null;
+	for(var i=0; i<oTaller.Aelectrodomesticos.length; i++){
+		if(oTaller.Aelectrodomesticos[i].num_Refe==elecAveXML){
+			electrodomestico=oTaller.Aelectrodomesticos[i];
+		}
+	}	
+
+	var oPartesitosAverias = new Parte_Averia(idAveXML, descripcionAveXML, unidadesAveXML, fechaAverXML,  electrodomestico, empleado, recambio);
+	oTaller.altaParteAveria(oPartesitosAverias);
+}
+for (var d = 0; d < oPresupuestos.length; d++){
+	var idAverXML = oPresupuestos[d].childNodes[1].innerHTML;
+	var idPresupuestoXML = oPresupuestos[d].childNodes[3].innerHTML;
+	var totalXML = oPresupuestos[d].childNodes[5].innerHTML;
+
+	var parteAveria=null;
+		for(var i=0; i<oTaller.AparteAveria.length; i++){
+			if(oTaller.AparteAveria[i].id_ParteAveria==idAverXML){
+				parteAveria=oTaller.AparteAveria[i];
+		}
+	}
+	var oPresupuesto = new Presupuesto(idPresupuestoXML, totalXML, parteAveria);
+	oTaller.altaPresupuesto(oPresupuesto);	
+}
+for (var d = 0; d < oFacturas.length; d++){
+	var idFacturaXML = oFacturas[d].childNodes[1].innerHTML;
+	var fechaXML = oFacturas[d].childNodes[3].innerHTML;
+	var totalXML = oFacturas[d].childNodes[5].innerHTML; 
+	var pagadaXML = oFacturas[d].childNodes[7].innerHTML;	
+
+	var presupuesto=null;
+		for(var i=0; i<oTaller.Apresupuestos.length; i++){
+			if(oTaller.Apresupuestos[i].id_presupuesto==idFacturaXML){
+				presupuesto=oTaller.Apresupuestos[i];
+		}
+	}
+	var oFactura = new Factura(idFacturaXML, totalXML, fechaXML, presupuesto);
+	oTaller.altaFactura(oFactura);	
 }
 
-for (var x = 0; x < oPartesAverias.length; x++) {
-	var idAveXML = oPartesAverias[x].childNodes[1].innerHTML;
-	var descripcionAveXML = oPartesAverias[x].childNodes[3].innerHTML;
-	var unidadesAveXML = oPartesAverias[x].childNodes[5].innerHTML;;
-	var fechaAverXML = oPartesAverias[x].childNodes[7].innerHTML;
-	var elecAveXML = oPartesAverias[x].childNodes[9].innerHTML;
-	var emplAveXML = oPartesAverias[x].childNodes[11].innerHTML;
-	var recamAveXML = oPartesAverias[x].childNodes[13].innerHTML;
-	
-	var oPartesAverias = new Parte_Averia(idAveXML, descripcionAveXML, unidadesAveXML, fechaAverXML, elecAveXML, emplAveXML, recamAveXML);
-	oTaller.altaParteAveria(oPartesAverias);
-}
 
 //cerrar ventana emergente
 var closeWindow = document.getElementById("cerrarVentana");
@@ -1025,7 +1081,7 @@ function aceptarBajaProveedor(){
 //******************************GESTION AVERIA**************************
 //ACEPTAR ALTA
 document.formAltaAveria.btnAltaAver.addEventListener("click", validaAltaAveria);
-function validaAltaAveria(oEvento){
+function validaAltaAveria(){
 	var bValido = true;
 	var arrayErrores = [];
 	
