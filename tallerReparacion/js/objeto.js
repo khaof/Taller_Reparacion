@@ -43,8 +43,6 @@ function Parte_Averia(id_ParteAveria, descripcion_ParteAveria, unidades, fecha_P
 	this.fecha_ParteAveria = fecha_ParteAveria;
 
 }
-
-
 //---------------------------------------------------------------------------------
 	//Clase empleado 
 function Empleado(dni_empleado, nombre_empleado, apellidos_empleado) {
@@ -52,7 +50,6 @@ function Empleado(dni_empleado, nombre_empleado, apellidos_empleado) {
 	this.nombre_empleado = nombre_empleado;
 	this.apellidos_empleado = apellidos_empleado;
 }
-
 //---------------------------------------------------------------------------------------
 	//Clase LineaComponente 
 function LineaComponente(id_LineaComponente, id_presupuesto, id_componente, cantidad_LineaComponente) {
@@ -61,8 +58,6 @@ function LineaComponente(id_LineaComponente, id_presupuesto, id_componente, cant
 	this.id_LineaComponente = id_LineaComponente;
 	this.cantidad_LineaComponente = cantidad_LineaComponente;
 }
-
-
 //--------------------------------------------------------------------------------------
 	//Clase componente 
 function Componentes(id_componente, nombre_componente, precio_componente, proveedor) {
@@ -71,7 +66,6 @@ function Componentes(id_componente, nombre_componente, precio_componente, provee
 	this.nombre_componente = nombre_componente;
 	this.precio_componente = precio_componente;
 }
-
 //------------------------------------------------------------------------
 	//Clase proveedor 
 function Proveedor(DNI_proveedor, nombre_proveedor, direccion_proveedor, telefono_proveedor) {
@@ -80,7 +74,6 @@ function Proveedor(DNI_proveedor, nombre_proveedor, direccion_proveedor, telefon
 	this.direccion_proveedor = direccion_proveedor;
 	this.telefono_proveedor = telefono_proveedor;
 }
-
 	//--------------------------------------------------------------------------
 	//Arrays de clases
 function tallerElectromecanica() {
@@ -94,13 +87,68 @@ function tallerElectromecanica() {
 	this.Acomponentes = [];
 	this.Aproveedor = [];
 }
+//MODIFIACION MARIO 31/01
+tallerElectromecanica.prototype.getComboClientes = function(){
+	var select = document.createElement("select");
+	select.setAttribute("width","100%");
+	select.setAttribute("name","SelectCliente");
+	select.setAttribute("onchange", "mostrarDatosCliente()");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un DNI---");
+	option.appendChild(texto);
+	select.appendChild(option);
+	for (var i = 0; i<this.Aclientes.length; i++){
+		var option = document.createElement("option");
+		option.setAttribute("value", "Elija un DNI");
+		option.setAttribute("value", this.Aclientes[i].dni_cliente);
+		var texto = document.createTextNode(this.Aclientes[i].dni_cliente);
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
 
+	if(this.Aclientes.length<=0){
+		var option = document.createElement("option");
+		var texto = document.createTextNode("No existen clientes");
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+	select.className = "form-control";
+	return select;
+}
+tallerElectromecanica.prototype.getComboEmpleados = function(){
+	var select = document.createElement("select");
+	select.setAttribute("width","100%");
+	select.setAttribute("name","SelectEmpleado");
+	select.setAttribute("onchange", "mostrarDatosEmpleados()");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un DNI---");
+	option.appendChild(texto);
+	select.appendChild(option);
+	for (var i = 0; i<this.Aempleados.length; i++){
+		var option = document.createElement("option");
+		option.setAttribute("value", "Elija un DNI");
+		option.setAttribute("value", this.Aempleados[i].dni_empleado);
+		var texto = document.createTextNode(this.Aempleados[i].dni_empleado);
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+
+	if(this.Aempleados.length<=0){
+		var option = document.createElement("option");
+		var texto = document.createTextNode("No existen Empleados");
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+	select.className = "form-control";
+	return select;
+}
 tallerElectromecanica.prototype.getComboAverias = function(){
 	var select = document.createElement("select");
 	select.setAttribute("width","100%");
 	select.setAttribute("name","SelectAverias");
 	select.setAttribute("onchange", "mostrarDatosModAveria()");
-
 	var option = document.createElement("option");
 	option.setAttribute("value", "0");
 	var texto = document.createTextNode("---Elija una Averia---");
@@ -144,42 +192,19 @@ tallerElectromecanica.prototype.getComboRecambios = function(){
 	select.className = "form-control";
 	return select;
 }
-tallerElectromecanica.prototype.getComboEmpleados = function(){
-	var select = document.createElement("select");
-	select.setAttribute("width","100%");
-	select.setAttribute("name","SelectEmpleado");
-	select.setAttribute("onclick", "mostrarDatosEmpleados()");
-	var option = document.createElement("option");
-	option.setAttribute("value", "0");
-	var texto = document.createTextNode("---Elija un DNI---");
-	option.appendChild(texto);
-	select.appendChild(option);
-	for (var i = 0; i<this.Aempleados.length; i++){
-		var option = document.createElement("option");
-		option.setAttribute("value", "Elija un DNI");
-		option.setAttribute("value", this.Aempleados[i].dni_empleado);
-		var texto = document.createTextNode(this.Aempleados[i].dni_empleado);
-		option.appendChild(texto);
-		select.appendChild(option);
-	}
-
-	if(this.Aempleados.length<=0){
-		var option = document.createElement("option");
-		var texto = document.createTextNode("No existen Empleados");
-		option.appendChild(texto);
-		select.appendChild(option);
-	}
-	select.className = "form-control";
-	return select;
-}
 tallerElectromecanica.prototype.getComboClientes = function(){
 	var select = document.createElement("select");
 	select.setAttribute("width","100%");
 	select.setAttribute("name","SelectCliente");
 	select.setAttribute("onclick", "mostrarDatosCliente()");
-
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un DNI---");
+	option.appendChild(texto);
+	select.appendChild(option);
 	for (var i = 0; i<this.Aclientes.length; i++){
 		var option = document.createElement("option");
+		option.setAttribute("value", "Elija un DNI");
 		option.setAttribute("value", this.Aclientes[i].dni_cliente);
 		var texto = document.createTextNode(this.Aclientes[i].dni_cliente);
 		option.appendChild(texto);
@@ -304,7 +329,7 @@ tallerElectromecanica.prototype.getComboPresupuestos = function(){
 	selectpres.className = "form-control";
 	return selectpres;
 }
-
+//FIN MODIFICACION
 //-------------------------------------------------------------------------
 tallerElectromecanica.prototype.cargadatosCliente = function(dniClienteSeleccionado){
 	var i = 0;
@@ -316,17 +341,18 @@ tallerElectromecanica.prototype.cargadatosCliente = function(dniClienteSeleccion
 			i++;
 	}
 	if(bEnc){
-
 		var mail = document.formModificaCli.txtMail;
-		mail.setAttribute("value", this.Aclientes[i].email_cliente);
 		var direc = document.formModificaCli.txtDireccion;
-		direc.setAttribute("value", this.Aclientes[i].direccion_cliente);
 		var tlfn = document.formModificaCli.txtTelefono;
-		tlfn.setAttribute("value", this.Aclientes[i].telefono_cliente);
 		var apeliido = document.formModificaCli.txtApellido;
-		apeliido.setAttribute("value", this.Aclientes[i].apellidos_cliente);
 		var nombre = document.formModificaCli.txtNombre;
+
 		nombre.setAttribute("value", this.Aclientes[i].nombre_cliente);
+		apeliido.setAttribute("value", this.Aclientes[i].apellidos_cliente);
+		tlfn.setAttribute("value", this.Aclientes[i].telefono_cliente);
+		direc.setAttribute("value", this.Aclientes[i].direccion_cliente);
+		mail.setAttribute("value", this.Aclientes[i].email_cliente);
+
 	}
 }
 tallerElectromecanica.prototype.cargadatosEmpleado = function (dniEmpleadoSeleccionado){
