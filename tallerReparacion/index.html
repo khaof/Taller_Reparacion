@@ -20,16 +20,17 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand hidden-xs" href="#">Taller <span class="glyphicon glyphicon-wrench"></span></a>
+      <a class="navbar-brand" ></a>
     </div>
-    
+    <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">        
         <li class="dropdown">
         	<a class="dropdown-toggle" data-toggle="dropdown">Gestión cliente
         <span class="caret"></span></a>
 	        <ul class="dropdown-menu">
 	          <li><a id="btnAltaCliente">Alta cliente</a></li>
-	          <li><a id="btnModificaCliente">Ver/Modificar cliente</a></li>	       
+	          <li><a id="btnModificaCliente">Ver/Modificar cliente</a></li>	 
+	          <li><a id="btnListadoCliente">Ver clientes</a></li>      
 	           <li><a id="btnBajaCliente">Dar de baja al cliente</a></li>	       
 	          <li class="dropdown dropdown-submenu" id="submenu">
 		        <a>Factura reparación <span class="caret"></span></a>
@@ -94,10 +95,11 @@
 	          <li><a  id="btnAltaEmpleado">Alta empleado</a></li>
 	          <li><a  id="btnModificaEmpleado">Ver/Modificar empleado</a></li>
 	          <li><a  id="btnBajaEmpleado">Baja empleado</a></li>
+	          <li><a  id="btnMostrarEmpleados">Ver empleados</a></li>
 	        </ul>
       	</li>      	
       </ul>	    
-
+    </div>
   </div>
 </nav>
 
@@ -212,7 +214,15 @@
 	            </div>
 	        </div>        
       </form>
-    </div>  
+    </div>
+    <!--modificacion juanjo 29/01/2017-->
+    <div class="col-md-12 text-left formulario" id="mostrarClientes">
+    	<h1>Listado de clientes:</h1>
+    	<div id="tablaMostrarClientes" class="container">
+    		
+    	</div>
+	            	
+	</div>  
 
     <div class="col-sm-8 text-left formulario" id="bajaCliente"> 
       	<h1>Dar de baja</h1>
@@ -262,8 +272,8 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
 	            <div class="col-md-2">
-	                <input type="radio" id="si" name="facPagada" value="si">Si<br>
-  					<input type="radio" id="no" name="facPagada" value="no">No<br>
+	                <input type="radio" name="facPagadas" value="si">Si<br>
+  					<input type="radio" name="facPagadan" value="no">No<br>
 	            </div>
 			</div>
 
@@ -299,6 +309,7 @@
 	            </div>
 			</div>
 <!--FIN-->
+
 			<div class="form-group">			
 	        <label class="col-md-3 control-label" for="textinput">Fecha factura:</label>	        
 	            <div class="col-md-3">         
@@ -423,14 +434,27 @@
 	    </div>        
       </form>
     </div>
-
-    <div class="col-sm-8 text-left formulario" id="consultarRecambio"> 
-      	<h1>Consulta de Recambios</h1>
+     <!--modificacion juanjo 30/01/2017-->
+    <div class="col-sm-12 text-left formulario" id="consultarComponentes"> 
+      	<h1>Consulta Recambios</h1>
       	<hr>
-      <form name="consultarRecambio" class="form-horizontal">
+      <form name="formConsultarRecambios" class="form-horizontal">
       	<div class="form-group">
-	      
-		</div>  
+	        <label class="col-md-2 control-label" for="textinput">Nif Proveedor:</label>
+	            <div class="col-md-2" id="comboComProveedor">
+	              
+	            </div>
+		</div>
+		 <!-- Button -->
+	    <div class="form-group" align="center">
+	        <label class="col-md-2 control-label" for="singlebutton"></label>
+	            <div class="col-md-2">
+	              <input type="button" id="singlebutton" name="btnConsultaCom" class="btn btn-danger" value="Mostrar Componentes"/>	              
+	            </div>
+	    </div>
+	    <div id="tablaMostrarComProveedor" class="container">
+    		
+    	</div>       
       </form>
     </div>
 
@@ -497,23 +521,27 @@
       </form>
     </div>
 
-    <div class="col-sm-8 text-left formulario" id="consultarProveedor"> 
+    <div class="col-sm-12 text-left formulario" id="consultarProveedor"> 
       	<h1>Consulta proveedor</h1>
       	<hr>
       <form name="formConsultarProveedor" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nif Proveedor:</label>
-	            <div class="col-md-7" id="comboProveedor">
+	        <label class="col-md-2 control-label" for="textinput">Nif Proveedor:</label>
+	            <div class="col-md-2" id="comboProveedor">
 	              
 	            </div>
 		</div>
 		 <!-- Button -->
+		 <!--modificacion juanjo 30/01/2017-->
 	    <div class="form-group" align="center">
-	        <label class="col-md-3 control-label" for="singlebutton"></label>
-	            <div class="col-md-7">
+	        <label class="col-md-2 control-label" for="singlebutton"></label>
+	            <div class="col-md-2">
 	              <input type="button" id="singlebutton" name="btnConsultaPro" class="btn btn-danger" value="Mostrar Proveedor"/>	              
 	            </div>
-	    </div>       
+	    </div>
+	    <div id="tablaMostrarProveedor" class="container">
+    		
+    	</div>       
       </form>
     </div>
 
@@ -536,27 +564,29 @@
 	        </div>        
       </form>
     </div>
-	
-	<div class="col-sm-8 text-left formulario" id="consultarElectrodomesticos"> 
-      	<h1>Listado de electrodomésticos registrados</h1>
+	 <!--modificacion juanjo 30/01/2017-->
+	<div class="col-md-12 text-left formulario" id="consultarElectrodomesticos"> 
+      	<h1>Listado de electrodomésticos registrados por Clientes:</h1>
       	<hr>
        <form name="formConsultarElectro" class="form-horizontal">
       	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nº Referencia:</label>
-	            <div class="col-md-7" id="comboElectrodomesticos">
+	        <label class="col-md-2 control-label" for="textinput">DNI Cliente:</label>
+	            <div class="col-md-2" id="comboElectrodomesticos">
 	              
 	            </div>
 		</div>
 		 <!-- Button -->
 	    <div class="form-group">
-	        <label class="col-md-3 control-label" for="singlebutton"></label>
-	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnConsultarElec" class="btn btn-primary" value="Mostrar Electrodomesticos"/>	              
+	        <label class="col-md-2 control-label" for="singlebutton"></label>
+	            <div class="col-md-2">
+	            	<input type="button" id="singlebutton" name="btnConsultarElec" class="btn btn-primary" value="Mostrar Electrodomesticos"/>
 	            </div>
-	    </div>       
+	    </div>
+	    <div id="tablaElecCliente" class="container">
+    		
+    	</div>         
       </form>
     </div>
-
 	<!--FORMULARIOS GESTION AVERÍA-->
 	<div class="col-sm-8 text-left formulario" id="altaAveria"> 
       	<h1>Alta Avería</h1>
@@ -700,23 +730,37 @@
       </form>
     </div>
 
-	<div class="col-sm-8 text-left formulario" id="consultarAveria"> 
-      	<h1>Listado de averías registradas</h1>
+ <!--modificacion juanjo 30/01/2017-->
+	<div class="col-md-12 text-left formulario" id="consultarAveria"> 
+      	<h1>Listado de Averias por Empleados:</h1>
       	<hr>
-      <form name="consultarAveria" class="form-horizontal">
+       <form name="consultarAveria" class="form-horizontal">
       	<div class="form-group">
-	        
-		</div>  
+	        <label class="col-md-2 control-label" for="textinput">DNI Empleados:</label>
+	            <div class="col-md-2" id="comboEmpleadosAveria">
+	              
+	            </div>
+		</div>
+		 <!-- Button -->
+	    <div class="form-group">
+	        <label class="col-md-2 control-label" for="singlebutton"></label>
+	            <div class="col-md-2">
+	            	<input type="button" id="singlebutton" name="btnEmpleadosAveria" class="btn btn-primary" value="Mostrar Averias"/>
+	            </div>
+	    </div>
+	    <div id="tablasAveriasEmpleados" class="container">
+    		
+    	</div>         
       </form>
     </div>
-
+    <!--modificacion juanjo 30/01/2017-->
     <div class="col-sm-8 text-left formulario" id="altaPresupuesto"> 
       	<h1>Alta Presupuesto</h1>
       	<hr>
       <form name="FormAltaPresupuesto" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">ID avería:</label>
-	            <div class="col-md-7" id="comboIdAverias">
+	            <div class="col-md-2" id="comboIdAverias">
 	              
 	            </div>
 		</div>
@@ -803,28 +847,28 @@
 	        </div>        
       </form>
     </div>
-
-    <div class="col-sm-8 text-left formulario" id="altaLineaComponente"> 
+    <!--modificaion juanjo 30/01/2017-->
+    <div class="col-sm-12 text-left formulario" id="altaLineaComponente"> 
       	<h1>Linea de componente</h1>
       	<hr>
       <form name="formaltaLineaComponente" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">ID Presupuesto:</label>
-	            <div class="col-md-7" id="comboPresupuestoLinea">
+	            <div class="col-md-4" id="comboPresupuestoLinea">
 	              
 	            </div>
 		</div>
 		 <form name="formAltaCliente" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">DNI cliente:</label>
-	            <div class="col-md-7">
+	            <div class="col-md-4">
 	              <input name="txtDNICliente" type="text" disabled="disabled" placeholder="DNI" class="form-control input-md">
 	            </div>
 		</div>
 
 	    <div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Nombre y Apellidos:</label>
-	            <div class="col-md-7">
+	            <div class="col-md-4">
 	              <input name="txtNombreYApellidos" type="text" disabled="disabled" placeholder="nombre y apellidos" class="form-control input-md">
 	            </div>
 		</div>
@@ -832,14 +876,14 @@
 	        <!-- Button -->
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
-	            <div class="col-md-7">
+	            <div class="col-md-4">
 	              <input type="button" id="singlebutton" name="btnGenerarLineaComponente" class="btn btn-primary" value="Generar Linea Componente"/>
 	              
 	            </div>
 	        </div>        
       </form>
       <!--modificacion juanjo 29/01/2017-->
-      <div class="col-md-10 col-md-offset-2" id="tablaLineaComponente">
+      <div class="container" id="tablaLineaComponente">
 	            	
 	  </div>
     </div>
@@ -880,6 +924,7 @@
 	        </div>        
       </form>
     </div> 
+
 <!--MODIFIcACION MARIO 30/01-->
 	<div class="col-sm-8 text-left formulario" id="bajaEmpleado"> 
       	<h1>Dar de baja a un empleado </h1>
@@ -901,13 +946,14 @@
 	    </form>
     </div>
 <!--FIN-->
+	
 	<div class="col-sm-8 text-left formulario" id="modificaEmpleado"> 
       	<h1>Ver/Modificar Empleado</h1>
       	<hr>
       <form name="formModificaEmpleado" class="form-horizontal">
 	      	<div class="form-group">
 		        <label class="col-md-3 control-label" for="textinput">DNI:</label>
-		             <div class="col-md-7" id="comboModEmpleados">
+		             <div class="col-md-7" id="comboBajaEmpleados">
 		              
 		            </div>
 			</div>
@@ -934,7 +980,14 @@
 	        </div>       
       </form>
     </div> 
-
+    <!--modificacion juanjo 29/01/2017-->
+    <div class="col-md-12 text-left formulario" id="mostrarEmpleados">
+    	<h1>Listado de Empleados:</h1>
+    	<div id="tablaMostrarEmpleados" class="container">
+    		
+    	</div>
+	            	
+	</div>  
 
     <div id="capaVentana">
     	<span id="nombreVentana">Ventana Emergente</span>

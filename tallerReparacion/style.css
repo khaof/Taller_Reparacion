@@ -31,7 +31,7 @@ footer {
 #altaAveria, #altaElectrodomestico, #consultarElectrodomesticos, 
 #bajaElectrodomestico, #altaRecambio, #consultarRecambio, #bajaRecambio, #altaLineaComponente, 
 #altaProveedor, #consultarProveedor, #bajaProveedor, #altaAveria, #modificaAveria, #bajaAveria, #consultarAveria,
-#altaPresupuesto, #modificaPresupuesto, #altaEmpleado, #bajaEmpleado, #modificaEmpleado{
+#altaPresupuesto, #modificaPresupuesto, #altaEmpleado, #bajaEmpleado, #modificaEmpleado, #mostrarClientes, #mostrarEmpleados,#consultarComponentes{
 	display: none;
 }
 
