@@ -95,11 +95,43 @@ function tallerElectromecanica() {
 	this.Aproveedor = [];
 }
 
+tallerElectromecanica.prototype.getComboClientes = function(){
+	var select = document.createElement("select");
+	select.setAttribute("width","100%");
+	select.setAttribute("name","SelectCliente");
+	select.setAttribute("onchange", "mostrarDatosCliente()");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un DNI---");
+	option.appendChild(texto);
+	select.appendChild(option);
+	for (var i = 0; i<this.Aclientes.length; i++){
+		var option = document.createElement("option");
+		option.setAttribute("value", this.Aclientes[i].dni_cliente);
+		var texto = document.createTextNode(this.Aclientes[i].dni_cliente);
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+
+	if(this.Aclientes.length<=0){
+		var option = document.createElement("option");
+		var texto = document.createTextNode("No existen clientes");
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+	select.className = "form-control";
+	return select;
+}
 tallerElectromecanica.prototype.getcomboIdAverias = function(){
 	var selectAver = document.createElement("select");
 	selectAver.setAttribute("width","100%");
 	selectAver.setAttribute("name","selectIdAverias");
-	selectAver.setAttribute("onclick", "mostrarDatosModAveria()");
+	selectAver.setAttribute("onchange", "mostrarDatosModAveria()");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un ID de averia---");
+	option.appendChild(texto);
+	selectAver.appendChild(option);
 	for (var i = 0; i < this.AparteAveria.length; i++) {
 		var option = document.createElement("option");
 		option.setAttribute("value", this.AparteAveria[i].id_ParteAveria);
@@ -182,7 +214,6 @@ tallerElectromecanica.prototype.getComboClientes = function(){
 	select.appendChild(option);
 	for (var i = 0; i<this.Aclientes.length; i++){
 		var option = document.createElement("option");
-		option.setAttribute("value", "Elija un DNI");
 		option.setAttribute("value", this.Aclientes[i].dni_cliente);
 		var texto = document.createTextNode(this.Aclientes[i].dni_cliente);
 		option.appendChild(texto);
@@ -210,7 +241,6 @@ tallerElectromecanica.prototype.getComboFacturas = function(){
 	selectFac.appendChild(option);
 	for (var i = 0; i < this.Afacturas.length; i++) {
 		var option = document.createElement("option");
-		option.setAttribute("value", "Elija una factura");
 		option.setAttribute("value", this.Afacturas[i].id_factura);
 		var texto = document.createTextNode(this.Afacturas[i].id_factura);
 		option.appendChild(texto);
@@ -480,7 +510,9 @@ tallerElectromecanica.prototype.bajaCliente = function(oDniCliente) {
 
 		if (bEnc == true) {
 			this.Aclientes.splice(i, 1);
-			sMensaje = "Cliente Baja: OK!";
+			sMensaje = "Cliente Baja: OK!";			
+		}else{
+			sMensaje = "Debe seleccionar un DNI";
 		}
 
 		return sMensaje;
@@ -490,6 +522,7 @@ tallerElectromecanica.prototype.modificarCliente = function(oClienteMod) {
 		var i = 0;
 		var z = 0;
 		var bEnc = false;
+		var bEle = false;
 		var sMensaje = "";
 
 		while (i < this.Aclientes.length && bEnc == false) {
@@ -499,25 +532,33 @@ tallerElectromecanica.prototype.modificarCliente = function(oClienteMod) {
 				i++;
 		}
 
-		while (z < this.Aelectrodomesticos.length){
+		while (z < this.Aelectrodomesticos.length && bEle == false){
 			if(this.Aelectrodomesticos[z].cliente.dni_cliente == oClienteMod.dni_cliente){
-				this.Aelectrodomesticos[z].cliente = oClienteMod;			
+				bEle = true;
 			}else{
 				z++;	
 			}			
 		}
 
-		if (bEnc == true) {
-			this.Aclientes.splice(i, 1, oClienteMod);
-			sMensaje = "Cliente Modificar: OK!";
-			mostrarDatosCliente();
-
+		if (bEnc == true && bEle == true) {
+			bClienteMod = false;
+			if(this.Aclientes[i].nombre_cliente!=oClienteMod.nombre_cliente || this.Aclientes[i].apellidos_cliente!=oClienteMod.apellidos_cliente || 
+				this.Aclientes[i].telefono_cliente!=oClienteMod.telefono_cliente || this.Aclientes[i].direccion_cliente!=oClienteMod.direccion_cliente || 
+				this.Aclientes[i].email_cliente!=oClienteMod.email_cliente){
+				bClienteMod = true;
+			}	
+			if(bClienteMod==false){
+				sMensaje = "No ha hecho ningun cambio";
+			}else{
+				this.Aelectrodomesticos[z].cliente = oClienteMod;
+				this.Aclientes.splice(i, 1, oClienteMod);
+				sMensaje = "Cliente Modificar: OK!";
+			}
 		} else {
-			sMensaje = "Cliente Modificar: No se ha encontrado el DNI";
+			sMensaje = "Debe seleccionar un DNI";
 		}
 		return sMensaje;
 }
-
 //------------------------------------------------------------------------
 	//Metodo altaEmpleado
 tallerElectromecanica.prototype.altaEmpleado = function(oEmpleado) {
@@ -557,6 +598,8 @@ tallerElectromecanica.prototype.bajaEmpleado = function(oDNIEmpleado){
 	if (bEnc == true) {
 		this.Aempleados.splice(i, 1);
 		sMensaje = "Empleado Baja: OK!";
+	}else{
+		sMensaje = "Debe seleccionar un DNI";
 	}
 
 	return sMensaje;
@@ -576,11 +619,9 @@ tallerElectromecanica.prototype.modificarEmpleado = function(oEmpleadoMod) {
 
 	if (bEnc == true) {			
 		bEmpleadoMod = false;
-		for(var z=0; z < this.Aempleados.length; z++){
-			if(this.Aempleados[z].nombre_empleado!=oEmpleadoMod.nombre_empleado || this.Aempleados[z].apellidos_empleado!=oEmpleadoMod.apellidos_empleado){
+			if(this.Aempleados[i].nombre_empleado!=oEmpleadoMod.nombre_empleado || this.Aempleados[i].apellidos_empleado!=oEmpleadoMod.apellidos_empleado){
 				bEmpleadoMod = true;
 			}	
-		}
 		if(bEmpleadoMod==false){
 			sMensaje = "No ha hecho ningun cambio";
 		}else{
@@ -588,7 +629,7 @@ tallerElectromecanica.prototype.modificarEmpleado = function(oEmpleadoMod) {
 			sMensaje = "Empleado Modificar: OK!";	
 		}		
 	} else {
-		sMensaje = "Empleado Modificar: No se ha encontrado el DNI";
+		sMensaje = "Debe seleccionar un DNI";
 	}
 	return sMensaje;
 }
@@ -651,6 +692,8 @@ tallerElectromecanica.prototype.bajaRecambio = function(idRecambio){
 	if (bEnc == true) {
 		this.Acomponentes.splice(i, 1);
 		sMensaje = "Recambio Baja: OK!";
+	}else{
+		sMensaje = "Debe seleccionar un Id de recambio";
 	}
 
 	return sMensaje;
@@ -702,6 +745,8 @@ tallerElectromecanica.prototype.bajaProveedor = function(oDNIProveedor){
 	if (bEnc == true) {
 		this.Aproveedor.splice(i, 1);
 		sMensaje = "Proveedor Baja: OK!";
+	}else{
+		sMensaje="Debe seleccionar un DNI";
 	}
 
 	return sMensaje;
@@ -745,8 +790,10 @@ tallerElectromecanica.prototype.bajaParteAveria = function(idAveria){
 
 	if (bEnc == true) {
 		this.AparteAveria.splice(i, 1);
-		sMensaje = "Parte Averia Baja: OK!";
-	}
+		sMensaje = "Parte Averia Baja: OK!";	
+		}else{
+			sMensaje = "Debe seleccionar un id de averia";
+		}
 
 	return sMensaje;
 }
@@ -764,11 +811,20 @@ tallerElectromecanica.prototype.modificarParteAveria = function(oAveria) {
 	}
 
 		if (bEnc == true) {
-			this.AparteAveria.splice(i, 1, oAveria);
-			sMensaje = "Parte Averia Modificar: OK!";
+			bParteAveriadoMod = false;
+			if(this.AparteAveria[i].descripcion_ParteAveria !=oAveria.descripcion_ParteAveria || this.AparteAveria[i].unidades!=oAveria.unidades || 
+				this.AparteAveria[i].fecha_ParteAveria!=oAveria.fecha_ParteAveria){
+				bParteAveriadoMod = true;
+			}	
 
+			if(bParteAveriadoMod==false){
+				sMensaje = "No ha hecho ningun cambio";
+			}else{
+				this.AparteAveria.splice(i, 1, oAveria);
+				sMensaje = "Parte Averia Modificar: OK!";
+			}
 		} else {
-			sMensaje = "No se ha podido modificar Parte Averia";
+			sMensaje = "Debe elegir un id de parte de averia";
 		}
 		return sMensaje;
 }
@@ -1180,6 +1236,7 @@ tallerElectromecanica.prototype.mostrarAveriasEmpleados = function (dniEm){
 	//mostrar facturas
 tallerElectromecanica.prototype.mostrarFacturas = function (pagada, fecha){
 	var color ="";
+	var sMensaje ="";
 	var div = document.getElementById("tablaFacturas");
 	//cabecera
 	var oTabla1 = document.createElement('table');

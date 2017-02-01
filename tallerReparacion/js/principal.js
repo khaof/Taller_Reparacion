@@ -481,10 +481,10 @@ document.formBajaCliente.btnBajaCliente.addEventListener("click", aceptarBajaCli
 function aceptarBajaCliente(){
 	var combo=document.formBajaCliente.SelectCliente.selectedIndex;
 	var dniCliente= document.formBajaCliente.SelectCliente.options[combo].value;
-	
 	var info = document.getElementById("txtMensaje");
 	var sMensaje = document.createTextNode(oTaller.bajaCliente(dniCliente));
 	openWindow(sMensaje);
+
 }
 //********************GESTION EMPLEADO************************************
 //***ACEPTA ALTA***
@@ -638,7 +638,7 @@ function aceptarModEmpleado(){
 	// Trim
 	document.formModificaEmpleado.txtApellidoEmplea.value = document.formModificaEmpleado.txtApellidoEmplea.value.trim();
 
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
+	var oExpReg = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]{3,40}$/;;
 	
 	if (oExpReg.test(sApellidoEmplea) == false){
 	
@@ -1126,8 +1126,8 @@ function consultarAverias(){
 	oTaller.mostrarAveriasEmpleados(dniEm);
 }
 //ACEPTAR ALTA
-document.formAltaAveria.btnAltaAver.addEventListener("click", validaAltaAveria);
-function validaAltaAveria(){
+document.formAltaAveria.btnAltaAver.addEventListener("click", altaAveria);
+function altaAveria(){
 	var bValido = true;
 	var arrayErrores = [];
 	
@@ -1147,7 +1147,7 @@ function validaAltaAveria(){
 			document.formAltaAveria.txtidAveria.focus();		
 		}
 	
-		arrayErrores.push("Id incorrecto: avr0000");
+		arrayErrores.push("Id incorrecto: aaa0000");
 		
 		//Marcar error
 		document.formAltaAveria.txtidAveria.className = "form-control  error";
@@ -1376,17 +1376,15 @@ function generarFactura(){
 	var oFactura = new Factura(id_factura, precioTotal, fecha_factura, presupuesto);
 	oTaller.altaFactura(oFactura);
 }
-document.FormListarFacturaReparacion.btnListarFacRepa.addEventListener("click",validaFecha);
-function validaFecha(oEvento){
-	var oE = oEvento || window.event;
+//Funcion Listar facturas
+document.FormListarFacturaReparacion.btnListarFacRepa.addEventListener("click",listarFacturas);
+function listarFacturas(){
 	var bValido = true;
 	var arrayErrores = [];
-
 	// Validaciones
-	//Campo nif Proveedor
+	//Campo fecha
 	var sFecha = document.FormListarFacturaReparacion.fecha.value.trim();
 	var oExpReg = /^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$/;
-	
 	if (oExpReg.test(sFecha) == false){
 	
 		if(bValido == true){
@@ -1407,8 +1405,6 @@ function validaFecha(oEvento){
 	}
 	//Resultado
 	if (bValido == false){
-		//Cancelar envio del formulario
-		oE.preventDefault();
 		//Mostrar errores
 		var div = document.createElement("div");
 		for(var i =0; i<arrayErrores.length;i++){
@@ -1422,8 +1418,6 @@ function validaFecha(oEvento){
 		var div = document.getElementById("tablaFacturas");
 		div.removeChild(div.firstChild);
 		oTaller.mostrarFacturas(pagada, fechaFac);
-
-
 	}
 	return bValido;	
 }
@@ -1488,27 +1482,18 @@ modAveria.addEventListener("click", validaModifAveria);
 function validaModifAveria(oEvento){
 	var oE = oEvento || window.event;
 	var bValido = true;
-	var arrayErrores = [];
-	
+	var arrayErrores = [];	
 	// Validaciones
-
 	//Campo descripcion
 	var sDescripcionAver = document.formModAveria.txtDescripAveria.value.trim();
-	// Trim
-	document.formModAveria.txtDescripAveria.value = document.formModAveria.txtDescripAveria.value.trim();
-
-	var oExpReg = /^[a-zA-Z\s]{3,40}$/;
-	
+	var oExpReg =  /^([a-zA-ZñÁÉÍÓÚáéíóú\s]\s?){2,50}$/;
 	if (oExpReg.test(sDescripcionAver) == false){
-	
 		if(bValido == true){
 			bValido = false;		
 			//Este campo obtiene el foco
 			document.formModAveria.txtDescripAveria.focus();		
 		}
-	
 		arrayErrores.push("Descripcion incorrecta");
-		
 		//Marcar error
 		document.formModAveria.txtDescripAveria.className = "form-control  error";
 	
@@ -1520,7 +1505,7 @@ function validaModifAveria(oEvento){
 
 	//campo unidades
 	var sUnidades = document.formModAveria.txtUnidades.value.trim();
-	var oExpReg = /^\d{2}$/;
+	var oExpReg = /^\d{1,2}$/;
 	if(oExpReg.test(sUnidades)==false){
 		if(bValido == true){
 			bValido = false;		
@@ -1555,7 +1540,6 @@ function validaModifAveria(oEvento){
 		//Desmarcar error
 		document.formModAveria.fecha.className = "form-control control";	
 	}
-
 	//Resultado
 	if (bValido == false){
 		//Cancelar envio del formulario
@@ -1727,6 +1711,7 @@ document.getElementById("btnListadoCliente").addEventListener("click", function(
     var listadoClientes = document.getElementById("tablaMostrarClientes");
     listadoClientes.removeChild(listadoClientes.firstChild);
     listadoClientes.appendChild(oTaller.listadoClientes());   
+
 });
 document.getElementById("btnBajaCliente").addEventListener("click", function(){
 	ocultar();
@@ -1754,14 +1739,7 @@ document.getElementById("btnListarFacturas").addEventListener("click", function(
 	//Muestra
     document.getElementById("ListarFacturaReparacion").style.display = "block";
 });
-document.getElementById("BtnBajaFactura").addEventListener("click", function(){
-	ocultar();
-	//Muestra
-	var comboBajaFactura = document.getElementById("comboBajaFactura");
-    comboBajaFactura.removeChild(comboBajaFactura.firstChild);
-    comboBajaFactura.appendChild(oTaller.getComboFacturas());
-    document.getElementById("bajaFacturaReparación").style.display = "block";
-});
+
 document.getElementById("btnAltaElectrodomestico").addEventListener("click", function(){
 	ocultar();
 	//Muestra 
