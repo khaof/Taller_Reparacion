@@ -4,7 +4,7 @@ function Factura(id_factura, precioTotal, fecha_factura, presupuesto) {
 	this.id_factura = id_factura;
 	this.fecha_factura = fecha_factura;
 	this.precioTotal = precioTotal;
-	this.pagada_factura = false;
+	this.pagada_factura = "no";
 }
 //--------------------------------------
 	//Clase cliente 
@@ -95,60 +95,32 @@ function tallerElectromecanica() {
 	this.Aproveedor = [];
 }
 
-tallerElectromecanica.prototype.getComboAverias = function(){
-	var select = document.createElement("select");
-	select.setAttribute("width","100%");
-	select.setAttribute("name","SelectAverias");
-	select.setAttribute("onchange", "mostrarDatosModAveria()");
-
-	var option = document.createElement("option");
-	option.setAttribute("value", "0");
-	var texto = document.createTextNode("---Elija una Averia---");
-	option.appendChild(texto);
-	select.appendChild(option);
-	for (var i = 0; i<this.AparteAveria.length; i++){
+tallerElectromecanica.prototype.getcomboIdAverias = function(){
+	var selectAver = document.createElement("select");
+	selectAver.setAttribute("width","100%");
+	selectAver.setAttribute("name","selectIdAverias");
+	selectAver.setAttribute("onclick", "mostrarDatosModAveria()");
+	for (var i = 0; i < this.AparteAveria.length; i++) {
 		var option = document.createElement("option");
 		option.setAttribute("value", this.AparteAveria[i].id_ParteAveria);
 		var texto = document.createTextNode(this.AparteAveria[i].id_ParteAveria);
 		option.appendChild(texto);
-		select.appendChild(option);
+		selectAver.appendChild(option);
 	}
-
 	if(this.AparteAveria.length<=0){
 		var option = document.createElement("option");
-		var texto = document.createTextNode("No existen Averias");
+		var texto = document.createTextNode("No existen averías");
 		option.appendChild(texto);
-		select.appendChild(option);
+		selectAver.appendChild(option);
 	}
-	select.className = "form-control";
-	return select;
-}
-tallerElectromecanica.prototype.getComboRecambios = function(){
-	var select = document.createElement("select");
-	select.setAttribute("width","100%");
-	select.setAttribute("name","SelectRecambios");
-	for (var i = 0; i<this.Acomponentes.length; i++){
-		var option = document.createElement("option");
-		option.setAttribute("value", this.Acomponentes[i].id_componente);
-		var texto = document.createTextNode(this.Acomponentes[i].nombre_componente);
-		option.appendChild(texto);
-		select.appendChild(option);
-	}
-
-	if(this.Acomponentes.length<=0){
-		var option = document.createElement("option");
-		var texto = document.createTextNode("No existen Recambios");
-		option.appendChild(texto);
-		select.appendChild(option);
-	}
-	select.className = "form-control";
-	return select;
+	selectAver.className = "form-control";
+	return selectAver;
 }
 tallerElectromecanica.prototype.getComboEmpleados = function(){
 	var select = document.createElement("select");
 	select.setAttribute("width","100%");
 	select.setAttribute("name","SelectEmpleado");
-	select.setAttribute("onclick", "mostrarDatosEmpleados()");
+	select.setAttribute("onchange", "mostrarDatosEmpleados()");
 	var option = document.createElement("option");
 	option.setAttribute("value", "0");
 	var texto = document.createTextNode("---Elija un DNI---");
@@ -172,7 +144,32 @@ tallerElectromecanica.prototype.getComboEmpleados = function(){
 	select.className = "form-control";
 	return select;
 }
-//MODIFIACION MARIO 31/01
+tallerElectromecanica.prototype.getComboRecambios = function(){
+	var select = document.createElement("select");
+	select.setAttribute("width","100%");
+	select.setAttribute("name","SelectRecambios");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un recambio---");
+	option.appendChild(texto);
+	select.appendChild(option);
+	for (var i = 0; i<this.Acomponentes.length; i++){
+		var option = document.createElement("option");
+		option.setAttribute("value", this.Acomponentes[i].id_componente);
+		var texto = document.createTextNode(this.Acomponentes[i].nombre_componente);
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+
+	if(this.Acomponentes.length<=0){
+		var option = document.createElement("option");
+		var texto = document.createTextNode("No existen Recambios");
+		option.appendChild(texto);
+		select.appendChild(option);
+	}
+	select.className = "form-control";
+	return select;
+}
 tallerElectromecanica.prototype.getComboClientes = function(){
 	var select = document.createElement("select");
 	select.setAttribute("width","100%");
@@ -205,9 +202,15 @@ tallerElectromecanica.prototype.getComboFacturas = function(){
 	var selectFac = document.createElement("select");
 	selectFac.setAttribute("width","100%");
 	selectFac.setAttribute("name","SelectFactura");
-	selectFac.setAttribute("onclick", "mostrarDatosFact()");
+	selectFac.setAttribute("onchange", "mostrarDatosFact()");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija una factura---");
+	option.appendChild(texto);
+	selectFac.appendChild(option);
 	for (var i = 0; i < this.Afacturas.length; i++) {
 		var option = document.createElement("option");
+		option.setAttribute("value", "Elija una factura");
 		option.setAttribute("value", this.Afacturas[i].id_factura);
 		var texto = document.createTextNode(this.Afacturas[i].id_factura);
 		option.appendChild(texto);
@@ -226,6 +229,11 @@ tallerElectromecanica.prototype.getComboElectrodomestico = function(){
 	var selectElect = document.createElement("select");
 	selectElect.setAttribute("width","100%");
 	selectElect.setAttribute("name","SelectElectrodomestico");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un electrodoméstico---");
+	option.appendChild(texto);
+	selectElect.appendChild(option);
 	for (var i = 0; i < this.Aelectrodomesticos.length; i++) {
 		var option = document.createElement("option");
 		option.setAttribute("value", this.Aelectrodomesticos[i].num_Refe);
@@ -268,32 +276,16 @@ tallerElectromecanica.prototype.getComboProveedor = function(){
 	select.className = "form-control";
 	return select;
 }
-tallerElectromecanica.prototype.getcomboIdAverias = function(){
-	var selectAver = document.createElement("select");
-	selectAver.setAttribute("width","100%");
-	selectAver.setAttribute("name","selectIdAverias");
-	selectAver.setAttribute("onclick", "mostrarDatosAver()");
-	for (var i = 0; i < this.AparteAveria.length; i++) {
-		var option = document.createElement("option");
-		option.setAttribute("value", this.AparteAveria[i].id_ParteAveria);
-		var texto = document.createTextNode(this.AparteAveria[i].id_ParteAveria);
-		option.appendChild(texto);
-		selectAver.appendChild(option);
-	}
-	if(this.AparteAveria.length<=0){
-		var option = document.createElement("option");
-		var texto = document.createTextNode("No existen averías");
-		option.appendChild(texto);
-		selectAver.appendChild(option);
-	}
-	selectAver.className = "form-control";
-	return selectAver;
-}
 tallerElectromecanica.prototype.getComboPresupuestos = function(){
 	var selectpres = document.createElement("select");
 	selectpres.setAttribute("width","100%");
 	selectpres.setAttribute("name","selectPresupuestoLinea");
 	selectpres.setAttribute("onclick","mostrarDatosPresupuesto()");
+	var option = document.createElement("option");
+	option.setAttribute("value", "0");
+	var texto = document.createTextNode("---Elija un Id de presupuesto---");
+	option.appendChild(texto);
+	selectpres.appendChild(option);
 	for (var i = 0; i < this.Apresupuestos.length; i++) {
 		var option = document.createElement("option");
 		option.setAttribute("value", this.Apresupuestos[i].id_presupuesto);
@@ -310,7 +302,6 @@ tallerElectromecanica.prototype.getComboPresupuestos = function(){
 	selectpres.className = "form-control";
 	return selectpres;
 }
-
 //-------------------------------------------------------------------------
 tallerElectromecanica.prototype.cargadatosCliente = function(dniClienteSeleccionado){
 	var i = 0;
@@ -322,17 +313,18 @@ tallerElectromecanica.prototype.cargadatosCliente = function(dniClienteSeleccion
 			i++;
 	}
 	if(bEnc){
-
 		var mail = document.formModificaCli.txtMail;
-		mail.setAttribute("value", this.Aclientes[i].email_cliente);
 		var direc = document.formModificaCli.txtDireccion;
-		direc.setAttribute("value", this.Aclientes[i].direccion_cliente);
 		var tlfn = document.formModificaCli.txtTelefono;
-		tlfn.setAttribute("value", this.Aclientes[i].telefono_cliente);
 		var apeliido = document.formModificaCli.txtApellido;
-		apeliido.setAttribute("value", this.Aclientes[i].apellidos_cliente);
 		var nombre = document.formModificaCli.txtNombre;
+
 		nombre.setAttribute("value", this.Aclientes[i].nombre_cliente);
+		apeliido.setAttribute("value", this.Aclientes[i].apellidos_cliente);
+		tlfn.setAttribute("value", this.Aclientes[i].telefono_cliente);
+		direc.setAttribute("value", this.Aclientes[i].direccion_cliente);
+		mail.setAttribute("value", this.Aclientes[i].email_cliente);
+
 	}
 }
 tallerElectromecanica.prototype.cargadatosEmpleado = function (dniEmpleadoSeleccionado){
@@ -362,24 +354,24 @@ tallerElectromecanica.prototype.cargadatosFactura = function(idFacturaSelecciona
 	}
 	if(bEnc){
 
-		var dniCli = document.FormModificaFacturaReparacion.txtDNIClie;		
+		var dniCli = document.FormModificaFacturaReparacion.txtDNIClie;	
+		dniCli.setAttribute("value", this.Afacturas[i].presupuesto.parteAveria.electrodomestico.cliente.dni_cliente);	
 		var precio = document.FormModificaFacturaReparacion.txtPrecio;
+		precio.setAttribute("value", this.Afacturas[i].precioTotal);
 		var fecha = document.FormModificaFacturaReparacion.fecha;
-		var facPagadaSi = document.FormModificaFacturaReparacion.facPagadas;
-		var facPagadaNo = document.FormModificaFacturaReparacion.facPagadan;
+		fecha.setAttribute("value", this.Afacturas[i].fecha_factura);
+
+		var facPagadaSi = document.getElementById("si");
+		var facPagadaNo = document.getElementById("no");
 
 		var pagada_factura = this.Afacturas[i].pagada_factura;
-		if(pagada_factura==false){
+		if(pagada_factura=="no"){
 			facPagadaNo.setAttribute("checked", "checked");
 			facPagadaSi.removeAttribute("checked", "checked");
 		}else{
 			facPagadaSi.setAttribute("checked", "checked");
 			facPagadaNo.removeAttribute("checked", "checked");
-		}
-
-		precio.setAttribute("value", this.Afacturas[i].precioTotal);
-		dniCli.setAttribute("value", this.Afacturas[i].presupuesto.electrodomestico.cliente.dni_cliente);
-		fecha.setAttribute("value", this.Afacturas[i].fecha_factura);
+		}	
 	}
 }
 tallerElectromecanica.prototype.cargadatosModAveria = function(idParteAveriaSeleccionado){
@@ -600,7 +592,6 @@ tallerElectromecanica.prototype.modificarEmpleado = function(oEmpleadoMod) {
 	}
 	return sMensaje;
 }
-
 //--------------------------------------
 	//Metodo AltaElectrodomestico
 tallerElectromecanica.prototype.altaElectrodomestico = function(oElectrodomestico) {
@@ -621,8 +612,6 @@ tallerElectromecanica.prototype.altaElectrodomestico = function(oElectrodomestic
 	
 	return sMensaje;
 }
-
-
 //-----------------------------------------------------------------------
 	//Metodo altaRecambio
 tallerElectromecanica.prototype.altaRecambio = function(oRecambio){
@@ -646,7 +635,7 @@ tallerElectromecanica.prototype.altaRecambio = function(oRecambio){
 
 	return sMensaje;
 }
-//Metodo baja recambio
+	//Metodo baja recambio
 tallerElectromecanica.prototype.bajaRecambio = function(idRecambio){
 	var i = 0;
 	var bEnc = false;
@@ -666,7 +655,6 @@ tallerElectromecanica.prototype.bajaRecambio = function(idRecambio){
 
 	return sMensaje;
 }
-
 //------------------------------------------------------------------------
 	//Metodo altaProveedor
 tallerElectromecanica.prototype.altaProveedor = function(oProveedor) {
@@ -811,7 +799,6 @@ tallerElectromecanica.prototype.altaPresupuesto = function (oPresupuesto){
 }
 
 //------------------------------------------------------------------------
-/*MODIFICACION MARIO Y JUANJO 29/01/2017*/
 	//mostrar linea de componente
 tallerElectromecanica.prototype.mostrarLineaPresupuesto = function (idPresupuestito){	
 	var div = document.getElementById("tablaLineaComponente");
@@ -857,7 +844,6 @@ tallerElectromecanica.prototype.mostrarLineaPresupuesto = function (idPresupuest
 	}
 	return div;
 }
-
 tallerElectromecanica.prototype.altaFactura = function (oFactura){
 	var i = 0;
 	var bEnc = false;
@@ -875,9 +861,26 @@ tallerElectromecanica.prototype.altaFactura = function (oFactura){
 	}
 	return sMensaje;
 }
+tallerElectromecanica.prototype.modificarFactura = function(id, pagada, fecha){
+	var i = 0;
+	var bEnc = false;
+	var sMensaje = "";
 
-//modificacion juanjo 30/01/2017
-//Listado de todo cllientes
+	while (i < this.Afacturas.length && bEnc == false) {
+		if (this.Afacturas[i].id_factura == id){
+			bEnc = true;
+		}else{
+			i++;
+		}
+	}
+	if (bEnc) {
+		this.Afacturas[i].id_factura = id;
+		this.Afacturas[i].pagada_factura = pagada;
+		sMensaje = "Factura modificada correctamente";
+	}
+	return sMensaje;
+}
+	//Listado de todo cllientes
 tallerElectromecanica.prototype.listadoClientes = function(){
 	var div = document.getElementById("tablaMostrarClientes");
 	//cabecera
@@ -931,7 +934,7 @@ tallerElectromecanica.prototype.listadoClientes = function(){
 	div.appendChild(oTabla);
 	return div;
 }
-//Listado de todo empleados
+	//Listado de todo empleados
 tallerElectromecanica.prototype.listadoEmpleados = function(){
 	var div = document.getElementById("tablaMostrarEmpleados");
 	//cabecera
@@ -973,8 +976,7 @@ tallerElectromecanica.prototype.listadoEmpleados = function(){
 	div.appendChild(oTabla);
 	return div;
 }
-
-//mostrar compones por proveedor
+	//mostrar compones por proveedor
 tallerElectromecanica.prototype.mostrarComponentesProveedor = function (idProveedor){	
 	var div = document.getElementById("tablaMostrarComProveedor");
 	//cabecera
@@ -1021,8 +1023,7 @@ tallerElectromecanica.prototype.mostrarComponentesProveedor = function (idProvee
 	}
 	return div;
 }	
-
-//mostrar proveedor
+	//mostrar proveedor
 tallerElectromecanica.prototype.mostrarProveedorSeleccionado = function (idProveedor){	
 	var div = document.getElementById("tablaMostrarProveedor");
 	//cabecera
@@ -1069,8 +1070,7 @@ tallerElectromecanica.prototype.mostrarProveedorSeleccionado = function (idProve
 	}
 	return div;
 }	
-
-//mostrar electrodomesticos por clientes
+	//mostrar electrodomesticos por clientes
 tallerElectromecanica.prototype.mostrarElecClientes = function (dni){
 	var div = document.getElementById("tablaElecCliente");
 	//cabecera
@@ -1117,7 +1117,7 @@ tallerElectromecanica.prototype.mostrarElecClientes = function (dni){
 	}
 	return div;
 }	
-//mostrar electrodomesticos por clientes
+	//mostrar electrodomesticos por clientes
 tallerElectromecanica.prototype.mostrarAveriasEmpleados = function (dniEm){
 	var div = document.getElementById("tablasAveriasEmpleados");
 	//cabecera
@@ -1177,3 +1177,76 @@ tallerElectromecanica.prototype.mostrarAveriasEmpleados = function (dniEm){
 	}
 	return div;
 }	
+	//mostrar facturas
+tallerElectromecanica.prototype.mostrarFacturas = function (pagada, fecha){
+	var color ="";
+	var div = document.getElementById("tablaFacturas");
+	//cabecera
+	var oTabla1 = document.createElement('table');
+	oTabla1.setAttribute( "class","table table-hover table-bordered");
+	var tbody1 = oTabla1.createTBody();	
+	for(var z=0; z<this.Afacturas.length;z++){
+		if(this.Afacturas[z].pagada_factura == pagada && this.Afacturas[z].fecha_factura == fecha){
+			if(this.Afacturas[z].pagada_factura=="si"){color="success"}else{color="danger"};
+			//1tr
+			var fila1 = tbody1.insertRow(-1);
+			//cliente
+			var celda = fila1.insertCell(-1);
+			var texto = document.createTextNode("CLIENTE");
+			celda.className = color;
+			celda.appendChild(texto);
+			//dni
+			var celda = fila1.insertCell(-1);
+			var texto = document.createTextNode(this.Afacturas[z].presupuesto.parteAveria.electrodomestico.cliente.dni_cliente);
+			celda.setAttribute("colspan", "2");
+			celda.className = color;
+			celda.appendChild(texto);
+			//2tr
+			var fila2 = tbody1.insertRow(-1);
+			//id factura
+			var celda = fila2.insertCell(-1);
+			var texto = document.createTextNode(this.Afacturas[z].id_factura);
+			celda.appendChild(texto);
+			//factura pagada
+			var celda = fila2.insertCell(-1);
+			var texto = document.createTextNode(this.Afacturas[z].pagada_factura);
+			celda.appendChild(texto);
+			//componente
+			var celda = fila2.insertCell(-1);
+			var texto = document.createTextNode(this.Afacturas[z].fecha_factura);
+			celda.appendChild(texto);
+				
+			var fila3 = tbody1.insertRow(-1);
+			//nombre componente
+			var celda = fila3.insertCell(-1);
+			var texto = document.createTextNode(this.Afacturas[z].presupuesto.parteAveria.recambio.nombre_componente);
+			celda.appendChild(texto);
+			//precio componente
+			var celda = fila3.insertCell(-1);
+			var texto = document.createTextNode(this.Afacturas[z].presupuesto.parteAveria.recambio.precio_componente+"€");
+			celda.appendChild(texto);
+			//unidades
+			var celda = fila3.insertCell(-1);
+			var texto = document.createTextNode("x"+this.Afacturas[z].presupuesto.parteAveria.unidades);
+			celda.appendChild(texto);
+			
+
+			//siguiente tabla
+			var fila4 =tbody1.insertRow(-1);
+
+			//total
+			var celda = fila4.insertCell(-1);
+			var texto = document.createTextNode("TOTAL:");
+			celda.appendChild(texto);
+			//importe
+			var celda = fila4.insertCell(-1);
+			var texto = document.createTextNode(this.Afacturas[z].presupuesto.total_presupuesto+"€");
+			celda.setAttribute("colspan", "2");
+			celda.appendChild(texto);
+
+			div.appendChild(oTabla1);
+		}
+	}
+	return div;
+}	
+

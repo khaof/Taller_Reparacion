@@ -20,9 +20,8 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" ></a>
+       <a class="navbar-brand hidden-xs" href="#">Taller <span class="glyphicon glyphicon-wrench"></span></a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">        
         <li class="dropdown">
         	<a class="dropdown-toggle" data-toggle="dropdown">Gestión cliente
@@ -76,13 +75,7 @@
 	          <li><a id="btnAltaAvería">Alta avería</a></li>
 	          <li><a id="btnModificarAvería">Ver/Modificar avería</a></li>
 	          <li><a id="btnConsultaAvería">Consultar averías por usuario</a></li>
-	          <li class="dropdown dropdown-submenu" id="submenu">
-		        <a>Presupuesto <span class="caret"></span></a>
-		        <ul class="dropdown-menu" id="submenu2">
-		          <li><a id="btnAltaPresupuesto">Alta presupuesto</a></li>
-		          <li><a id="btnModificaPresupuesto">Ver/Modificar presupuesto</a></li>		  		 
-		        </ul>
-      		  </li>    
+		      <li><a id="btnAltaPresupuesto">Alta presupuesto</a></li>	    
       		  <li><a  id="btnLineaComponente">Linea de Componente</a></li>  		  
 	          <li><a id="btnBajaAveria">Baja avería</a></li>
 	        </ul>
@@ -98,8 +91,7 @@
 	          <li><a  id="btnMostrarEmpleados">Ver empleados</a></li>
 	        </ul>
       	</li>      	
-      </ul>	    
-    </div>
+      </ul>	   
   </div>
 </nav>
 
@@ -215,7 +207,7 @@
 	        </div>        
       </form>
     </div>
-    <!--modificacion juanjo 29/01/2017-->
+
     <div class="col-md-12 text-left formulario" id="mostrarClientes">
     	<h1>Listado de clientes:</h1>
     	<div id="tablaMostrarClientes" class="container">
@@ -272,8 +264,8 @@
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
 	            <div class="col-md-2">
-	                <input type="radio" name="facPagadas" value="si">Si<br>
-  					<input type="radio" name="facPagadan" value="no">No<br>
+	                <input type="radio" id="si" name="facPagada" value="si">Si<br>
+  					<input type="radio" id="no" name="facPagada" value="no">No<br>
 	            </div>
 			</div>
 
@@ -289,7 +281,7 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnModiFacRepa" class="btn btn-primary" value="Modificar"/>	              
+	              <input type="button" style="width: 40%" id="singlebutton" name="btnModiFacRepa" class="btn btn-primary" value="Modificar"/>	              
 	            </div>
 	        </div>        
       </form>
@@ -300,7 +292,7 @@
       	<hr>
       <form name="FormListarFacturaReparacion" class="form-horizontal">
       	<div class="form-group">
-<!--MODIFICACION MARIO 30/01-->
+
 			<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">Pagada:</label>
 	            <div class="col-md-2">	             
@@ -308,7 +300,7 @@
   					<input type="radio" id="no" name="facPagada" value="no">No<br>
 	            </div>
 			</div>
-<!--FIN-->
+
 
 			<div class="form-group">			
 	        <label class="col-md-3 control-label" for="textinput">Fecha factura:</label>	        
@@ -321,10 +313,15 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnListarFacRepa" class="btn btn-primary" value="Listar Facturas"/>	              
+	              <input type="button" style="width: 31%" id="singlebutton" name="btnListarFacRepa" class="btn btn-primary" value="Listar Facturas"/>	              
 	            </div>
 	        </div>   
-	    </div>     
+	    </div>
+	    <div class="container">
+	    	<div id="tablaFacturas"  class="col-md-4 col-md-offset-4">
+	    		
+	    	</div>	
+    	</div>     
       </form>
     </div>
 
@@ -342,7 +339,7 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7" align="center">
-	              <input type="button" id="singlebutton" name="btnBajaFactura" class="btn btn-danger" value="Dar de Baja"/>
+	              <input type="button" style="width: 100%" id="singlebutton" name="btnBajaFactura" class="btn btn-danger" value="Dar de Baja"/>
 	            </div>
 	        </div>        
       </form>
@@ -385,8 +382,8 @@
 	    <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnAltaElect" class="btn btn-primary" value="Enviar"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	              <input type="button" style="width: 49%" id="singlebutton" name="btnAltaElect" class="btn btn-primary" value="Enviar"/>
+	              <input type="reset" id="singlebutton" name="singlebutton" style="width: 50%" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	    </div>        
       </form>
@@ -428,13 +425,13 @@
 	    <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnAltaRecam" class="btn btn-primary" value="Enviar"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	              <input type="button" style="width: 49%" id="singlebutton" name="btnAltaRecam" class="btn btn-primary" value="Enviar"/>
+	              <input type="reset" style="width: 50%" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	    </div>        
       </form>
     </div>
-     <!--modificacion juanjo 30/01/2017-->
+
     <div class="col-sm-12 text-left formulario" id="consultarComponentes"> 
       	<h1>Consulta Recambios</h1>
       	<hr>
@@ -449,7 +446,7 @@
 	    <div class="form-group" align="center">
 	        <label class="col-md-2 control-label" for="singlebutton"></label>
 	            <div class="col-md-2">
-	              <input type="button" id="singlebutton" name="btnConsultaCom" class="btn btn-danger" value="Mostrar Componentes"/>	              
+	              <input type="button" id="singlebutton" name="btnConsultaCom" class="btn btn-primary" value="Mostrar Componentes"/>	              
 	            </div>
 	    </div>
 	    <div id="tablaMostrarComProveedor" class="container">
@@ -472,7 +469,7 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7" align="center">
-	              <input type="button" id="singlebutton" name="btnBajaRecam" class="btn btn-danger" value="Dar de Baja"/>
+	              <input type="button" style="width: 100%" id="singlebutton" name="btnBajaRecam" class="btn btn-danger" value="Dar de Baja"/>
 	            </div>
 	        </div>        
       </form>
@@ -514,8 +511,8 @@
 	    <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnAltaProv" class="btn btn-primary" value="Alta Proveedor"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	              <input type="button" style="width: 49%" id="singlebutton" name="btnAltaProv" class="btn btn-primary" value="Alta Proveedor"/>
+	              <input type="reset" style="width: 48%" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	    </div>        
       </form>
@@ -532,11 +529,10 @@
 	            </div>
 		</div>
 		 <!-- Button -->
-		 <!--modificacion juanjo 30/01/2017-->
 	    <div class="form-group" align="center">
 	        <label class="col-md-2 control-label" for="singlebutton"></label>
 	            <div class="col-md-2">
-	              <input type="button" id="singlebutton" name="btnConsultaPro" class="btn btn-danger" value="Mostrar Proveedor"/>	              
+	              <input type="button" id="singlebutton" name="btnConsultaPro" class="btn btn-primary" value="Mostrar Proveedor"/>	              
 	            </div>
 	    </div>
 	    <div id="tablaMostrarProveedor" class="container">
@@ -559,12 +555,11 @@
 	        <div class="form-group" align="center">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7" align="center">
-	              <input type="button" id="singlebutton" name="btnBajaProv" class="btn btn-danger" value="Dar de Baja"/>
+	              <input type="button" style="width: 100%" id="singlebutton" name="btnBajaProv" class="btn btn-danger" value="Dar de Baja"/>
 	            </div>
 	        </div>        
       </form>
     </div>
-	 <!--modificacion juanjo 30/01/2017-->
 	<div class="col-md-12 text-left formulario" id="consultarElectrodomesticos"> 
       	<h1>Listado de electrodomésticos registrados por Clientes:</h1>
       	<hr>
@@ -642,8 +637,8 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnAltaAver" class="btn btn-primary" value="Enviar"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	              <input type="button" style="width: 49%" id="singlebutton" name="btnAltaAver" class="btn btn-primary" value="Enviar"/>
+	              <input type="reset" style="width: 50%" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	        </div>        
       </form>
@@ -703,8 +698,8 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnModAver" class="btn btn-primary" value="Modificar"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	              <input type="button" style="width: 49%" id="singlebutton" name="btnModAver" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" style="width: 50%" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	        </div>        
       </form>
@@ -724,13 +719,12 @@
 	        <div class="form-group" align="center">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7" align="center">
-	              <input type="button" id="singlebutton" name="btnBajaAve" class="btn btn-danger" value="Dar de Baja"/>
+	              <input type="button" style="width: 100%" id="singlebutton" name="btnBajaAve" class="btn btn-danger" value="Dar de Baja"/>
 	            </div>
 	        </div>        
       </form>
     </div>
 
- <!--modificacion juanjo 30/01/2017-->
 	<div class="col-md-12 text-left formulario" id="consultarAveria"> 
       	<h1>Listado de Averias por Empleados:</h1>
       	<hr>
@@ -745,7 +739,7 @@
 	    <div class="form-group">
 	        <label class="col-md-2 control-label" for="singlebutton"></label>
 	            <div class="col-md-2">
-	            	<input type="button" id="singlebutton" name="btnEmpleadosAveria" class="btn btn-primary" value="Mostrar Averias"/>
+	            	<input type="button" style="width: 100%" id="singlebutton" name="btnEmpleadosAveria" class="btn btn-primary" value="Mostrar Averias"/>
 	            </div>
 	    </div>
 	    <div id="tablasAveriasEmpleados" class="container">
@@ -753,14 +747,14 @@
     	</div>         
       </form>
     </div>
-    <!--modificacion juanjo 30/01/2017-->
+
     <div class="col-sm-8 text-left formulario" id="altaPresupuesto"> 
       	<h1>Alta Presupuesto</h1>
       	<hr>
       <form name="FormAltaPresupuesto" class="form-horizontal">
       	<div class="form-group">
 	        <label class="col-md-3 control-label" for="textinput">ID avería:</label>
-	            <div class="col-md-2" id="comboIdAverias">
+	            <div class="col-md-7" id="comboIdAverias">
 	              
 	            </div>
 		</div>
@@ -785,68 +779,13 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnGeneraFactura" class="btn btn-primary" value="Generar Factura"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	              <input type="button" style="width: 49%" id="singlebutton" name="btnGeneraFactura" class="btn btn-primary" value="Generar Factura"/>
+	              <input type="reset" style="width: 50%" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	        </div>        
       </form>
     </div>
 
-	<div class="col-sm-8 text-left formulario" id="modificaPresupuesto"> 
-      	<h1>Ver/Modificar presupuesto</h1>
-      	<hr>
-      <form name="modificaAveria" class="form-horizontal">
-      	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">DNI:</label>
-	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtDNI" type="text" placeholder="apellidos" class="form-control input-md">
-	            </div>
-			</div>
-
-	      	<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Nombre:</label>
-	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
-	            </div>
-			</div>
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Apellido:</label>
-	            <div class="col-md-7">
-	              <input disabled="disabled" name="txtApellido" type="text" placeholder="apellidos" class="form-control input-md">
-	            </div>
-			</div>		
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textinput">Teléfono:</label>
-	            <div class="col-md-7">
-	              <input name="txtTelefono" type="text" placeholder="telefono" class="form-control input-md">
-	            </div>
-			</div>
-
-			<div class="form-group">
-	        <label class="col-md-3 control-label" for="textarea">Dirección:</label>
-	            <div class="col-md-7">
-	              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
-	            </div>
-	        </div>
-
-	        <div class="form-group">
-	        <label class="col-md-3 control-label" for="textarea">E-mail:</label>
-	            <div class="col-md-7">
-	              <input name="txtMail" type="text" placeholder="Dirección" class="form-control input-md"/>
-	            </div>
-	        </div>
-	        <!-- Button -->
-	        <div class="form-group">
-	        <label class="col-md-3 control-label" for="singlebutton"></label>
-	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Modificar"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
-	            </div>
-	        </div>        
-      </form>
-    </div>
     <!--modificaion juanjo 30/01/2017-->
     <div class="col-sm-12 text-left formulario" id="altaLineaComponente"> 
       	<h1>Linea de componente</h1>
@@ -877,12 +816,11 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-4">
-	              <input type="button" id="singlebutton" name="btnGenerarLineaComponente" class="btn btn-primary" value="Generar Linea Componente"/>
+	              <input type="button" style="width: 100%" id="singlebutton" name="btnGenerarLineaComponente" class="btn btn-primary" value="Generar Linea Componente"/>
 	              
 	            </div>
 	        </div>        
       </form>
-      <!--modificacion juanjo 29/01/2017-->
       <div class="container" id="tablaLineaComponente">
 	            	
 	  </div>
@@ -918,14 +856,12 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnAltaEmple" class="btn btn-primary" value="Alta"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
+	              <input type="button" style="width: 49%" id="singlebutton" name="btnAltaEmple" class="btn btn-primary" value="Alta"/>
+	              <input type="reset" style="width: 50%" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	        </div>        
       </form>
     </div> 
-
-<!--MODIFIcACION MARIO 30/01-->
 	<div class="col-sm-8 text-left formulario" id="bajaEmpleado"> 
       	<h1>Dar de baja a un empleado </h1>
       	<hr>
@@ -940,20 +876,19 @@
 		    <div class="form-group">
 		        <label class="col-md-3 control-label" for="singlebutton"></label>
 		        <div class="col-md-7" align="center">
-		            <input type="button" id="singlebutton" name="btnBajaEmple" class="btn btn-danger" value="Dar de Baja"/>
+		            <input type="button" style="width: 100%" id="singlebutton" name="btnBajaEmple" class="btn btn-danger" value="Dar de Baja"/>
 		        </div>
 		    </div> 
 	    </form>
     </div>
-<!--FIN-->
-	
+
 	<div class="col-sm-8 text-left formulario" id="modificaEmpleado"> 
       	<h1>Ver/Modificar Empleado</h1>
       	<hr>
       <form name="formModificaEmpleado" class="form-horizontal">
 	      	<div class="form-group">
 		        <label class="col-md-3 control-label" for="textinput">DNI:</label>
-		             <div class="col-md-7" id="comboBajaEmpleados">
+		             <div class="col-md-7" id="comboModEmpleados">
 		              
 		            </div>
 			</div>
@@ -974,13 +909,13 @@
 	        <div class="form-group">
 	        <label class="col-md-3 control-label" for="singlebutton"></label>
 	            <div class="col-md-7">
-	              <input type="button" id="singlebutton" name="btnModifiEmple" class="btn btn-primary" value="Modificar"/>
-	              <input type="reset" id="singlebutton" name="singlebutton" class="btn btn-default" value="Limpiar"/>
+	              <input type="button" style="width: 49%" id="singlebutton" name="btnModifiEmple" class="btn btn-primary" value="Modificar"/>
+	              <input type="reset" style="width: 50%" id="singlebutton" name="singlebutton" class="btn btn-danger" value="Limpiar"/>
 	            </div>
 	        </div>       
       </form>
     </div> 
-    <!--modificacion juanjo 29/01/2017-->
+
     <div class="col-md-12 text-left formulario" id="mostrarEmpleados">
     	<h1>Listado de Empleados:</h1>
     	<div id="tablaMostrarEmpleados" class="container">

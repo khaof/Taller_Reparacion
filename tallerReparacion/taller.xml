@@ -6,7 +6,7 @@
 			<nombre>Peter</nombre>
 			<apellidos>Parker</apellidos>
 			<telefono>955222333</telefono>
-			<direccion>NYC AV45</direccion>
+			<direccion>C/ NYC AV45</direccion>
 			<email>spiderman@hotmail.com</email>
 		</cliente>
 		<cliente>
@@ -14,8 +14,24 @@
 			<nombre>Brus</nombre>
 			<apellidos>Wuein</apellidos>
 			<telefono>688777999</telefono>
-			<direccion>Gothan nº4</direccion>
+			<direccion>C/ Gothan nº4</direccion>
 			<email>batman@hotmail.com</email>
+		</cliente>
+		<cliente>
+			<dni>49034017h</dni>
+			<nombre>Mario</nombre>
+			<apellidos>Rodriguez Camero</apellidos>
+			<telefono>654321987</telefono>
+			<direccion>C/ estolado verde</direccion>
+			<email>marielordz0@gmail.com</email>
+		</cliente>
+		<cliente>
+			<dni>78945612A</dni>
+			<nombre>Alberto</nombre>
+			<apellidos>Perez Fernandez</apellidos>
+			<telefono>987456321</telefono>
+			<direccion>C/ NYC AV45</direccion>
+			<email>albertito@hotmail.com</email>
 		</cliente>
 	</clientes>
 	<electrodomesticos>
@@ -31,8 +47,20 @@
 			<marca>LG</marca>
 			<dni>32165498b</dni>
 		</electrodomestico>
+		<electrodomestico>
+			<id>ele0003</id>
+			<nombre>Television</nombre>
+			<marca>Samsung</marca>
+			<dni>49034017h</dni>
+		</electrodomestico>
+		<electrodomestico>
+			<id>ele0004</id>
+			<nombre>iphone 5s</nombre>
+			<marca>apple</marca>
+			<dni>78945612A</dni>
+		</electrodomestico>
 	</electrodomesticos>
-	<partesAverias>
+	<partesAverias>		
 		<parte_Averia>
 			<id_ParteAveria>avr0001</id_ParteAveria>
 			<descripcion_ParteAveria>No calienta</descripcion_ParteAveria>
@@ -51,6 +79,24 @@
 			<dni_empleado>78945612G</dni_empleado>
 			<id_electrodomestico>ele0002</id_electrodomestico>
 		</parte_Averia>
+		<parte_Averia>
+			<id_ParteAveria>avr0003</id_ParteAveria>
+			<descripcion_ParteAveria>No coge internet</descripcion_ParteAveria>
+			<fecha_ParteAveria>18/01/2017</fecha_ParteAveria>
+			<nom_recambio>Tarjeta de red</nom_recambio>
+			<unidades>1</unidades>
+			<dni_empleado>65478932A</dni_empleado>
+			<id_electrodomestico>ele0003</id_electrodomestico>
+		</parte_Averia>
+		<parte_Averia>
+			<id_ParteAveria>avr0004</id_ParteAveria>
+			<descripcion_ParteAveria>Pantalla rota</descripcion_ParteAveria>
+			<fecha_ParteAveria>31/01/2017</fecha_ParteAveria>
+			<nom_recambio>Pantalla iphone 5s</nom_recambio>
+			<unidades>1</unidades>
+			<dni_empleado>43216598A</dni_empleado>
+			<id_electrodomestico>ele0004</id_electrodomestico>
+		</parte_Averia>
 	</partesAverias>
 	<empleados>
 		<empleado>
@@ -63,30 +109,57 @@
 			<nombre>Ramón</nombre>
 			<apellidos>Sanchez</apellidos>
 		</empleado>
+		<empleado>
+			<dniEmpleado>65478932A</dniEmpleado>
+			<nombre>Juan</nombre>
+			<apellidos>Sanchez Romero</apellidos>
+		</empleado>
 	</empleados>
 	<presupuestos>
 		<presupuesto>
 			<id_Averia>avr0001</id_Averia>
 			<id_presu>pre0001</id_presu>
-			<total>200</total>
+			<total>50</total>
 		</presupuesto>
 		<presupuesto>
 			<id_Averia>avr0002</id_Averia>
 			<id_presu>pre0002</id_presu>
-			<total>85</total>
+			<total>60</total>
+		</presupuesto>
+		<presupuesto>
+			<id_Averia>avr0003</id_Averia>
+			<id_presu>pre0003</id_presu>
+			<total>60</total>
+		</presupuesto>
+		<presupuesto>
+			<id_Averia>avr0004</id_Averia>
+			<id_presu>pre0004</id_presu>
+			<total>80</total>
 		</presupuesto>
 	</presupuestos>
 	<facturas>
 		<factura>
 			<idFactura>pre0001</idFactura>
 			<fecha>17/01/2017</fecha>
-			<total>200</total>
+			<total>50</total>
 			<pagada>No</pagada>
 		</factura>
 		<factura>
 			<idFactura>pre0002</idFactura>
 			<fecha>01/01/2017</fecha>
-			<total>85</total>
+			<total>60</total>
+			<pagada>No</pagada>
+		</factura>
+		<factura>
+			<idFactura>pre0003</idFactura>
+			<fecha>18/01/2017</fecha>
+			<total>60</total>
+			<pagada>No</pagada>
+		</factura>
+		<factura>
+			<idFactura>pre0004</idFactura>
+			<fecha>31/01/2017</fecha>
+			<total>80</total>
 			<pagada>No</pagada>
 		</factura>
 	</facturas>
@@ -115,6 +188,18 @@
 			<idcomponente>AAA2222</idcomponente>
 			<nombre>Cables</nombre>
 			<precio>12</precio>
+			<nif>12345675B</nif>
+		</com>
+		<com>
+			<idcomponente>AAA3333</idcomponente>
+			<nombre>Tarjeta de red</nombre>
+			<precio>60</precio>
+			<nif>12345675A</nif>
+		</com>
+		<com>
+			<idcomponente>AAA4444</idcomponente>
+			<nombre>Pantalla iphone 5s</nombre>
+			<precio>80</precio>
 			<nif>12345675B</nif>
 		</com>
 	</componentes>

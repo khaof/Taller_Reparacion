@@ -1,5 +1,0 @@
--El parte de averia deberia tener un numero de horas de trabajo, para poder multiplcar el precio total por las horas de trabajo,
-entonces eso daria el total
--Presupuesto se puede generar 2 veces(Lo suyo es que se quite del combo de id averia)
--A la averia deberia poder meterle mas de un recambio
--No se actualizan los combos al borrar
