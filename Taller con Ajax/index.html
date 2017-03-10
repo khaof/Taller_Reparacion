@@ -1,0 +1,272 @@
+﻿F<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Taller ROCAMA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <i class="icon-cliente"></i>
+          <h4>CLIENTES</h4>
+        </li>
+        <li>
+          <i class="icon-electrodomestico"></i>
+          <h4>ELECTRODOMESTICOS</h4>
+        </li>
+        <li>
+          <i class="icon-empleado"></i>
+          <h4>EMPLEADOS</h4>
+        </li>
+        <li>
+          <i class="icon-parteAveria"></i>
+          <h4>PARTES DE AVERIAS</h4>
+        </li>
+        <li>
+          <i class="icon-componentes"></i>
+          <h4>COMPONENTES</h4>
+        </li>
+      </ul>
+    </nav>
+    <div id="mensajes" title="mensajes">
+      <p id="pResultado"></p>
+    </div>
+    <div class="container">
+      <div id="capaVentana">
+        <span id="nombreVentana">Información</span>
+        <span id="cerrarVentana">X</span>
+        <p id="txtMensaje"></p>
+      </div>
+      <div id="capaFondo"></div>
+      <div id="capaMensajes">
+        <p id="mensaje"></p>
+      </div>
+      <div class="menu-icon"><span></span></div>
+      <div id="form1">  </div>
+      <div id="form2">  </div>
+      <div id="form3">  </div>
+      <div id="form4">  </div>
+      <div id="form5">  </div>
+      <!--FORMULARIOS GESTION CLIENTE-->
+      <div id="formAltaCliente" title="Alta Cliente">
+        <form name="formAltaCliente" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">DNI:</label>
+            <div class="col-md-4">
+              <input name="txtDNI" type="text" placeholder="DNI" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+            <div class="col-md-4">
+              <input name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Apellidos:</label>
+            <div class="col-md-4">
+              <input name="txtApellidos" type="text" placeholder="apellidos" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textarea">Dirección:</label>
+            <div class="col-md-4">
+              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textarea">E-mail:</label>
+            <div class="col-md-4">
+              <input name="txtMail" type="text" placeholder="Correo" class="form-control input-md"/>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="listadosClientes">
+        
+      </div>
+      <div id="formModificaCli" title="Modificar Cliente">
+        <form name="formModificaCli" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">DNI:</label>
+            <!--Modificacion juanjo 06/03/17-->
+            <div class="col-md-4" id="comboModClientes">
+                <select id="comboDniClientes" class="form-control input-md">
+                      
+                </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+            <div class="col-md-4">
+              <input name="txtNombre" type="text" placeholder="nombre" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Apellidos:</label>
+            <div class="col-md-4">
+              <input name="txtApellidos" type="text" placeholder="apellidos" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textarea">Dirección:</label>
+            <div class="col-md-4">
+              <input name="txtDireccion" type="text" placeholder="Dirección" class="form-control input-md"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textarea">E-mail:</label>
+            <div class="col-md-4">
+              <input name="txtMail" type="text" placeholder="Correo" class="form-control input-md"/>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!--FORMULARIOS GESTION ELECTRODOMESTICO-->
+      <div id="formAltaElectrodomestico" title="Alta Electrodoméstico">
+        <form name="formAltaElectrodomestico" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Nº Referencia:</label>
+            <div class="col-md-7">
+              <input name="txtNumRef" type="text" placeholder="Número de referencia" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+            <div class="col-md-7">
+              <input name="txtNombreElec" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Marca:</label>
+            <div class="col-md-7">
+              <input name="txtMarca" type="text" placeholder="Marca" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">DNI Cliente:</label>
+             <div class="col-md-7">
+                <select id="getComboAltaElecClientes" class="form-control input-md">
+                      
+                </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="listadosElectrodomesticos">
+      </div>
+      <div id="formModElectrodomestico" title="Modificar Electrodoméstico">
+        <form name="formModElectrodomestico" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">NumRef:</label>
+            <div class="col-md-7">
+              <select id="comboModElecRef" class="form-control input-md">
+                
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Nombre:</label>
+            <div class="col-md-7">
+              <input name="txtNombreElec" type="text" placeholder="Nombre electrodoméstico" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Marca:</label>
+            <div class="col-md-7">
+              <input name="txtMarca" type="text" placeholder="Marca" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">DNI Cliente:</label>
+            <div class="col-md-7">
+              <select id="comboModElecDniClientes" class="form-control input-md">
+                
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+     
+      <!--FORMULARIO GESTION COMPONENTES-->
+      <div id="formAltaComponente" title="Alta Componente">
+        <form name="formAltaComponente" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Id Componente:</label>
+            <div class="col-md-7">
+              <input name="txtIdComponente" type="text" placeholder="Id Componente" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Nombre Componente:</label>
+            <div class="col-md-7">
+              <input name="txtNombreComponente" type="text" placeholder="Nombre" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Precio:</label>
+            <div class="col-md-7">
+              <input name="txtPrecio" type="text" placeholder="Precio €" class="form-control input-md">
+            </div>
+          </div>        
+        </form>
+      </div>
+      <div id="listadoComponentes">        
+      </div>
+      <div id="formModComponente" title="Modificar Componente">
+        <form name="formModComponente" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Id Componente:</label>
+            <div class="col-md-7">
+              <select id="comboComponentes" class="form-control input-md">
+                
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Nombre Componente:</label>
+            <div class="col-md-7">
+              <input name="txtNombreComponente" type="text" placeholder="Nombre" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="textinput">Precio:</label>
+            <div class="col-md-7">
+              <input name="txtPrecio" type="text" placeholder="Precio €" class="form-control input-md">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="listadoEmpleados">
+
+      </div>
+      <div id="factura">
+      
+      </div>
+    </div>
+  
+    <div id="divMensajes"></div>
+
+    <!--SCRIPTS-->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/codigo.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/combos/getComboClientes.js"></script>
+    <script src="js/combos/getComboAltaElecClientes.js"></script>
+    <script src="js/combos/getComboModElecClientes.js"></script>
+    <script src="js/combos/getComboNumRef.js"></script>
+    <script src="js/combos/getComboComponentes.js"></script>
+    
+
+    
+  </body>
+</html>

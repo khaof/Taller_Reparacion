@@ -1,0 +1,54 @@
+﻿<div id="formAltaAveria" title="Alta Avería">
+  <form name="formAltaAveria" class="form-horizontal">
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="textinput">Id ParteAveria:</label>
+        <div class="col-md-7">
+          <input name="txtIdParteAveria" type="text" placeholder="Id ParteAveria" class="form-control input-md">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="textinput">Fecha:</label>
+        <div class="col-md-7">
+          <input type="text" name="datepicker" id="datepicker" size="30" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="textinput">Electrodomesticos:</label>
+         <div class="col-md-7">
+          <select id="comboElectrodomestico" class="form-control">
+            
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="textinput">Empleados:</label>
+          <div class="col-md-7">
+             <select  id="comboEmpleados" class="form-control">
+              
+            </select>
+          </div>
+      </div>  
+      <hr/>
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="textinput">Componentes:</label>
+          <div class="col-md-7">
+             <select  id="comboComponente"  class="form-control">
+              
+            </select>
+          </div>
+      </div> 
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="textinput">Unidades:</label>
+        <div class="col-md-3">
+          <input name="txtUnidades" type="text" placeholder="nº Unidades" class="form-control input-md">
+        </div>
+        <label class="col-md-3 control-label" for="textinput">Precio:</label>
+        <div class="col-md-3">
+          <input name="txtPrecioCompo" type="text" placeholder="€" class="form-control input-md">
+        </div>
+      </div>
+  </form>
+</div>
+<script src="js/combos/getComboElectrodomesticos.js"></script>
+<script src="js/combos/getComboEmple.js"></script>
+<script src="js/combos/getComboCompo.js"></script>
